@@ -8,16 +8,20 @@ import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
 class SecondaryButton extends ConsumerWidget {
   final String text;
   final Function() onPressed;
+  final Widget? icon;
   final Color? textColor;
   final Color? backgroundColor;
+  final double verticalPadding;
   final bool isEnable;
 
   const SecondaryButton({
     super.key,
     required this.text,
     required this.onPressed,
+    this.icon,
     this.textColor,
     this.backgroundColor,
+    this.verticalPadding = 12,
     this.isEnable = true,
   });
 
@@ -26,6 +30,7 @@ class SecondaryButton extends ConsumerWidget {
     final txtColor = textColor ?? context.primaryTextColor;
     final bgColor = backgroundColor ?? Colors.transparent;
     return Container(
+      height: 48,
       decoration: BoxDecoration(
         color: isEnable ? bgColor : AppColors.mono20,
         borderRadius: BorderRadius.circular(24),
@@ -40,13 +45,27 @@ class SecondaryButton extends ConsumerWidget {
         child: Container(
           width: double.infinity,
           alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          child: Text(
-            text,
-            style: AppTheme.titleExtraSmall14.copyWith(
-              color: isEnable ? txtColor : AppColors.mono40,
-            ),
-          ),
+          padding: EdgeInsets.symmetric(vertical: verticalPadding),
+          child: icon != null
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    icon!,
+                    const SizedBox(width: 8),
+                    Text(
+                      text,
+                      style: AppTheme.titleExtraSmall14.copyWith(
+                        color: isEnable ? txtColor : AppColors.mono40,
+                      ),
+                    ),
+                  ],
+                )
+              : Text(
+                  text,
+                  style: AppTheme.titleExtraSmall14.copyWith(
+                    color: isEnable ? txtColor : AppColors.mono40,
+                  ),
+                ),
         ),
       ),
     );

@@ -1,3 +1,11 @@
 {
-  "welcome": "Xin chào!"
+  "welcome": "Xin chào đến với Flutter MVVM Riverpod!",
+  "or": "hoặc",
+  "log_in": "Đăng nhập",
+  "register": "Đăng ký",
+  "confirm": "Xác nhận",
+  "google": "Google",
+  "sign_in_with_google": "Đăng nhập với Google",
+  "apple": "Apple",
+  "sign_in_with_apple": "Đăng nhập với Apple"
 }

@@ -1,3 +1,11 @@
 {
-  "welcome": "Welcome!"
+  "welcome": "Welcome to Flutter MVVM Riverpod!",
+  "or": "or",
+  "log_in": "Sign in",
+  "register": "Register",
+  "confirm": "Confirm",
+  "google": "Google",
+  "sign_in_with_google": "Sign in with Google",
+  "apple": "Apple",
+  "sign_in_with_apple": "Sign in with Apple"
 }
