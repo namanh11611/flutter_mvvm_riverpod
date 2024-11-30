@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_mvvm_riverpod/features/common/presentation/widgets/primary_button.dart';
-import 'package:flutter_mvvm_riverpod/features/common/presentation/widgets/secondary_button.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/primary_button.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/secondary_button.dart';
 import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
 import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
 import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';

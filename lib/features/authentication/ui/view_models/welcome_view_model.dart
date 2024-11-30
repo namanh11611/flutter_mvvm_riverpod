@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm_riverpod/features/onboarding/presentation/state/welcome_state.dart';
+import 'package:flutter_mvvm_riverpod/features/authentication/ui/state/welcome_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'welcome_view_model.g.dart';

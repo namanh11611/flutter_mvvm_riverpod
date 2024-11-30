@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/features/common/presentation/widgets/common_back_button.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
+import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_back_button.dart';
 import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,23 +24,21 @@ class CommonHeader extends ConsumerWidget {
         right: 6,
         bottom: 16,
       ),
-      decoration: const BoxDecoration(
-        color: AppColors.blueberry100,
-        borderRadius: BorderRadius.vertical(
+      decoration: BoxDecoration(
+        color: context.secondaryWidgetColor,
+        borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(16),
         ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (isShowBack) const CommonBackButton(color: AppColors.mono0),
+          if (isShowBack) const CommonBackButton(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Text(
               header,
-              style: AppTheme.titleExtraLarge24.copyWith(
-                color: AppColors.mono0,
-              ),
+              style: AppTheme.titleExtraLarge24,
             ),
           ),
           const SizedBox(width: 36),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_mvvm_riverpod/features/common/presentation/widgets/material_ink_well.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/material_ink_well.dart';
 import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class CircleOutlineButton extends ConsumerWidget {
   final IconData icon;
@@ -24,10 +25,10 @@ class CircleOutlineButton extends ConsumerWidget {
       child: SizedBox(
         width: 36,
         height: 36,
-        child: Icon(
-          icon,
-          size: 24,
+        child: HugeIcon(
+          icon: icon,
           color: iconColor,
+          size: 24,
         ),
       ),
     );

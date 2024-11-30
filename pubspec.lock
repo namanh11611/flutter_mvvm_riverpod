@@ -613,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  hugeicons:
+    dependency: "direct main"
+    description:
+      name: hugeicons
+      sha256: b5cf08183a75b7774ca6d601a2ef025ed26550e4fca9d956673ffda91e132411
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.7"
   in_app_purchase:
     dependency: "direct main"
     description:

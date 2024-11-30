@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_mvvm_riverpod/features/common/presentation/widgets/circle_outline_button.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/circle_outline_button.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class CommonBackButton extends StatelessWidget {
   final Function()? onBack;
@@ -15,7 +16,7 @@ class CommonBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleOutlineButton(
-      icon: Icons.arrow_back_ios_new,
+      icon: HugeIcons.strokeRoundedArrowLeft01,
       color: color,
       onPressed: onBack ??
           () {

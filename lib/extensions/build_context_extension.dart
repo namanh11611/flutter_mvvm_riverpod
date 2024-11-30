@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/features/common/presentation/widgets/custom_snack_bar.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/custom_snack_bar.dart';
 import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
 
 extension ThemeModeExtension on BuildContext {

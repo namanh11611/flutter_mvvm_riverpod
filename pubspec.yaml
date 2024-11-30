@@ -46,6 +46,7 @@ dependencies:
   go_router: ^14.1.4
   google_fonts: ^6.2.1
 #  google_mobile_ads: ^5.2.0
+  hugeicons: ^0.0.7
   in_app_purchase: ^3.2.0
   in_app_update: ^4.2.3
   isar: ^4.0.0-dev.3

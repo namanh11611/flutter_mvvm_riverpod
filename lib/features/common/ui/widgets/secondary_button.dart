@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/features/common/presentation/widgets/material_ink_well.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/material_ink_well.dart';
+import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
 import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
 import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
 
-class PrimaryButton extends StatelessWidget {
+class SecondaryButton extends ConsumerWidget {
   final String text;
   final Function() onPressed;
   final Widget? icon;
@@ -12,26 +14,30 @@ class PrimaryButton extends StatelessWidget {
   final double verticalPadding;
   final bool isEnable;
 
-  const PrimaryButton({
+  const SecondaryButton({
     super.key,
     required this.text,
     required this.onPressed,
     this.icon,
     this.textColor,
     this.backgroundColor,
-    this.verticalPadding = 14,
+    this.verticalPadding = 12,
     this.isEnable = true,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final txtColor = textColor ?? AppColors.mono0;
-    final bgColor = backgroundColor ?? AppColors.blueberry100;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final txtColor = textColor ?? context.primaryTextColor;
+    final bgColor = backgroundColor ?? Colors.transparent;
     return Container(
       height: 48,
       decoration: BoxDecoration(
-        color: isEnable ? bgColor : AppColors.mono40,
+        color: isEnable ? bgColor : AppColors.mono20,
         borderRadius: BorderRadius.circular(24),
+        border: Border.all(
+          color: isEnable ? txtColor : AppColors.mono20,
+          width: 2,
+        ),
       ),
       child: MaterialInkWell(
         onTap: isEnable ? onPressed : null,
@@ -49,7 +55,7 @@ class PrimaryButton extends StatelessWidget {
                     Text(
                       text,
                       style: AppTheme.titleExtraSmall14.copyWith(
-                        color: isEnable ? txtColor : AppColors.mono60,
+                        color: isEnable ? txtColor : AppColors.mono40,
                       ),
                     ),
                   ],
@@ -57,7 +63,7 @@ class PrimaryButton extends StatelessWidget {
               : Text(
                   text,
                   style: AppTheme.titleExtraSmall14.copyWith(
-                    color: isEnable ? txtColor : AppColors.mono60,
+                    color: isEnable ? txtColor : AppColors.mono40,
                   ),
                 ),
         ),
