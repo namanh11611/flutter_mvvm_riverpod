@@ -8,16 +8,15 @@ part of 'welcome_state.dart';
 
 _$WelcomeStateImpl _$$WelcomeStateImplFromJson(Map<String, dynamic> json) =>
     _$WelcomeStateImpl(
+      authResponse:
+          _authResponseFromJson(json['authResponse'] as Map<String, dynamic>?),
       isRegisterSuccessfully: json['isRegisterSuccessfully'] as bool? ?? false,
-      isLoginWithGoogleSuccessfully:
-          json['isLoginWithGoogleSuccessfully'] as bool? ?? false,
-      isLoginWithAppleSuccessfully:
-          json['isLoginWithAppleSuccessfully'] as bool? ?? false,
+      isLoginSuccessfully: json['isLoginSuccessfully'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$WelcomeStateImplToJson(_$WelcomeStateImpl instance) =>
     <String, dynamic>{
+      'authResponse': _authResponseToJson(instance.authResponse),
       'isRegisterSuccessfully': instance.isRegisterSuccessfully,
-      'isLoginWithGoogleSuccessfully': instance.isLoginWithGoogleSuccessfully,
-      'isLoginWithAppleSuccessfully': instance.isLoginWithAppleSuccessfully,
+      'isLoginSuccessfully': instance.isLoginSuccessfully,
     };

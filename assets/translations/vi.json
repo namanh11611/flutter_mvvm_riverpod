@@ -9,6 +9,8 @@
   "sign_in_with_google": "Đăng nhập với Google",
   "apple": "Apple",
   "sign_in_with_apple": "Đăng nhập với Apple",
+  "access_token_not_found": "Không có access token. Vui lòng thử lại.",
+  "id_token_not_found": "Không có ID token. Vui lòng thử lại.",
   "menu_hero": "Hero",
   "menu_profile": "Hồ sơ",
   "general": "Tổng quan",

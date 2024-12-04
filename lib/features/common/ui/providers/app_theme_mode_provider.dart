@@ -9,8 +9,8 @@ part 'app_theme_mode_provider.g.dart';
 class AppThemeMode extends _$AppThemeMode {
   @override
   Future<ThemeMode> build() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final currentMode = sharedPreferences.getString(Constants.themeModeKey);
+    final prefs = await SharedPreferences.getInstance();
+    final currentMode = prefs.getString(Constants.themeModeKey);
     return ThemeMode.values.firstWhere(
           (value) => currentMode == value.name,
       orElse: () => ThemeMode.system,
@@ -19,7 +19,7 @@ class AppThemeMode extends _$AppThemeMode {
 
   Future<void> updateMode(ThemeMode mode) async {
     state = AsyncData(mode);
-    final sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString(Constants.themeModeKey, mode.name);
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(Constants.themeModeKey, mode.name);
   }
 }

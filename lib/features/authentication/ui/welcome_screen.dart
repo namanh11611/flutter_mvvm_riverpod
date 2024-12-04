@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_riverpod/constants/assets.dart';
+import 'package:flutter_mvvm_riverpod/constants/constants.dart';
 import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
+import 'package:flutter_mvvm_riverpod/features/authentication/ui/view_models/welcome_view_model.dart';
 import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/primary_button.dart';
 import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/secondary_button.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/view_models/welcome_view_model.dart';
 import 'package:flutter_mvvm_riverpod/routing/routes.dart';
 import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
 import 'package:flutter_mvvm_riverpod/utils/global_loading.dart';
@@ -23,16 +24,25 @@ class WelcomeScreen extends ConsumerWidget {
 
     ref.listen(welcomeViewModelProvider, (previous, next) {
       if (next.isLoading != previous?.isLoading) {
-        if (next.isLoading == true) {
+        if (next.isLoading) {
           Global.showLoading(context);
         } else {
           Global.hideLoading();
         }
       }
 
-      if (next.value?.isLoginWithGoogleSuccessfully == true ||
-          next.value?.isLoginWithAppleSuccessfully == true) {
-        context.push(Routes.home);
+      if (next.hasError) {
+        context.showErrorSnackBar(next.error.toString());
+      }
+
+      if (next.hasValue) {
+        debugPrint(
+            '${Constants.tag} [WelcomeScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isLoginSuccessfully = ${next.value?.isLoginSuccessfully}');
+        if (next.value?.isRegisterSuccessfully == true) {
+          context.push(Routes.onboarding);
+        } else if (next.value?.isLoginSuccessfully == true) {
+          context.push(Routes.home);
+        }
       }
     });
 

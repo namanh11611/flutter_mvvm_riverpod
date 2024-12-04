@@ -9,6 +9,8 @@
   "sign_in_with_google": "Sign in with Google",
   "apple": "Apple",
   "sign_in_with_apple": "Sign in with Apple",
+  "access_token_not_found": "Access token not found. Please try again.",
+  "id_token_not_found": "ID token not found. Please try again.",
   "menu_hero": "Hero",
   "menu_profile": "Profile",
   "general": "General",

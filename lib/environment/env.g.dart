@@ -29,4 +29,27 @@ final class _Env {
     growable: false,
   ).map(
       (int i) => _envieddatasupabaseAnonKey[i] ^ _enviedkeysupabaseAnonKey[i]));
+
+  static const List<int> _enviedkeygoogleClientId = <int>[];
+
+  static const List<int> _envieddatagoogleClientId = <int>[];
+
+  static final String googleClientId = String.fromCharCodes(List<int>.generate(
+    _envieddatagoogleClientId.length,
+    (int i) => i,
+    growable: false,
+  ).map((int i) => _envieddatagoogleClientId[i] ^ _enviedkeygoogleClientId[i]));
+
+  static const List<int> _enviedkeygoogleServerClientId = <int>[];
+
+  static const List<int> _envieddatagoogleServerClientId = <int>[];
+
+  static final String googleServerClientId = String.fromCharCodes(
+      List<int>.generate(
+    _envieddatagoogleServerClientId.length,
+    (int i) => i,
+    growable: false,
+  ).map((int i) =>
+          _envieddatagoogleServerClientId[i] ^
+          _enviedkeygoogleServerClientId[i]));
 }
