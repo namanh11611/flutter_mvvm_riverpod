@@ -1,11 +1,12 @@
+import 'package:flutter_mvvm_riverpod/features/authentication/repository/authentication_repository.dart';
+import 'package:flutter_mvvm_riverpod/features/profile/model/profile.dart';
 import 'package:flutter_mvvm_riverpod/features/profile/repository/profile_repository.dart';
 import 'package:flutter_mvvm_riverpod/features/profile/ui/state/profile_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/repository/authentication_repository.dart';
 
 part 'profile_view_model.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ProfileViewModel extends _$ProfileViewModel {
   @override
   FutureOr<ProfileState> build() async {
@@ -14,18 +15,24 @@ class ProfileViewModel extends _$ProfileViewModel {
   }
 
   Future<void> updateProfile({
+    String? email,
     String? name,
     String? avatar,
   }) async {
     state = const AsyncLoading();
     try {
       final currentProfile = state.value?.profile;
-      if (currentProfile == null) return;
 
-      final updatedProfile = currentProfile.copyWith(
-        name: name ?? currentProfile.name,
-        avatar: avatar ?? currentProfile.avatar,
-      );
+      final updatedProfile = currentProfile?.copyWith(
+            email: email ?? currentProfile.email,
+            name: name ?? currentProfile.name,
+            avatar: avatar ?? currentProfile.avatar,
+          ) ??
+          Profile(
+            email: email,
+            name: name,
+            avatar: avatar,
+          );
 
       await ref.read(profileRepositoryProvider).update(updatedProfile);
       state = AsyncData(ProfileState(profile: updatedProfile));

@@ -57,6 +57,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           });
         },
         backgroundColor: context.secondaryWidgetColor,
+        selectedItemColor: selectedColor,
         selectedLabelStyle: AppTheme.titleTiny12,
         unselectedLabelStyle: AppTheme.titleTiny12,
       ),

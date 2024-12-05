@@ -21,8 +21,6 @@ ProfileState _$ProfileStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProfileState {
   Profile? get profile => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
 
   /// Serializes this ProfileState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +38,7 @@ abstract class $ProfileStateCopyWith<$Res> {
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res, ProfileState>;
   @useResult
-  $Res call({Profile? profile, bool isLoading, String? error});
+  $Res call({Profile? profile});
 
   $ProfileCopyWith<$Res>? get profile;
 }
@@ -61,22 +59,12 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   @override
   $Res call({
     Object? profile = freezed,
-    Object? isLoading = null,
-    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
               as Profile?,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 
@@ -103,7 +91,7 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
       __$$ProfileStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Profile? profile, bool isLoading, String? error});
+  $Res call({Profile? profile});
 
   @override
   $ProfileCopyWith<$Res>? get profile;
@@ -123,22 +111,12 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? profile = freezed,
-    Object? isLoading = null,
-    Object? error = freezed,
   }) {
     return _then(_$ProfileStateImpl(
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
               as Profile?,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -146,22 +124,17 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ProfileStateImpl implements _ProfileState {
-  const _$ProfileStateImpl({this.profile, this.isLoading = false, this.error});
+  const _$ProfileStateImpl({this.profile});
 
   factory _$ProfileStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileStateImplFromJson(json);
 
   @override
   final Profile? profile;
-  @override
-  @JsonKey()
-  final bool isLoading;
-  @override
-  final String? error;
 
   @override
   String toString() {
-    return 'ProfileState(profile: $profile, isLoading: $isLoading, error: $error)';
+    return 'ProfileState(profile: $profile)';
   }
 
   @override
@@ -169,15 +142,12 @@ class _$ProfileStateImpl implements _ProfileState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProfileStateImpl &&
-            (identical(other.profile, profile) || other.profile == profile) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, profile, isLoading, error);
+  int get hashCode => Object.hash(runtimeType, profile);
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -196,20 +166,13 @@ class _$ProfileStateImpl implements _ProfileState {
 }
 
 abstract class _ProfileState implements ProfileState {
-  const factory _ProfileState(
-      {final Profile? profile,
-      final bool isLoading,
-      final String? error}) = _$ProfileStateImpl;
+  const factory _ProfileState({final Profile? profile}) = _$ProfileStateImpl;
 
   factory _ProfileState.fromJson(Map<String, dynamic> json) =
       _$ProfileStateImpl.fromJson;
 
   @override
   Profile? get profile;
-  @override
-  bool get isLoading;
-  @override
-  String? get error;
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.

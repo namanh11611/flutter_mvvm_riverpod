@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_text_form_field.dart';
 import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/primary_button.dart';
+import 'package:flutter_mvvm_riverpod/features/profile/ui/view_models/profile_view_model.dart';
 import 'package:flutter_mvvm_riverpod/routing/routes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,11 +16,28 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   final TextEditingController _nameController = TextEditingController();
+  bool _isButtonEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController.addListener(_updateButtonState);
+  }
 
   @override
   void dispose() {
+    _nameController.removeListener(_updateButtonState);
     _nameController.dispose();
     super.dispose();
+  }
+
+  void _updateButtonState() {
+    final isEnabled = _nameController.text.trim().isNotEmpty;
+    if (isEnabled != _isButtonEnabled) {
+      setState(() {
+        _isButtonEnabled = isEnabled;
+      });
+    }
   }
 
   @override
@@ -43,19 +63,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              TextField(
+              CommonTextFormField(
+                label: 'Your Name',
                 controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Your Name',
-                  border: OutlineInputBorder(),
-                ),
               ),
               const Spacer(),
               PrimaryButton(
                 text: 'Continue',
-                onPressed: () {
-                  context.push(Routes.home);
-                },
+                onPressed: () => _saveNameAndContinue(context),
+                isEnable: _isButtonEnabled,
               ),
               const SizedBox(height: 16),
             ],
@@ -63,5 +79,20 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _saveNameAndContinue(BuildContext context) async {
+    try {
+      await ref.read(profileViewModelProvider.notifier).updateProfile(
+            name: _nameController.text.trim(),
+          );
+      if (context.mounted) {
+        context.pushReplacement(Routes.home);
+      }
+    } catch (error) {
+      if (context.mounted) {
+        context.showErrorSnackBar('Failed to save profile');
+      }
+    }
   }
 }

@@ -11,13 +11,9 @@ _$ProfileStateImpl _$$ProfileStateImplFromJson(Map<String, dynamic> json) =>
       profile: json['profile'] == null
           ? null
           : Profile.fromJson(json['profile'] as Map<String, dynamic>),
-      isLoading: json['isLoading'] as bool? ?? false,
-      error: json['error'] as String?,
     );
 
 Map<String, dynamic> _$$ProfileStateImplToJson(_$ProfileStateImpl instance) =>
     <String, dynamic>{
       'profile': instance.profile,
-      'isLoading': instance.isLoading,
-      'error': instance.error,
     };

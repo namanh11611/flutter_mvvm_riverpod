@@ -4,8 +4,7 @@ import 'package:flutter_mvvm_riverpod/constants/constants.dart';
 import 'package:flutter_mvvm_riverpod/extensions/string_extension.dart';
 import 'package:flutter_mvvm_riverpod/features/authentication/repository/authentication_repository.dart';
 import 'package:flutter_mvvm_riverpod/features/authentication/ui/state/welcome_state.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/model/profile.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/repository/profile_repository.dart';
+import 'package:flutter_mvvm_riverpod/features/profile/ui/view_models/profile_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -43,8 +42,8 @@ class WelcomeViewModel extends _$WelcomeViewModel {
 
       ref.read(authenticationRepositoryProvider).setIsLogin(true);
       ref
-          .read(profileRepositoryProvider)
-          .update(Profile(email: response.user?.email.orEmpty()));
+          .read(profileViewModelProvider.notifier)
+          .updateProfile(email: response.user?.email.orEmpty());
 
       state = AsyncData(
         WelcomeState(
