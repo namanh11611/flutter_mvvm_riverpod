@@ -17,46 +17,44 @@ class WelcomeViewModel extends _$WelcomeViewModel {
     return const WelcomeState();
   }
 
-  void loginWithGoogle() async {
-    state = const AsyncLoading();
-    final result =
-        await ref.read(authenticationRepositoryProvider).loginWithGoogle();
-    handleResult(result);
+  Future<void> loginWithGoogle() async {
+    state = const AsyncValue.loading();
+    final authRepo = ref.read(authenticationRepositoryProvider);
+    final result = await AsyncValue.guard(authRepo.loginWithGoogle);
+    handleResult(result.value);
   }
 
-  void loginWithApple() async {
-    state = const AsyncLoading();
-    final result =
-        await ref.read(authenticationRepositoryProvider).loginWithApple();
-    handleResult(result);
+  Future<void> loginWithApple() async {
+    state = const AsyncValue.loading();
+    final authRepo = ref.read(authenticationRepositoryProvider);
+    final result = await AsyncValue.guard(authRepo.loginWithApple);
+    handleResult(result.value);
   }
 
-  void handleResult(AsyncValue? result) async {
-    debugPrint('${Constants.tag} [WelcomeViewModel.handleResult] ${result?.value}');
-    if (result is AsyncData && result.value is AuthResponse) {
-      final response = result.value as AuthResponse;
-      final isExistAccount = await ref.read(authenticationRepositoryProvider).isExistAccount();
-      if (!isExistAccount) {
-        ref.read(authenticationRepositoryProvider).setIsExistAccount(true);
-      }
-
-      ref.read(authenticationRepositoryProvider).setIsLogin(true);
-      ref
-          .read(profileViewModelProvider.notifier)
-          .updateProfile(email: response.user?.email.orEmpty());
-
-      state = AsyncData(
-        WelcomeState(
-          authResponse: response,
-          isRegisterSuccessfully: !isExistAccount,
-          isLoginSuccessfully: true,
-        ),
-      );
-    } else {
-      state = AsyncError(
-        result?.error ?? 'unexpected_error_occurred'.tr(),
-        StackTrace.current,
-      );
+  void handleResult(AuthResponse? result) async {
+    debugPrint('${Constants.tag} [WelcomeViewModel.handleResult] $result');
+    if (result == null) {
+      state = AsyncError('unexpected_error_occurred'.tr(), StackTrace.current);
+      return;
     }
+
+    final isExistAccount =
+        await ref.read(authenticationRepositoryProvider).isExistAccount();
+    if (!isExistAccount) {
+      ref.read(authenticationRepositoryProvider).setIsExistAccount(true);
+    }
+
+    ref.read(authenticationRepositoryProvider).setIsLogin(true);
+    ref
+        .read(profileViewModelProvider.notifier)
+        .updateProfile(email: result.user?.email.orEmpty());
+
+    state = AsyncData(
+      WelcomeState(
+        authResponse: result,
+        isRegisterSuccessfully: !isExistAccount,
+        isLoginSuccessfully: true,
+      ),
+    );
   }
 }

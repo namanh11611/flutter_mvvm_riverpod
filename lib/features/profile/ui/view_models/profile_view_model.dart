@@ -19,7 +19,7 @@ class ProfileViewModel extends _$ProfileViewModel {
     String? name,
     String? avatar,
   }) async {
-    state = const AsyncLoading();
+    state = const AsyncValue.loading();
     try {
       final currentProfile = state.value?.profile;
 
@@ -42,7 +42,7 @@ class ProfileViewModel extends _$ProfileViewModel {
   }
 
   Future<void> refreshProfile() async {
-    state = const AsyncLoading();
+    state = const AsyncValue.loading();
     try {
       final profile = await ref.read(profileRepositoryProvider).get();
       state = AsyncData(ProfileState(profile: profile));
@@ -52,7 +52,7 @@ class ProfileViewModel extends _$ProfileViewModel {
   }
 
   Future<void> signOut() async {
-    state = const AsyncLoading();
+    state = const AsyncValue.loading();
     try {
       await ref.read(authenticationRepositoryProvider).setIsLogin(false);
       // Add any additional sign-out logic here, such as clearing user data

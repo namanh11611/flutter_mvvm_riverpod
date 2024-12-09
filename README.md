@@ -2,7 +2,7 @@
 
 A lightweight Flutter starter template implementing **MVVM architecture** with **Riverpod state management** and **Supabase backend**. Perfect for indie hackers and solo developers looking to quickly bootstrap their projects.
 
-This project was inspired by the [Flutter App Architecture Guide](https://docs.flutter.dev/app-architecture/guide) and the [Starter Architecture for Flutter & Firebase](https://github.com/bizz84/starter_architecture_flutter_firebase) by [bizz84](https://github.com/bizz84).
+This project was inspired by the [Flutter App Architecture Guide](https://docs.flutter.dev/app-architecture/guide) and the [Starter Architecture for Flutter & Firebase](https://github.com/bizz84/starter_architecture_flutter_firebase).
 
 ## 🎯 Features
 

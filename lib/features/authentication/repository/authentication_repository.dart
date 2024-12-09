@@ -22,9 +22,9 @@ AuthenticationRepository authenticationRepository(Ref ref) {
 class AuthenticationRepository {
   const AuthenticationRepository();
 
-  Future<AsyncValue?> loginWithGoogle() async {
+  Future<AuthResponse> loginWithGoogle() async {
     // TODO: fake data
-    return AsyncData(AuthResponse(
+    return AuthResponse(
       user: User(
         id: '',
         appMetadata: {},
@@ -33,7 +33,7 @@ class AuthenticationRepository {
         createdAt: '',
         email: 'henry@google.com',
       ),
-    ));
+    );
 
     try {
       const List<String> scopes = <String>[
@@ -52,11 +52,11 @@ class AuthenticationRepository {
       final idToken = googleAuth.idToken;
 
       if (accessToken == null) {
-        return AsyncError('access_token_not_found'.tr(), StackTrace.current);
+        throw Exception('access_token_not_found'.tr());
       }
 
       if (idToken == null) {
-        return AsyncError('id_token_not_found'.tr(), StackTrace.current);
+        throw Exception('id_token_not_found'.tr());
       }
 
       final result = await supabase.auth.signInWithIdToken(
@@ -64,17 +64,15 @@ class AuthenticationRepository {
         idToken: idToken,
         accessToken: accessToken,
       );
-      return AsyncData(result);
-    } on AuthException catch (error) {
-      return AsyncError(error.message, StackTrace.current);
+      return result;
     } catch (error) {
-      return AsyncError('unexpected_error_occurred'.tr(), StackTrace.current);
+      throw Exception('unexpected_error_occurred'.tr());
     }
   }
 
-  Future<AsyncValue?> loginWithApple() async {
+  Future<AuthResponse> loginWithApple() async {
     // TODO: fake data
-    return AsyncData(AuthResponse(
+    return AuthResponse(
       user: User(
         id: '',
         appMetadata: {},
@@ -83,7 +81,7 @@ class AuthenticationRepository {
         createdAt: '',
         email: 'henry@apple.com',
       ),
-    ));
+    );
 
     try {
       final rawNonce = supabase.auth.generateRawNonce();
@@ -99,7 +97,7 @@ class AuthenticationRepository {
 
       final idToken = credential.identityToken;
       if (idToken == null) {
-        return AsyncError('id_token_not_found'.tr(), StackTrace.current);
+        throw Exception('id_token_not_found'.tr());
       }
 
       final result = await supabase.auth.signInWithIdToken(
@@ -107,11 +105,11 @@ class AuthenticationRepository {
         idToken: idToken,
         nonce: rawNonce,
       );
-      return AsyncData(result);
+      return result;
     } on AuthException catch (error) {
-      return AsyncError(error.message, StackTrace.current);
+      throw Exception(error.message);
     } catch (error) {
-      return AsyncError('unexpected_error_occurred'.tr(), StackTrace.current);
+      throw Exception('unexpected_error_occurred'.tr());
     }
   }
 
