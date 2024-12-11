@@ -1,13 +1,37 @@
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/login_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_riverpod/features/authentication/ui/sign_in_screen.dart';
 import 'package:flutter_mvvm_riverpod/features/authentication/ui/otp_screen.dart';
+import 'package:flutter_mvvm_riverpod/features/authentication/ui/welcome_screen.dart';
 import 'package:flutter_mvvm_riverpod/features/home/ui/home_screen.dart';
 import 'package:flutter_mvvm_riverpod/features/onboarding/ui/onboarding_screen.dart';
 import 'package:flutter_mvvm_riverpod/features/onboarding/ui/splash_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/welcome_screen.dart';
 import 'package:flutter_mvvm_riverpod/features/profile/ui/appearances_screen.dart';
 import 'package:flutter_mvvm_riverpod/features/profile/ui/lanaguages_screen.dart';
 import 'package:flutter_mvvm_riverpod/routing/routes.dart';
 import 'package:go_router/go_router.dart';
+
+class SlideRouteTransition extends CustomTransitionPage<void> {
+  SlideRouteTransition({required super.child, required String routeName})
+      : super(
+          key: ValueKey(routeName),
+          transitionDuration: const Duration(milliseconds: 300),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            final curve = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+            );
+            final tween = Tween(begin: begin, end: end);
+            final offsetAnimation = tween.animate(curve);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+        );
+}
 
 GoRouter router() {
   return GoRouter(
@@ -15,35 +39,64 @@ GoRouter router() {
     routes: [
       GoRoute(
         path: Routes.splash,
-        builder: (context, state) => const SplashScreen(),
+        pageBuilder: (context, state) => SlideRouteTransition(
+          child: const SplashScreen(),
+          routeName: Routes.splash,
+        ),
       ),
       GoRoute(
         path: Routes.welcome,
-        builder: (context, state) => const WelcomeScreen(),
+        pageBuilder: (context, state) => SlideRouteTransition(
+          child: const WelcomeScreen(),
+          routeName: Routes.welcome,
+        ),
       ),
       GoRoute(
         path: Routes.login,
-        builder: (context, state) => const LoginScreen(),
+        pageBuilder: (context, state) => SlideRouteTransition(
+          child: const SignInScreen(),
+          routeName: Routes.login,
+        ),
       ),
       GoRoute(
         path: Routes.otp,
-        builder: (context, state) => const OtpScreen(),
+        pageBuilder: (context, state){
+          final map = state.extra as Map?;
+          return SlideRouteTransition(
+          child: OtpScreen(
+            email: map?['email'],
+            isRegister: map?['isRegister'],
+          ),
+          routeName: Routes.otp,
+        );}
       ),
       GoRoute(
         path: Routes.onboarding,
-        builder: (context, state) => const OnboardingScreen(),
+        pageBuilder: (context, state) => SlideRouteTransition(
+          child: const OnboardingScreen(),
+          routeName: Routes.onboarding,
+        ),
       ),
       GoRoute(
         path: Routes.home,
-        builder: (context, state) => const HomeScreen(),
+        pageBuilder: (context, state) => SlideRouteTransition(
+          child: const HomeScreen(),
+          routeName: Routes.home,
+        ),
       ),
       GoRoute(
         path: Routes.appearances,
-        builder: (context, state) => const AppearancesScreen(),
+        pageBuilder: (context, state) => SlideRouteTransition(
+          child: const AppearancesScreen(),
+          routeName: Routes.appearances,
+        ),
       ),
       GoRoute(
         path: Routes.languages,
-        builder: (context, state) => const LanguagesScreen(),
+        pageBuilder: (context, state) => SlideRouteTransition(
+          child: const LanguagesScreen(),
+          routeName: Routes.languages,
+        ),
       ),
     ],
   );

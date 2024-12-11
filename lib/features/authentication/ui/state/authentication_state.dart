@@ -1,20 +1,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-part 'welcome_state.freezed.dart';
+part 'authentication_state.freezed.dart';
 
-part 'welcome_state.g.dart';
+part 'authentication_state.g.dart';
 
 @freezed
-class WelcomeState with _$WelcomeState {
-  const factory WelcomeState({
+class AuthenticationState with _$AuthenticationState {
+  const factory AuthenticationState({
     @JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson) AuthResponse? authResponse,
     @Default(false) bool isRegisterSuccessfully,
-    @Default(false) bool isLoginSuccessfully,
-  }) = _WelcomeState;
+    @Default(false) bool isSignInSuccessfully,
+  }) = _AuthenticationState;
 
-  factory WelcomeState.fromJson(Map<String, Object?> json) =>
-      _$WelcomeStateFromJson(json);
+  factory AuthenticationState.fromJson(Map<String, Object?> json) =>
+      _$AuthenticationStateFromJson(json);
 }
 
 AuthResponse? _authResponseFromJson(Map<String, dynamic>? json) {

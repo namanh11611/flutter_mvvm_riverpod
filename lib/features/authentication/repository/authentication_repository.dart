@@ -22,7 +22,54 @@ AuthenticationRepository authenticationRepository(Ref ref) {
 class AuthenticationRepository {
   const AuthenticationRepository();
 
-  Future<AuthResponse> loginWithGoogle() async {
+  Future<void> signInWithMagicLink(String email) async {
+    // TODO: fake data
+    return;
+
+    try {
+      await supabase.auth.signInWithOtp(
+        email: email,
+        emailRedirectTo: Constants.supabaseLoginCallback,
+      );
+    } on AuthException catch (error) {
+      throw Exception(error.message);
+    } catch (error) {
+      throw Exception('unexpected_error_occurred'.tr());
+    }
+  }
+
+  Future<AuthResponse> verifyOtp({
+    required String email,
+    required String token,
+    required bool isRegister,
+  }) async {
+    try {
+      // TODO: fake data
+      return AuthResponse(
+        user: User(
+          id: '',
+          appMetadata: {},
+          userMetadata: {},
+          aud: '',
+          createdAt: '',
+          email: email,
+        ),
+      );
+
+      final result = await supabase.auth.verifyOTP(
+        email: email,
+        token: token,
+        type: isRegister ? OtpType.signup : OtpType.magiclink,
+      );
+      return result;
+    } on AuthException catch (error) {
+      throw Exception(error.message);
+    } catch (error) {
+      throw Exception('unexpected_error_occurred'.tr());
+    }
+  }
+
+  Future<AuthResponse> signInWithGoogle() async {
     // TODO: fake data
     return AuthResponse(
       user: User(
@@ -65,12 +112,14 @@ class AuthenticationRepository {
         accessToken: accessToken,
       );
       return result;
+    } on AuthException catch (error) {
+      throw Exception(error.message);
     } catch (error) {
       throw Exception('unexpected_error_occurred'.tr());
     }
   }
 
-  Future<AuthResponse> loginWithApple() async {
+  Future<AuthResponse> signInWithApple() async {
     // TODO: fake data
     return AuthResponse(
       user: User(

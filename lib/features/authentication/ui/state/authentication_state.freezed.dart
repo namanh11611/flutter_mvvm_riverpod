@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'welcome_state.dart';
+part of 'authentication_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,58 +14,61 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-WelcomeState _$WelcomeStateFromJson(Map<String, dynamic> json) {
-  return _WelcomeState.fromJson(json);
+AuthenticationState _$AuthenticationStateFromJson(Map<String, dynamic> json) {
+  return _AuthenticationState.fromJson(json);
 }
 
 /// @nodoc
-mixin _$WelcomeState {
+mixin _$AuthenticationState {
   @JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
   AuthResponse? get authResponse => throw _privateConstructorUsedError;
   bool get isRegisterSuccessfully => throw _privateConstructorUsedError;
-  bool get isLoginSuccessfully => throw _privateConstructorUsedError;
+  bool get isSignInSuccessfully => throw _privateConstructorUsedError;
+  bool get isMagicLinkSent => throw _privateConstructorUsedError;
 
-  /// Serializes this WelcomeState to a JSON map.
+  /// Serializes this AuthenticationState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of WelcomeState
+  /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $WelcomeStateCopyWith<WelcomeState> get copyWith =>
+  $AuthenticationStateCopyWith<AuthenticationState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $WelcomeStateCopyWith<$Res> {
-  factory $WelcomeStateCopyWith(
-          WelcomeState value, $Res Function(WelcomeState) then) =
-      _$WelcomeStateCopyWithImpl<$Res, WelcomeState>;
+abstract class $AuthenticationStateCopyWith<$Res> {
+  factory $AuthenticationStateCopyWith(
+          AuthenticationState value, $Res Function(AuthenticationState) then) =
+      _$AuthenticationStateCopyWithImpl<$Res, AuthenticationState>;
   @useResult
   $Res call(
       {@JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
       AuthResponse? authResponse,
       bool isRegisterSuccessfully,
-      bool isLoginSuccessfully});
+      bool isSignInSuccessfully,
+      bool isMagicLinkSent});
 }
 
 /// @nodoc
-class _$WelcomeStateCopyWithImpl<$Res, $Val extends WelcomeState>
-    implements $WelcomeStateCopyWith<$Res> {
-  _$WelcomeStateCopyWithImpl(this._value, this._then);
+class _$AuthenticationStateCopyWithImpl<$Res, $Val extends AuthenticationState>
+    implements $AuthenticationStateCopyWith<$Res> {
+  _$AuthenticationStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of WelcomeState
+  /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? authResponse = freezed,
     Object? isRegisterSuccessfully = null,
-    Object? isLoginSuccessfully = null,
+    Object? isSignInSuccessfully = null,
+    Object? isMagicLinkSent = null,
   }) {
     return _then(_value.copyWith(
       authResponse: freezed == authResponse
@@ -76,47 +79,53 @@ class _$WelcomeStateCopyWithImpl<$Res, $Val extends WelcomeState>
           ? _value.isRegisterSuccessfully
           : isRegisterSuccessfully // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoginSuccessfully: null == isLoginSuccessfully
-          ? _value.isLoginSuccessfully
-          : isLoginSuccessfully // ignore: cast_nullable_to_non_nullable
+      isSignInSuccessfully: null == isSignInSuccessfully
+          ? _value.isSignInSuccessfully
+          : isSignInSuccessfully // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMagicLinkSent: null == isMagicLinkSent
+          ? _value.isMagicLinkSent
+          : isMagicLinkSent // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$WelcomeStateImplCopyWith<$Res>
-    implements $WelcomeStateCopyWith<$Res> {
-  factory _$$WelcomeStateImplCopyWith(
-          _$WelcomeStateImpl value, $Res Function(_$WelcomeStateImpl) then) =
-      __$$WelcomeStateImplCopyWithImpl<$Res>;
+abstract class _$$AuthenticationStateImplCopyWith<$Res>
+    implements $AuthenticationStateCopyWith<$Res> {
+  factory _$$AuthenticationStateImplCopyWith(_$AuthenticationStateImpl value,
+          $Res Function(_$AuthenticationStateImpl) then) =
+      __$$AuthenticationStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
       AuthResponse? authResponse,
       bool isRegisterSuccessfully,
-      bool isLoginSuccessfully});
+      bool isSignInSuccessfully,
+      bool isMagicLinkSent});
 }
 
 /// @nodoc
-class __$$WelcomeStateImplCopyWithImpl<$Res>
-    extends _$WelcomeStateCopyWithImpl<$Res, _$WelcomeStateImpl>
-    implements _$$WelcomeStateImplCopyWith<$Res> {
-  __$$WelcomeStateImplCopyWithImpl(
-      _$WelcomeStateImpl _value, $Res Function(_$WelcomeStateImpl) _then)
+class __$$AuthenticationStateImplCopyWithImpl<$Res>
+    extends _$AuthenticationStateCopyWithImpl<$Res, _$AuthenticationStateImpl>
+    implements _$$AuthenticationStateImplCopyWith<$Res> {
+  __$$AuthenticationStateImplCopyWithImpl(_$AuthenticationStateImpl _value,
+      $Res Function(_$AuthenticationStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of WelcomeState
+  /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? authResponse = freezed,
     Object? isRegisterSuccessfully = null,
-    Object? isLoginSuccessfully = null,
+    Object? isSignInSuccessfully = null,
+    Object? isMagicLinkSent = null,
   }) {
-    return _then(_$WelcomeStateImpl(
+    return _then(_$AuthenticationStateImpl(
       authResponse: freezed == authResponse
           ? _value.authResponse
           : authResponse // ignore: cast_nullable_to_non_nullable
@@ -125,9 +134,13 @@ class __$$WelcomeStateImplCopyWithImpl<$Res>
           ? _value.isRegisterSuccessfully
           : isRegisterSuccessfully // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoginSuccessfully: null == isLoginSuccessfully
-          ? _value.isLoginSuccessfully
-          : isLoginSuccessfully // ignore: cast_nullable_to_non_nullable
+      isSignInSuccessfully: null == isSignInSuccessfully
+          ? _value.isSignInSuccessfully
+          : isSignInSuccessfully // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMagicLinkSent: null == isMagicLinkSent
+          ? _value.isMagicLinkSent
+          : isMagicLinkSent // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -135,15 +148,16 @@ class __$$WelcomeStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$WelcomeStateImpl implements _WelcomeState {
-  const _$WelcomeStateImpl(
+class _$AuthenticationStateImpl implements _AuthenticationState {
+  const _$AuthenticationStateImpl(
       {@JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
       this.authResponse,
       this.isRegisterSuccessfully = false,
-      this.isLoginSuccessfully = false});
+      this.isSignInSuccessfully = false,
+      this.isMagicLinkSent = false});
 
-  factory _$WelcomeStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WelcomeStateImplFromJson(json);
+  factory _$AuthenticationStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AuthenticationStateImplFromJson(json);
 
   @override
   @JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
@@ -153,56 +167,63 @@ class _$WelcomeStateImpl implements _WelcomeState {
   final bool isRegisterSuccessfully;
   @override
   @JsonKey()
-  final bool isLoginSuccessfully;
+  final bool isSignInSuccessfully;
+  @override
+  @JsonKey()
+  final bool isMagicLinkSent;
 
   @override
   String toString() {
-    return 'WelcomeState(authResponse: $authResponse, isRegisterSuccessfully: $isRegisterSuccessfully, isLoginSuccessfully: $isLoginSuccessfully)';
+    return 'AuthenticationState(authResponse: $authResponse, isRegisterSuccessfully: $isRegisterSuccessfully, isSignInSuccessfully: $isSignInSuccessfully, isMagicLinkSent: $isMagicLinkSent)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$WelcomeStateImpl &&
+            other is _$AuthenticationStateImpl &&
             (identical(other.authResponse, authResponse) ||
                 other.authResponse == authResponse) &&
             (identical(other.isRegisterSuccessfully, isRegisterSuccessfully) ||
                 other.isRegisterSuccessfully == isRegisterSuccessfully) &&
-            (identical(other.isLoginSuccessfully, isLoginSuccessfully) ||
-                other.isLoginSuccessfully == isLoginSuccessfully));
+            (identical(other.isSignInSuccessfully, isSignInSuccessfully) ||
+                other.isSignInSuccessfully == isSignInSuccessfully) &&
+            (identical(other.isMagicLinkSent, isMagicLinkSent) ||
+                other.isMagicLinkSent == isMagicLinkSent));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, authResponse, isRegisterSuccessfully, isLoginSuccessfully);
+  int get hashCode => Object.hash(runtimeType, authResponse,
+      isRegisterSuccessfully, isSignInSuccessfully, isMagicLinkSent);
 
-  /// Create a copy of WelcomeState
+  /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$WelcomeStateImplCopyWith<_$WelcomeStateImpl> get copyWith =>
-      __$$WelcomeStateImplCopyWithImpl<_$WelcomeStateImpl>(this, _$identity);
+  _$$AuthenticationStateImplCopyWith<_$AuthenticationStateImpl> get copyWith =>
+      __$$AuthenticationStateImplCopyWithImpl<_$AuthenticationStateImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$WelcomeStateImplToJson(
+    return _$$AuthenticationStateImplToJson(
       this,
     );
   }
 }
 
-abstract class _WelcomeState implements WelcomeState {
-  const factory _WelcomeState(
+abstract class _AuthenticationState implements AuthenticationState {
+  const factory _AuthenticationState(
       {@JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
       final AuthResponse? authResponse,
       final bool isRegisterSuccessfully,
-      final bool isLoginSuccessfully}) = _$WelcomeStateImpl;
+      final bool isSignInSuccessfully,
+      final bool isMagicLinkSent}) = _$AuthenticationStateImpl;
 
-  factory _WelcomeState.fromJson(Map<String, dynamic> json) =
-      _$WelcomeStateImpl.fromJson;
+  factory _AuthenticationState.fromJson(Map<String, dynamic> json) =
+      _$AuthenticationStateImpl.fromJson;
 
   @override
   @JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
@@ -210,12 +231,14 @@ abstract class _WelcomeState implements WelcomeState {
   @override
   bool get isRegisterSuccessfully;
   @override
-  bool get isLoginSuccessfully;
+  bool get isSignInSuccessfully;
+  @override
+  bool get isMagicLinkSent;
 
-  /// Create a copy of WelcomeState
+  /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WelcomeStateImplCopyWith<_$WelcomeStateImpl> get copyWith =>
+  _$$AuthenticationStateImplCopyWith<_$AuthenticationStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

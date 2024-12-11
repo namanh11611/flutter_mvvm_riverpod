@@ -1,10 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
+
 String? notEmptyEmailValidator(String? value) {
   if (value == null || value.trim().isEmpty) {
-    return 'Required field, please enter a valid value';
+    return 'validator_required_field'.tr();
   }
 
   if (!isValidEmail(value.trim())) {
-    return 'Invalid email format, please try again';
+    return 'validator_invalid_email_format'.tr();
   }
 
   // Return null if the value is valid

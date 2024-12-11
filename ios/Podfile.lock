@@ -20,14 +20,14 @@ PODS:
   - Firebase/Crashlytics (11.4.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 11.4.0)
-  - firebase_analytics (11.3.5):
+  - firebase_analytics (11.3.6):
     - Firebase/Analytics (= 11.4.0)
     - firebase_core
     - Flutter
-  - firebase_core (3.8.0):
+  - firebase_core (3.8.1):
     - Firebase/CoreOnly (= 11.4.0)
     - Flutter
-  - firebase_crashlytics (4.1.5):
+  - firebase_crashlytics (4.2.0):
     - Firebase/Crashlytics (= 11.4.0)
     - firebase_core
     - Flutter
@@ -249,9 +249,9 @@ SPEC CHECKSUMS:
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   connectivity_plus: 4c41c08fc6d7c91f63bc7aec70ffe3730b04f563
   Firebase: cf1b19f21410b029b6786a54e9764a0cacad3c99
-  firebase_analytics: fa7e5b20c2b58042e3301f5112a473d365bd490c
-  firebase_core: 9efc3ecf689cdbc90f13f4dc58108c83ea46b266
-  firebase_crashlytics: 72a8b504422ba8bb435a7a0c0a9341320cbcbe29
+  firebase_analytics: 2815af29d49c1a994652abd37a5b001a88bc7b75
+  firebase_core: 418aed674e9a0b8b6088aec16cde82a811f6261f
+  firebase_crashlytics: 757e252772ed3dd37c07638f9fcd4dceb5f101c8
   FirebaseAnalytics: 3feef9ae8733c567866342a1000691baaa7cad49
   FirebaseCore: e0510f1523bc0eb21653cac00792e1e2bd6f1771
   FirebaseCoreExtension: f1bc67a4702931a7caa097d8e4ac0a1b0d16720e

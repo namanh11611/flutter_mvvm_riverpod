@@ -1,28 +1,75 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_riverpod/constants/assets.dart';
 import 'package:flutter_mvvm_riverpod/constants/constants.dart';
 import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/view_models/welcome_view_model.dart';
+import 'package:flutter_mvvm_riverpod/features/authentication/ui/view_models/authentication_view_model.dart';
+import 'package:flutter_mvvm_riverpod/features/authentication/ui/widgets/horizontal_divider.dart';
+import 'package:flutter_mvvm_riverpod/features/authentication/ui/widgets/social_sign_in.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_text_form_field.dart';
 import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/primary_button.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/secondary_button.dart';
 import 'package:flutter_mvvm_riverpod/routing/routes.dart';
 import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
 import 'package:flutter_mvvm_riverpod/utils/global_loading.dart';
+import 'package:flutter_mvvm_riverpod/utils/validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:async';
+import 'package:flutter_mvvm_riverpod/main.dart';
+import 'package:flutter_mvvm_riverpod/features/profile/ui/view_models/profile_view_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class WelcomeScreen extends ConsumerWidget {
+class WelcomeScreen extends ConsumerStatefulWidget {
   const WelcomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isIOS = Platform.isIOS;
+  ConsumerState<WelcomeScreen> createState() => _WelcomeScreenState();
+}
 
-    ref.listen(welcomeViewModelProvider, (previous, next) {
+class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
+  late final TextEditingController _emailController;
+  late final StreamSubscription<AuthState> _authSubscription;
+  bool _isEmailValid = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _emailController.addListener(_validateEmail);
+
+    _authSubscription = supabase.auth.onAuthStateChange.listen((data) {
+      final AuthChangeEvent event = data.event;
+      final Session? session = data.session;
+      debugPrint(
+          '${Constants.tag} [WelcomeScreen.initState] Auth change: $event, session: $session');
+
+      if (event == AuthChangeEvent.signedIn && session != null) {
+        ref
+            .read(profileViewModelProvider.notifier)
+            .updateProfile(email: session.user.email ?? '');
+        context.go(Routes.home);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _emailController.removeListener(_validateEmail);
+    _emailController.dispose();
+    _authSubscription.cancel();
+    super.dispose();
+  }
+
+  void _validateEmail() {
+    setState(() {
+      _isEmailValid = isValidEmail(_emailController.text);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen(authenticationViewModelProvider, (previous, next) {
       if (next.isLoading != previous?.isLoading) {
         if (next.isLoading) {
           Global.showLoading(context);
@@ -37,142 +84,81 @@ class WelcomeScreen extends ConsumerWidget {
 
       if (next.hasValue) {
         debugPrint(
-            '${Constants.tag} [WelcomeScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isLoginSuccessfully = ${next.value?.isLoginSuccessfully}');
+            '${Constants.tag} [WelcomeScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isSignInSuccessfully = ${next.value?.isSignInSuccessfully}');
         if (next.value?.isRegisterSuccessfully == true) {
-          context.push(Routes.onboarding);
-        } else if (next.value?.isLoginSuccessfully == true) {
-          context.push(Routes.home);
+          context.pushReplacement(Routes.onboarding);
+        } else if (next.value?.isSignInSuccessfully == true) {
+          context.pushReplacement(Routes.home);
         }
       }
     });
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                top: 48,
-                right: 24,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: SvgPicture.asset(
+                  Assets.welcome,
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.bottomCenter,
+                  semanticsLabel: 'Welcome',
+                ),
               ),
-              child: Text(
-                'welcome'.tr(),
+              Text(
+                'register'.tr(),
                 style: AppTheme.headLineLarge32,
-                textAlign: TextAlign.center,
               ),
-            ),
-            Expanded(
-              child: SvgPicture.asset(
-                Assets.welcome,
-                fit: BoxFit.contain,
-                semanticsLabel: 'Welcome',
+              const SizedBox(height: 24),
+              CommonTextFormField(
+                label: 'Email',
+                controller: _emailController,
+                validator: notEmptyEmailValidator,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                right: 24,
-                bottom: 16,
-              ),
-              child: PrimaryButton(
-                text: 'register'.tr(),
+              const SizedBox(height: 32),
+              PrimaryButton(
+                isEnable: _isEmailValid,
+                text: 'continue'.tr(),
                 onPressed: () {
-                  // context.push(Routers.loginMagic, extra: true);
+                  ref
+                      .read(authenticationViewModelProvider.notifier)
+                      .signInWithMagicLink(_emailController.text);
+                  context.push(
+                    Routes.otp,
+                    extra: {
+                      'email': _emailController.text,
+                      'isRegister': true,
+                    },
+                  );
                 },
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                right: 24,
-                bottom: 16,
-              ),
-              child: SecondaryButton(
-                text: 'log_in'.tr(),
-                onPressed: () {
-                  // context.push(Routers.loginMagic, extra: false);
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: context.dividerColor,
-                    ),
+                  Text(
+                    'already_have_account'.tr(),
+                    style: AppTheme.bodyMedium14,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                  const SizedBox(width: 4),
+                  TextButton(
+                    onPressed: () {
+                      context.push(Routes.login);
+                    },
                     child: Text(
-                      'or'.tr(),
-                      style: AppTheme.bodyMedium14
-                          .copyWith(color: context.secondaryTextColor),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: context.dividerColor,
+                      'sign_in'.tr(),
+                      style: AppTheme.titleExtraSmall14,
                     ),
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                top: 16,
-                right: 24,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SecondaryButton(
-                      icon: SizedBox(
-                        width: 32,
-                        height: 32,
-                        child: SvgPicture.asset(
-                          Assets.googleLogo,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      text: isIOS ? 'google'.tr() : 'sign_in_with_google'.tr(),
-                      onPressed: () => ref
-                          .read(welcomeViewModelProvider.notifier)
-                          .loginWithGoogle(),
-                    ),
-                  ),
-                  if (isIOS) const SizedBox(width: 16),
-                  if (isIOS)
-                    Expanded(
-                      child: SecondaryButton(
-                        icon: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: SvgPicture.asset(
-                            Assets.appleLogo,
-                            fit: BoxFit.contain,
-                            colorFilter: ColorFilter.mode(
-                              context.secondaryTextColor,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                        ),
-                        text: 'apple'.tr(),
-                        onPressed: () => ref
-                            .read(welcomeViewModelProvider.notifier)
-                            .loginWithApple(),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 48),
-          ],
+              const SizedBox(height: 4),
+              HorizontalDivider(),
+              SocialSignIn(),
+            ],
+          ),
         ),
       ),
     );
