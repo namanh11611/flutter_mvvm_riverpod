@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/material_ink_well.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
 import 'package:hugeicons/hugeicons.dart';
+
+import '../../../../extensions/build_context_extension.dart';
+import '../../../../features/common/ui/widgets/material_ink_well.dart';
+import '../../../../theme/app_theme.dart';
 
 class ProfileItem extends StatelessWidget {
   final IconData icon;

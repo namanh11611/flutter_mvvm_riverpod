@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/features/hero_list/ui/hero_list_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/ui/profile_screen.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
+
+import '../../../extensions/build_context_extension.dart';
+import '../../../features/hero_list/ui/hero_list_screen.dart';
+import '../../../features/profile/ui/profile_screen.dart';
+import '../../../theme/app_colors.dart';
+import '../../../theme/app_theme.dart';
 
 const List<Widget> _screens = [
   HeroListScreen(),

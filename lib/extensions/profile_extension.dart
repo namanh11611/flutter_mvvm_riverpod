@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm_riverpod/features/profile/model/profile.dart';
+import '../../features/profile/model/profile.dart';
 
 extension ProfileExtension on Profile? {
   bool get isPremium {

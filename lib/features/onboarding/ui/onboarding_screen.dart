@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_text_form_field.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/primary_button.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/ui/view_models/profile_view_model.dart';
-import 'package:flutter_mvvm_riverpod/routing/routes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../extensions/build_context_extension.dart';
+import '../../../features/common/ui/widgets/common_text_form_field.dart';
+import '../../../features/common/ui/widgets/primary_button.dart';
+import '../../../features/profile/ui/view_models/profile_view_model.dart';
+import '../../../routing/routes.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});

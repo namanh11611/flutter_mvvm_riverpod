@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/sign_in_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/otp_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/welcome_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/home/ui/home_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/onboarding/ui/onboarding_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/onboarding/ui/splash_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/ui/appearances_screen.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/ui/lanaguages_screen.dart';
-import 'package:flutter_mvvm_riverpod/routing/routes.dart';
 import 'package:go_router/go_router.dart';
+
+import '../features/authentication/ui/otp_screen.dart';
+import '../features/authentication/ui/sign_in_screen.dart';
+import '../features/authentication/ui/welcome_screen.dart';
+import '../features/home/ui/home_screen.dart';
+import '../features/onboarding/ui/onboarding_screen.dart';
+import '../features/onboarding/ui/splash_screen.dart';
+import '../features/profile/ui/appearances_screen.dart';
+import '../features/profile/ui/lanaguages_screen.dart';
+import '../routing/routes.dart';
 
 class SlideRouteTransition extends CustomTransitionPage<void> {
   SlideRouteTransition({required super.child, required String routeName})

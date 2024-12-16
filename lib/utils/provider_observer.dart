@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/constants/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../constants/constants.dart';
 
 class AppObserver extends ProviderObserver {
   @override

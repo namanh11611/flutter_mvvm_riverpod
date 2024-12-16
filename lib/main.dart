@@ -1,22 +1,17 @@
-import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mvvm_riverpod/environment/env.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/providers/app_theme_mode_provider.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/offline_container.dart';
-import 'package:flutter_mvvm_riverpod/routing/router.dart';
-import 'package:flutter_mvvm_riverpod/utils/provider_observer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 // import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'environment/env.dart';
+import 'extensions/build_context_extension.dart';
+import 'features/common/ui/providers/app_theme_mode_provider.dart';
+import 'features/common/ui/widgets/offline_container.dart';
+import 'routing/router.dart';
+import 'utils/provider_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

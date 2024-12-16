@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/widgets/sign_in_with_apple.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/widgets/sign_in_with_google.dart';
+
+import '../../../../features/authentication/ui/widgets/sign_in_with_apple.dart';
+import '../../../../features/authentication/ui/widgets/sign_in_with_google.dart';
 
 class SocialSignIn extends StatelessWidget {
   const SocialSignIn({super.key});

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/model/profile.dart';
+
+import '../../../../features/profile/model/profile.dart';
 
 part 'profile_state.freezed.dart';
 part 'profile_state.g.dart';

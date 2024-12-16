@@ -1,18 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/constants/assets.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/view_models/authentication_view_model.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/widgets/horizontal_divider.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/widgets/social_sign_in.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_back_button.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_text_form_field.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/primary_button.dart';
-import 'package:flutter_mvvm_riverpod/routing/routes.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
-import 'package:flutter_mvvm_riverpod/utils/validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../constants/assets.dart';
+import '../../../features/authentication/ui/view_models/authentication_view_model.dart';
+import '../../../features/authentication/ui/widgets/horizontal_divider.dart';
+import '../../../features/authentication/ui/widgets/social_sign_in.dart';
+import '../../../features/common/ui/widgets/common_back_button.dart';
+import '../../../features/common/ui/widgets/common_text_form_field.dart';
+import '../../../features/common/ui/widgets/primary_button.dart';
+import '../../../routing/routes.dart';
+import '../../../theme/app_theme.dart';
+import '../../../utils/validator.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
+
+import '../../../../theme/app_colors.dart';
 
 class ShadowBox extends StatelessWidget {
   final Widget child;

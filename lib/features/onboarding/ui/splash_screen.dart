@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/constants/constants.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/repository/authentication_repository.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/loading.dart';
-import 'package:flutter_mvvm_riverpod/routing/routes.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../constants/constants.dart';
+import '../../../features/authentication/repository/authentication_repository.dart';
+import '../../../features/common/ui/widgets/loading.dart';
+import '../../../routing/routes.dart';
 
 class SplashScreen extends ConsumerWidget {
   const SplashScreen({super.key});

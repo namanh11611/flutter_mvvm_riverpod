@@ -1,8 +1,9 @@
-import 'package:flutter_mvvm_riverpod/features/authentication/repository/authentication_repository.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/model/profile.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/repository/profile_repository.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/ui/state/profile_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../../features/authentication/repository/authentication_repository.dart';
+import '../../../../features/profile/model/profile.dart';
+import '../../../../features/profile/repository/profile_repository.dart';
+import '../../../../features/profile/ui/state/profile_state.dart';
 
 part 'profile_view_model.g.dart';
 

@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_header.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/ui/widgets/appearance_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
+
+import '../../../../extensions/build_context_extension.dart';
+import '../../../../features/common/ui/widgets/common_header.dart';
+import '../../../../features/profile/ui/widgets/appearance_item.dart';
 
 class AppearancesScreen extends ConsumerWidget {
   const AppearancesScreen({super.key});

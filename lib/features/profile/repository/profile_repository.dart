@@ -1,11 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter_mvvm_riverpod/constants/constants.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/model/profile.dart';
-import 'package:flutter_mvvm_riverpod/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../constants/constants.dart';
+import '../../../features/profile/model/profile.dart';
+import '../../../main.dart';
 
 part 'profile_repository.g.dart';
 

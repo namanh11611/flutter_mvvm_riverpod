@@ -1,18 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/constants/assets.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_dialog.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/ui/widgets/profile_item.dart';
-import 'package:flutter_mvvm_riverpod/routing/routes.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
-import 'package:flutter_mvvm_riverpod/utils/global_loading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../../constants/assets.dart';
+import '../../../../extensions/build_context_extension.dart';
+import '../../../../features/common/ui/widgets/common_dialog.dart';
+import '../../../../features/profile/ui/widgets/profile_item.dart';
+import '../../../../routing/routes.dart';
+import '../../../../theme/app_colors.dart';
+import '../../../../theme/app_theme.dart';
+import '../../../../utils/global_loading.dart';
 
 class ProfileScreen2 extends ConsumerStatefulWidget {
   const ProfileScreen2({super.key});

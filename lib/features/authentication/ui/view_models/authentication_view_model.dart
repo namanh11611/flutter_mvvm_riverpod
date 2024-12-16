@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/constants/constants.dart';
-import 'package:flutter_mvvm_riverpod/extensions/string_extension.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/repository/authentication_repository.dart';
-import 'package:flutter_mvvm_riverpod/features/authentication/ui/state/authentication_state.dart';
-import 'package:flutter_mvvm_riverpod/features/profile/ui/view_models/profile_view_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../../constants/constants.dart';
+import '../../../../extensions/string_extension.dart';
+import '../../../../features/authentication/repository/authentication_repository.dart';
+import '../../../../features/authentication/ui/state/authentication_state.dart';
+import '../../../../features/profile/ui/view_models/profile_view_model.dart';
 
 part 'authentication_view_model.g.dart';
 

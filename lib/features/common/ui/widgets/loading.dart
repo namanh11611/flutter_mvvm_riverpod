@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/constants/assets.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
+
+import '../../../../constants/assets.dart';
+import '../../../../theme/app_colors.dart';
 
 class Loading extends StatelessWidget {
   const Loading({super.key});

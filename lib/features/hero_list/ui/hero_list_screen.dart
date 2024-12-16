@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../extensions/build_context_extension.dart';
+import '../../../theme/app_theme.dart';
 import 'widgets/hero_item.dart';
 
 const List<Map<String, String>> heroes = [

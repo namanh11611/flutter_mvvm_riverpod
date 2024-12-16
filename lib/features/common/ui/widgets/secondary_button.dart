@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/material_ink_well.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
-import 'package:flutter_mvvm_riverpod/theme/app_theme.dart';
+
+import '../../../../extensions/build_context_extension.dart';
+import '../../../../features/common/ui/widgets/material_ink_well.dart';
+import '../../../../theme/app_colors.dart';
+import '../../../../theme/app_theme.dart';
 
 class SecondaryButton extends ConsumerWidget {
   final String text;
