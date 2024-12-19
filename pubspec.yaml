@@ -61,6 +61,7 @@ dependencies:
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0
   sign_in_with_apple: ^6.1.4
+  supabase_auth_ui: ^0.5.4
   supabase_flutter: ^2.5.4
   url_launcher: ^6.3.0
   uuid: ^4.4.0

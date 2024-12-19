@@ -5,16 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 
 import '../../../constants/assets.dart';
 import '../../../constants/constants.dart';
 import '../../../extensions/build_context_extension.dart';
 import '../../../features/authentication/ui/view_models/authentication_view_model.dart';
 import '../../../features/authentication/ui/widgets/horizontal_divider.dart';
-import '../../../features/authentication/ui/widgets/social_sign_in.dart';
-import '../../../features/common/ui/widgets/common_text_form_field.dart';
-import '../../../features/common/ui/widgets/primary_button.dart';
 import '../../../features/profile/ui/view_models/profile_view_model.dart';
 import '../../../main.dart';
 import '../../../routing/routes.dart';
@@ -115,27 +112,11 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
                 style: AppTheme.headLineLarge32,
               ),
               const SizedBox(height: 24),
-              CommonTextFormField(
-                label: 'Email',
-                controller: _emailController,
-                validator: notEmptyEmailValidator,
-              ),
-              const SizedBox(height: 32),
-              PrimaryButton(
-                isEnable: _isEmailValid,
-                text: 'continue'.tr(),
-                onPressed: () {
-                  ref
-                      .read(authenticationViewModelProvider.notifier)
-                      .signInWithMagicLink(_emailController.text);
-                  context.push(
-                    Routes.otp,
-                    extra: {
-                      'email': _emailController.text,
-                      'isRegister': true,
-                    },
-                  );
-                },
+              SupaMagicAuth(
+                localization: SupaMagicAuthLocalization(
+                  continueWithMagicLink: 'continue'.tr(),
+                ),
+                onSuccess: (session) {},
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -156,9 +137,16 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 4),
               HorizontalDivider(),
-              SocialSignIn(),
+              const SizedBox(height: 8),
+              SupaSocialsAuth(
+                socialProviders: [
+                  OAuthProvider.apple,
+                  OAuthProvider.google,
+                ],
+                onSuccess: (session) {},
+              ),
+              const SizedBox(height: 32),
             ],
           ),
         ),

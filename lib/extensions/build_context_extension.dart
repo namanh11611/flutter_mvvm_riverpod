@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../features/common/ui/widgets/custom_snack_bar.dart';
 import '../theme/app_colors.dart';
+import '../theme/app_theme.dart';
 
 extension ThemeModeExtension on BuildContext {
   bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
@@ -33,6 +34,8 @@ extension ThemeModeExtension on BuildContext {
         textTheme: Theme.of(this).textTheme.apply(
               bodyColor: AppColors.mono100,
             ),
+        inputDecorationTheme: AppTheme.inputDecorationTheme,
+        elevatedButtonTheme: AppTheme.elevatedButtonTheme,
       );
 
   ThemeData get darkTheme => ThemeData.dark().copyWith(
@@ -45,6 +48,8 @@ extension ThemeModeExtension on BuildContext {
         textTheme: Theme.of(this).textTheme.apply(
               bodyColor: AppColors.mono20,
             ),
+        inputDecorationTheme: AppTheme.inputDecorationTheme,
+        elevatedButtonTheme: AppTheme.elevatedButtonTheme,
       );
 
   void showSuccessSnackBar(String text) {

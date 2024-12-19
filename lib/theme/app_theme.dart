@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'app_colors.dart';
+
 class AppTheme {
   AppTheme._();
 
@@ -62,5 +64,28 @@ class AppTheme {
   static final bodySmall12 = GoogleFonts.nunito(
     fontSize: 12,
     fontWeight: FontWeight.w400,
+  );
+
+  static final InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
+    border: const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+    labelStyle: AppTheme.bodyLarge16,
+  );
+
+  static final ElevatedButtonThemeData elevatedButtonTheme =
+      ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      foregroundColor: AppColors.mono0,
+      backgroundColor: AppColors.blueberry100,
+      disabledForegroundColor: AppColors.mono60,
+      disabledBackgroundColor: AppColors.mono40,
+      elevation: 0,
+      textStyle: AppTheme.titleExtraSmall14,
+      fixedSize: Size(double.infinity, 48),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+      ),
+    ),
   );
 }
