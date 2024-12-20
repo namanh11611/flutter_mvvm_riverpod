@@ -67,6 +67,7 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.13
+  change_app_package_name: ^1.4.0
   custom_lint: ^0.7.0
   envied_generator: ^1.0.0
   flutter_lints: ^5.0.0

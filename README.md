@@ -78,7 +78,12 @@ lib/
    flutter pub get
    ```
 
-3. Run the app
+3. Change the app package name
+   ```bash
+   dart run change_app_package_name:main com.new.package.name
+   ```
+
+4. Run the app
    ```bash
    flutter run
    ```
