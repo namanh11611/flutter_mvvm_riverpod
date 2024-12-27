@@ -78,10 +78,14 @@ lib/
    flutter pub get
    ```
 
-3. Change the app package name
+3. Change the app information
+   - To change the app package name, run the following command:
    ```bash
    dart run change_app_package_name:main com.new.package.name
    ```
+   - To change the Android app name, open the `android/app/src/main/AndroidManifest.xml` file, change the `android:label="New App Name"`
+   - To change the iOS app name, open the `ios/Runner/Info.plist` file, change the `CFBundleDisplayName` to `New App Name`
+   - To change the iOS bundle name, open the `ios/Runner/Info.plist` file, change the `CFBundleName` to `new_bundle_name`
 
 4. Run the app
    ```bash
