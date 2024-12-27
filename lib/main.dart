@@ -78,7 +78,7 @@ class MainApp extends ConsumerWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        routerConfig: router(),
+        routerConfig: router,
         debugShowCheckedModeBanner: false,
         builder: (context, child) {
           return OfflineContainer(child: child);

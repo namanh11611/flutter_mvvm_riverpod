@@ -34,71 +34,69 @@ class SlideRouteTransition extends CustomTransitionPage<void> {
         );
 }
 
-GoRouter router() {
-  return GoRouter(
-    initialLocation: Routes.splash,
-    routes: [
-      GoRoute(
-        path: Routes.splash,
-        pageBuilder: (context, state) => SlideRouteTransition(
-          child: const SplashScreen(),
-          routeName: Routes.splash,
-        ),
+final GoRouter router = GoRouter(
+  initialLocation: Routes.splash,
+  routes: [
+    GoRoute(
+      path: Routes.splash,
+      pageBuilder: (context, state) => SlideRouteTransition(
+        child: const SplashScreen(),
+        routeName: Routes.splash,
       ),
-      GoRoute(
-        path: Routes.welcome,
-        pageBuilder: (context, state) => SlideRouteTransition(
-          child: const WelcomeScreen(),
-          routeName: Routes.welcome,
-        ),
+    ),
+    GoRoute(
+      path: Routes.welcome,
+      pageBuilder: (context, state) => SlideRouteTransition(
+        child: const WelcomeScreen(),
+        routeName: Routes.welcome,
       ),
-      GoRoute(
-        path: Routes.login,
-        pageBuilder: (context, state) => SlideRouteTransition(
-          child: const SignInScreen(),
-          routeName: Routes.login,
-        ),
+    ),
+    GoRoute(
+      path: Routes.login,
+      pageBuilder: (context, state) => SlideRouteTransition(
+        child: const SignInScreen(),
+        routeName: Routes.login,
       ),
-      GoRoute(
+    ),
+    GoRoute(
         path: Routes.otp,
-        pageBuilder: (context, state){
+        pageBuilder: (context, state) {
           final map = state.extra as Map?;
           return SlideRouteTransition(
-          child: OtpScreen(
-            email: map?['email'],
-            isRegister: map?['isRegister'],
-          ),
-          routeName: Routes.otp,
-        );}
+            child: OtpScreen(
+              email: map?['email'],
+              isRegister: map?['isRegister'],
+            ),
+            routeName: Routes.otp,
+          );
+        }),
+    GoRoute(
+      path: Routes.onboarding,
+      pageBuilder: (context, state) => SlideRouteTransition(
+        child: const OnboardingScreen(),
+        routeName: Routes.onboarding,
       ),
-      GoRoute(
-        path: Routes.onboarding,
-        pageBuilder: (context, state) => SlideRouteTransition(
-          child: const OnboardingScreen(),
-          routeName: Routes.onboarding,
-        ),
+    ),
+    GoRoute(
+      path: Routes.home,
+      pageBuilder: (context, state) => SlideRouteTransition(
+        child: const HomeScreen(),
+        routeName: Routes.home,
       ),
-      GoRoute(
-        path: Routes.home,
-        pageBuilder: (context, state) => SlideRouteTransition(
-          child: const HomeScreen(),
-          routeName: Routes.home,
-        ),
+    ),
+    GoRoute(
+      path: Routes.appearances,
+      pageBuilder: (context, state) => SlideRouteTransition(
+        child: const AppearancesScreen(),
+        routeName: Routes.appearances,
       ),
-      GoRoute(
-        path: Routes.appearances,
-        pageBuilder: (context, state) => SlideRouteTransition(
-          child: const AppearancesScreen(),
-          routeName: Routes.appearances,
-        ),
+    ),
+    GoRoute(
+      path: Routes.languages,
+      pageBuilder: (context, state) => SlideRouteTransition(
+        child: const LanguagesScreen(),
+        routeName: Routes.languages,
       ),
-      GoRoute(
-        path: Routes.languages,
-        pageBuilder: (context, state) => SlideRouteTransition(
-          child: const LanguagesScreen(),
-          routeName: Routes.languages,
-        ),
-      ),
-    ],
-  );
-}
+    ),
+  ],
+);
