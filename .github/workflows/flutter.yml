@@ -1,0 +1,63 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Flutter CI/CD Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Flutter Build
+    runs-on: macos-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Java
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # Step 3: Setup Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.27.1'
+
+      # Step 4: Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Step 5: Generate code
+      - name: Generate code
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      # Step 6: Run tests
+      - name: Run tests
+        run: flutter test
+
+      # Step 7: Build iOS
+      - name: Build iOS
+        run: flutter build ios --release --no-codesign
+
+      # Step 8: Build Android App Bundle
+      - name: Build Android App Bundle
+        run: flutter build appbundle --release
+
+      # Step 9: Upload artifacts
+      - name: Upload App Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-bundle
+          path: build/app/outputs/bundle/release/app-release.aab
