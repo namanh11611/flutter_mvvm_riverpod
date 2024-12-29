@@ -6,7 +6,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   app_links
   connectivity_plus
   firebase_core
-  isar_flutter_libs
   url_launcher_windows
 )
 

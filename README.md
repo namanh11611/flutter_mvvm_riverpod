@@ -29,7 +29,7 @@ This project was inspired by the [Flutter App Architecture Guide](https://docs.f
 |                      | `go_router`            | Declarative routing          |
 | **Storage**          |
 |                      | `shared_preferences`   | Local key-value storage      |
-|                      | `isar`                 | Local database               |
+|                      | `sqflite`              | Local database               |
 | **Network**          |
 |                      | `dio`                  | HTTP client                  |
 |                      | `connectivity_plus`    | Network connectivity         |

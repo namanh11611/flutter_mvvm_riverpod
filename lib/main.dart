@@ -95,9 +95,6 @@ class _EagerInitialization extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Open local storage
-    // ref.watch(isarProvider);
-
     return child;
   }
 }

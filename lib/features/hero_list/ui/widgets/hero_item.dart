@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_riverpod/theme/app_colors.dart';
+
+import '../../../../theme/app_theme.dart';
 
 class HeroItem extends StatelessWidget {
   final String name;
   final String imageUrl;
+  final bool isFavorite;
+  final VoidCallback onFavoritePressed;
 
   const HeroItem({
     super.key,
     required this.name,
     required this.imageUrl,
+    this.isFavorite = false,
+    required this.onFavoritePressed,
   });
 
   @override
@@ -41,7 +48,7 @@ class HeroItem extends StatelessWidget {
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.transparent,
-                      Colors.black.withOpacity(0.7),
+                      Colors.black.withAlpha(200),
                     ],
                   ),
                 ),
@@ -53,18 +60,7 @@ class HeroItem extends StatelessWidget {
               right: 8,
               child: Text(
                 name,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 4.0,
-                      color: Colors.black,
-                      offset: Offset(1.0, 1.0),
-                    ),
-                  ],
-                ),
+                style: AppTheme.titleMedium18.copyWith(color: AppColors.mono0),
                 textAlign: TextAlign.center,
               ),
             ),

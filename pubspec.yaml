@@ -50,17 +50,16 @@ dependencies:
   hugeicons: ^0.0.7
   in_app_purchase: ^3.2.0
   in_app_update: ^4.2.3
-  isar: ^4.0.0-dev.3
-  isar_flutter_libs: ^4.0.0-dev.3
   json_annotation: ^4.9.0
   lottie: ^3.2.0
   package_info_plus: ^8.0.0
-  path_provider: ^2.1.4
+  path: ^1.9.0
   pinput: ^5.0.0
   riverpod_annotation: ^2.6.1
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0
   sign_in_with_apple: ^6.1.4
+  sqflite: ^2.4.1
   supabase_flutter: ^2.5.4
   url_launcher: ^6.3.0
   uuid: ^4.4.0

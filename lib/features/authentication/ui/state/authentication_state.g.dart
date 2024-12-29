@@ -13,7 +13,6 @@ _$AuthenticationStateImpl _$$AuthenticationStateImplFromJson(
           _authResponseFromJson(json['authResponse'] as Map<String, dynamic>?),
       isRegisterSuccessfully: json['isRegisterSuccessfully'] as bool? ?? false,
       isSignInSuccessfully: json['isSignInSuccessfully'] as bool? ?? false,
-      isMagicLinkSent: json['isMagicLinkSent'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$AuthenticationStateImplToJson(
@@ -22,5 +21,4 @@ Map<String, dynamic> _$$AuthenticationStateImplToJson(
       'authResponse': _authResponseToJson(instance.authResponse),
       'isRegisterSuccessfully': instance.isRegisterSuccessfully,
       'isSignInSuccessfully': instance.isSignInSuccessfully,
-      'isMagicLinkSent': instance.isMagicLinkSent,
     };

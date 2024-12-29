@@ -50,15 +50,9 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
       obscureText: _isObscure,
       decoration: InputDecoration(
         labelText: widget.label,
-        floatingLabelStyle: AppTheme.bodyLarge16,
+        labelStyle: AppTheme.bodyLarge16,
         border: const OutlineInputBorder(
-          borderSide: BorderSide(width: 2),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.blueberry100,
-            width: 2,
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         suffixIcon: widget.isPassword
             ? IconButton(

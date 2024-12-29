@@ -24,7 +24,6 @@ mixin _$AuthenticationState {
   AuthResponse? get authResponse => throw _privateConstructorUsedError;
   bool get isRegisterSuccessfully => throw _privateConstructorUsedError;
   bool get isSignInSuccessfully => throw _privateConstructorUsedError;
-  bool get isMagicLinkSent => throw _privateConstructorUsedError;
 
   /// Serializes this AuthenticationState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,8 +45,7 @@ abstract class $AuthenticationStateCopyWith<$Res> {
       {@JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
       AuthResponse? authResponse,
       bool isRegisterSuccessfully,
-      bool isSignInSuccessfully,
-      bool isMagicLinkSent});
+      bool isSignInSuccessfully});
 }
 
 /// @nodoc
@@ -68,7 +66,6 @@ class _$AuthenticationStateCopyWithImpl<$Res, $Val extends AuthenticationState>
     Object? authResponse = freezed,
     Object? isRegisterSuccessfully = null,
     Object? isSignInSuccessfully = null,
-    Object? isMagicLinkSent = null,
   }) {
     return _then(_value.copyWith(
       authResponse: freezed == authResponse
@@ -82,10 +79,6 @@ class _$AuthenticationStateCopyWithImpl<$Res, $Val extends AuthenticationState>
       isSignInSuccessfully: null == isSignInSuccessfully
           ? _value.isSignInSuccessfully
           : isSignInSuccessfully // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isMagicLinkSent: null == isMagicLinkSent
-          ? _value.isMagicLinkSent
-          : isMagicLinkSent // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -103,8 +96,7 @@ abstract class _$$AuthenticationStateImplCopyWith<$Res>
       {@JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
       AuthResponse? authResponse,
       bool isRegisterSuccessfully,
-      bool isSignInSuccessfully,
-      bool isMagicLinkSent});
+      bool isSignInSuccessfully});
 }
 
 /// @nodoc
@@ -123,7 +115,6 @@ class __$$AuthenticationStateImplCopyWithImpl<$Res>
     Object? authResponse = freezed,
     Object? isRegisterSuccessfully = null,
     Object? isSignInSuccessfully = null,
-    Object? isMagicLinkSent = null,
   }) {
     return _then(_$AuthenticationStateImpl(
       authResponse: freezed == authResponse
@@ -138,10 +129,6 @@ class __$$AuthenticationStateImplCopyWithImpl<$Res>
           ? _value.isSignInSuccessfully
           : isSignInSuccessfully // ignore: cast_nullable_to_non_nullable
               as bool,
-      isMagicLinkSent: null == isMagicLinkSent
-          ? _value.isMagicLinkSent
-          : isMagicLinkSent // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -153,8 +140,7 @@ class _$AuthenticationStateImpl implements _AuthenticationState {
       {@JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
       this.authResponse,
       this.isRegisterSuccessfully = false,
-      this.isSignInSuccessfully = false,
-      this.isMagicLinkSent = false});
+      this.isSignInSuccessfully = false});
 
   factory _$AuthenticationStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthenticationStateImplFromJson(json);
@@ -168,13 +154,10 @@ class _$AuthenticationStateImpl implements _AuthenticationState {
   @override
   @JsonKey()
   final bool isSignInSuccessfully;
-  @override
-  @JsonKey()
-  final bool isMagicLinkSent;
 
   @override
   String toString() {
-    return 'AuthenticationState(authResponse: $authResponse, isRegisterSuccessfully: $isRegisterSuccessfully, isSignInSuccessfully: $isSignInSuccessfully, isMagicLinkSent: $isMagicLinkSent)';
+    return 'AuthenticationState(authResponse: $authResponse, isRegisterSuccessfully: $isRegisterSuccessfully, isSignInSuccessfully: $isSignInSuccessfully)';
   }
 
   @override
@@ -187,15 +170,13 @@ class _$AuthenticationStateImpl implements _AuthenticationState {
             (identical(other.isRegisterSuccessfully, isRegisterSuccessfully) ||
                 other.isRegisterSuccessfully == isRegisterSuccessfully) &&
             (identical(other.isSignInSuccessfully, isSignInSuccessfully) ||
-                other.isSignInSuccessfully == isSignInSuccessfully) &&
-            (identical(other.isMagicLinkSent, isMagicLinkSent) ||
-                other.isMagicLinkSent == isMagicLinkSent));
+                other.isSignInSuccessfully == isSignInSuccessfully));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, authResponse,
-      isRegisterSuccessfully, isSignInSuccessfully, isMagicLinkSent);
+  int get hashCode => Object.hash(
+      runtimeType, authResponse, isRegisterSuccessfully, isSignInSuccessfully);
 
   /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
@@ -219,8 +200,7 @@ abstract class _AuthenticationState implements AuthenticationState {
       {@JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson)
       final AuthResponse? authResponse,
       final bool isRegisterSuccessfully,
-      final bool isSignInSuccessfully,
-      final bool isMagicLinkSent}) = _$AuthenticationStateImpl;
+      final bool isSignInSuccessfully}) = _$AuthenticationStateImpl;
 
   factory _AuthenticationState.fromJson(Map<String, dynamic> json) =
       _$AuthenticationStateImpl.fromJson;
@@ -232,8 +212,6 @@ abstract class _AuthenticationState implements AuthenticationState {
   bool get isRegisterSuccessfully;
   @override
   bool get isSignInSuccessfully;
-  @override
-  bool get isMagicLinkSent;
 
   /// Create a copy of AuthenticationState
   /// with the given fields replaced by the non-null parameter values.
