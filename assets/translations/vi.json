@@ -1,5 +1,6 @@
 {
   "cancel": "Huỷ",
+  "no_data": "Không có dữ liệu",
   "welcome": "Xin chào đến với Flutter MVVM Riverpod!",
   "already_have_account": "Đã có tài khoản?",
   "or": "hoặc",
@@ -23,6 +24,9 @@
   "resend_otp": "Gửi lại OTP",
   "menu_hero": "Hero",
   "menu_profile": "Hồ sơ",
+  "good_morning": "Chào buổi sáng",
+  "good_afternoon": "Chào buổi chiều",
+  "good_evening": "Chào buổi tối",
   "general": "Tổng quan",
   "preferences": "Tham chiếu",
   "dangerous_zone": "Khác",

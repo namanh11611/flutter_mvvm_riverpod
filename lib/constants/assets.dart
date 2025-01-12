@@ -3,6 +3,7 @@ class Assets {
 
   static const loading = 'assets/animations/loading.json';
 
+  static const empty = 'assets/images/empty.png';
   static const error404 = 'assets/images/404.svg';
   static const welcome = 'assets/images/welcome.svg';
   static const login = 'assets/images/login.svg';

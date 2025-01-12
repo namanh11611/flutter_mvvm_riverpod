@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../constants/languages.dart';
 import '../../../extensions/build_context_extension.dart';
 import '../../../theme/app_theme.dart';
+import '../../common/ui/widgets/common_empty_data.dart';
 import '../model/hero.dart' as hero;
 import '../ui/view_model/hero_count_provider.dart';
 import '../ui/view_model/hero_list_view_model.dart';
@@ -80,6 +83,13 @@ final sampleHeroes = [
 class HeroListScreen extends ConsumerWidget {
   const HeroListScreen({super.key});
 
+  String _getGreeting() {
+    final currentHour = DateTime.now().hour;
+    if (currentHour >= 5 && currentHour < 12) return Languages.goodMorning;
+    if (currentHour >= 12 && currentHour < 18) return Languages.goodAfternoon;
+    return Languages.goodEvening;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final heroListState = ref.watch(heroListViewModelProvider);
@@ -87,7 +97,10 @@ class HeroListScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Marvel Superheroes', style: AppTheme.headLineLarge32),
+        title: Text(
+          context.tr(_getGreeting()),
+          style: AppTheme.headLineLarge32,
+        ),
         automaticallyImplyLeading: false,
         backgroundColor: context.primaryBackgroundColor,
         foregroundColor: context.primaryTextColor,
@@ -103,9 +116,7 @@ class HeroListScreen extends ConsumerWidget {
           }
 
           if (state.heroes.isEmpty) {
-            return const Center(
-              child: Text('No heroes found. Add some heroes!'),
-            );
+            return const CommonEmptyData();
           }
 
           return GridView.builder(

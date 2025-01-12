@@ -26,7 +26,7 @@ class LanguageItem extends ConsumerWidget {
       isLast: isLast,
       child: MaterialInkWell(
         onTap: () {
-          EasyLocalization.of(context)?.setLocale(Locale(language.code));
+          context.setLocale(Locale(language.code));
         },
         child: Container(
           height: 60,

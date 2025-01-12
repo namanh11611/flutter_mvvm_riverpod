@@ -1,5 +1,6 @@
 {
   "cancel": "Cancel",
+  "no_data": "No data",
   "welcome": "Welcome to Flutter MVVM Riverpod!",
   "already_have_account": "Already have an account?",
   "or": "or",
@@ -23,6 +24,9 @@
   "resend_otp": "Resend OTP",
   "menu_hero": "Hero",
   "menu_profile": "Profile",
+  "good_morning": "Good Morning",
+  "good_afternoon": "Good Afternoon",
+  "good_evening": "Good Evening",
   "general": "General",
   "preferences": "Preferences",
   "dangerous_zone": "Other",

@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  collection: ^1.19.0
   connectivity_plus: ^6.0.3
   cupertino_icons: ^1.0.6
   dio: ^5.4.3+1

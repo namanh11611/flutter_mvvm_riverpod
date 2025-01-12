@@ -8,7 +8,7 @@ class Utils {
     return !connectivityResults.contains(ConnectivityResult.none);
   }
 
-  static DateTime getToday() {
+  static DateTime today() {
     final today = DateTime.now();
     return DateTime(today.year, today.month, today.day);
   }
