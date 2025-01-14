@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_riverpod/features/authentication/ui/widgets/sign_in_agreement.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -157,8 +158,12 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
                 ],
               ),
               const SizedBox(height: 4),
-              HorizontalDivider(),
-              SocialSignIn(),
+              const HorizontalDivider(),
+              const SizedBox(height: 16),
+              const SocialSignIn(),
+              const SizedBox(height: 16),
+              const SignInAgreement(),
+              const SizedBox(height: 32),
             ],
           ),
         ),

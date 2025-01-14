@@ -11,20 +11,17 @@ class SocialSignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isIOS = Platform.isIOS;
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, bottom: 32),
-      child: Row(
-        children: [
+    return Row(
+      children: [
+        Expanded(
+          child: SignInWithGoogle(),
+        ),
+        if (isIOS) const SizedBox(width: 16),
+        if (isIOS)
           Expanded(
-            child: SignInWithGoogle(),
+            child: SignInWithApple(),
           ),
-          if (isIOS) const SizedBox(width: 16),
-          if (isIOS)
-            Expanded(
-              child: SignInWithApple(),
-            ),
-        ],
-      ),
+      ],
     );
   }
 }

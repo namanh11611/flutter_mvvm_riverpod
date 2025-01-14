@@ -1,32 +1,42 @@
 {
+  "ok": "OK",
   "cancel": "Cancel",
+  "confirm": "Confirm",
+  "continue": "Continue",
   "no_data": "No data",
+  "unexpected_error_occurred": "Unexpected error occurred",
+  "validator_required_field": "Required field, please enter a valid value",
+  "validator_invalid_email_format": "Invalid email format, please try again",
+
   "welcome": "Welcome to Flutter MVVM Riverpod!",
   "already_have_account": "Already have an account?",
   "or": "or",
   "sign_in": "Sign in",
   "register": "Register",
-  "continue": "Continue",
-  "confirm": "Confirm",
-  "validator_required_field": "Required field, please enter a valid value",
-  "validator_invalid_email_format": "Invalid email format, please try again",
   "google": "Google",
   "sign_in_with_google": "Sign in with Google",
   "apple": "Apple",
   "sign_in_with_apple": "Sign in with Apple",
   "access_token_not_found": "Access token not found. Please try again.",
   "id_token_not_found": "ID token not found. Please try again.",
+  "sign_in_agreement_prefix": "By signing in, you agree to our",
+  "sign_in_agreement_middle": "\nand",
+  "sign_in_agreement_suffix": "",
+
   "otp_verification": "OTP Verification",
   "otp_enter_title": "We've sent a 6-digit OTP to your email",
   "otp_enter_description": "You can enter the OTP here or click the button in the email.",
   "did_not_receive_otp": "Didn't receive the OTP?",
   "try_again_after": "You can send another login link after {} seconds.",
   "resend_otp": "Resend OTP",
+
   "menu_hero": "Hero",
   "menu_profile": "Profile",
+
   "good_morning": "Good Morning",
   "good_afternoon": "Good Afternoon",
   "good_evening": "Good Evening",
+
   "general": "General",
   "preferences": "Preferences",
   "dangerous_zone": "Other",
@@ -46,6 +56,5 @@
   "log_out_message": "Are you sure you want to log out?",
   "delete_account": "Delete account",
   "delete_account_title": "Delete account confirmation",
-  "delete_account_message": "Are you sure you want to delete account?",
-  "unexpected_error_occurred": "Unexpected error occurred"
+  "delete_account_message": "Are you sure you want to delete account?"
 }

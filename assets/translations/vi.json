@@ -1,32 +1,42 @@
 {
+  "ok": "OK",
   "cancel": "Huỷ",
+  "confirm": "Xác nhận",
+  "continue": "Tiếp tục",
   "no_data": "Không có dữ liệu",
+  "unexpected_error_occurred": "Đã có lỗi xảy ra",
+  "validator_required_field": "Thông tin bắt buộc, vui lòng nhập giá trị hợp lệ",
+  "validator_invalid_email_format": "Email không hợp lệ, vui lòng thử lại",
+
   "welcome": "Xin chào đến với Flutter MVVM Riverpod!",
   "already_have_account": "Đã có tài khoản?",
   "or": "hoặc",
   "sign_in": "Đăng nhập",
   "register": "Đăng ký",
-  "continue": "Tiếp tục",
-  "confirm": "Xác nhận",
-  "validator_required_field": "Thông tin bắt buộc, vui lòng nhập giá trị hợp lệ",
-  "validator_invalid_email_format": "Email không hợp lệ, vui lòng thử lại",
   "google": "Google",
   "sign_in_with_google": "Đăng nhập với Google",
   "apple": "Apple",
   "sign_in_with_apple": "Đăng nhập với Apple",
   "access_token_not_found": "Không có access token. Vui lòng thử lại.",
   "id_token_not_found": "Không có ID token. Vui lòng thử lại.",
+  "sign_in_agreement_prefix": "Bằng việc đăng nhập, bạn đồng ý với",
+  "sign_in_agreement_middle": "\nvà",
+  "sign_in_agreement_suffix": "của chúng tôi",
+
   "otp_verification": "Xác thực OTP",
   "otp_enter_title": "Chúng tôi đã gửi mã OTP gồm 6 chữ số tới email của bạn",
   "otp_enter_description": "Bạn có thể nhập mã OTP ở đây hoặc nhấn vào nút trong email.",
   "did_not_receive_otp": "Không nhận được mã OTP?",
   "try_again_after": "Bạn có thể gửi một link đăng nhập khác sau {} giây.",
   "resend_otp": "Gửi lại OTP",
+
   "menu_hero": "Hero",
   "menu_profile": "Hồ sơ",
+
   "good_morning": "Chào buổi sáng",
   "good_afternoon": "Chào buổi chiều",
   "good_evening": "Chào buổi tối",
+
   "general": "Tổng quan",
   "preferences": "Tham chiếu",
   "dangerous_zone": "Khác",
@@ -46,6 +56,5 @@
   "log_out_message": "Bạn có chắc chắn muốn đăng xuất?",
   "delete_account": "Xoá tài khoản",
   "delete_account_title": "Xác nhận xoá tài khoản",
-  "delete_account_message": "Bạn có chắc chắn muốn xoá tài khoản?",
-  "unexpected_error_occurred": "Đã có lỗi xảy ra"
+  "delete_account_message": "Bạn có chắc chắn muốn xoá tài khoản?"
 }
