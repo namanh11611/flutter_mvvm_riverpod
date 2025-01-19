@@ -35,7 +35,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final profile = ref.watch(profileViewModelProvider);
+    final profile = ref.watch(profileViewModelProvider).value?.profile;
     final dangerousColor =
         context.isDarkMode ? AppColors.rambutan80 : AppColors.rambutan100;
     return Scaffold(
@@ -43,28 +43,28 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 32),
           children: [
-            Container(
-              height: 96,
-              width: 96,
-              decoration: const BoxDecoration(
-                color: AppColors.blueberry80,
-                image: DecorationImage(
-                  image: AssetImage(Assets.avatar),
-                  fit: BoxFit.contain,
+            Column(
+              children: [
+                CircleAvatar(
+                  radius: 48,
+                  backgroundColor: AppColors.blueberry80,
+                  backgroundImage: AssetImage(Assets.avatar),
+                  foregroundImage: profile?.avatar != null
+                      ? NetworkImage(profile?.avatar ?? '')
+                      : null,
                 ),
-                shape: BoxShape.circle,
-              ),
+              ],
             ),
             const SizedBox(height: 16),
             Center(
               child: Text(
-                profile.value?.profile?.name ?? 'Henry Nguyen',
+                profile?.name ?? 'Henry Nguyen',
                 style: AppTheme.titleExtraLarge24,
               ),
             ),
             Center(
               child: Text(
-                profile.value?.profile?.email ?? 'namanh11611@gmail.com',
+                profile?.email ?? 'namanh11611@gmail.com',
                 style: AppTheme.bodyMedium14.copyWith(
                   color: context.secondaryTextColor,
                 ),
@@ -216,9 +216,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         primaryButtonLabel: 'delete_account'.tr(),
         primaryButtonBackground: AppColors.rambutan100,
         secondaryButtonLabel: 'cancel'.tr(),
-        primaryButtonAction: () {
+        primaryButtonAction: () async {
           try {
             Global.showLoading(context);
+            await ref.read(profileViewModelProvider.notifier).signOut();
           } on AuthException catch (error) {
             if (context.mounted) {
               context.showErrorSnackBar(error.message);

@@ -1,34 +1,61 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../constants/constants.dart';
+import '../../../../constants/languages.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_theme.dart';
 
-class OfflineContainer extends ConsumerWidget {
+class OfflineContainer extends ConsumerStatefulWidget {
   final Widget? child;
 
   const OfflineContainer({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isOffline = false;
-    // final isOffline = useState(false);
+  ConsumerState<OfflineContainer> createState() => _OfflineContainerState();
+}
 
-    // useOnStreamChange(Connectivity().onConnectivityChanged, onData: (data) {
-    //   if (Platform.isIOS) return;
-    //   isOffline.value = data.contains(ConnectivityResult.none);
-    //   debugPrint(
-    //       'HENZY [OfflineContainer.build] $data => ${isOffline.value ? 'offline' : 'online'}');
-    // });
+class _OfflineContainerState extends ConsumerState<OfflineContainer> {
+  bool _isOffline = false;
+  StreamSubscription<List<ConnectivityResult>>? _subscription;
 
+  @override
+  void initState() {
+    super.initState();
+    _subscription =
+        Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
+
+  void _updateConnectionStatus(List<ConnectivityResult> result) {
+    if (Platform.isIOS) return;
+
+    setState(() {
+      _isOffline = result.contains(ConnectivityResult.none);
+    });
+    debugPrint(
+        '${Constants.tag} [_OfflineContainerState._updateConnectionStatus] $result => ${_isOffline ? 'offline' : 'online'}');
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.only(top: isOffline ? 20 : 0),
-            child: child,
+            padding: EdgeInsets.only(top: _isOffline ? 20 : 0),
+            child: widget.child,
           ),
-          if (isOffline)
+          if (_isOffline)
             Positioned(
               top: 0,
               left: 0,
@@ -45,10 +72,11 @@ class OfflineContainer extends ConsumerWidget {
                     const Icon(
                       Icons.signal_wifi_connected_no_internet_4,
                       size: 16,
+                      color: AppColors.mono0,
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'Your device is offline',
+                      Languages.offline,
                       style: AppTheme.bodyMedium14.copyWith(
                         color: AppColors.mono0,
                       ),

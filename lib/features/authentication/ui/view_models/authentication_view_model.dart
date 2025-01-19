@@ -21,9 +21,10 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
   Future<void> signInWithMagicLink(String email) async {
     state = const AsyncValue.loading();
     final authRepo = ref.read(authenticationRepositoryProvider);
-    final result = await AsyncValue.guard(() => authRepo.signInWithMagicLink(email));
+    final result =
+        await AsyncValue.guard(() => authRepo.signInWithMagicLink(email));
 
-    if (result.hasError) {
+    if (result is AsyncError) {
       state = AsyncError(result.error.toString(), StackTrace.current);
       return;
     }
@@ -38,11 +39,13 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
   }) async {
     state = const AsyncValue.loading();
     final authRepo = ref.read(authenticationRepositoryProvider);
-    final result = await AsyncValue.guard(() => authRepo.verifyOtp(
-      email: email,
-      token: token,
-      isRegister: isRegister,
-    ));
+    final result = await AsyncValue.guard(
+      () => authRepo.verifyOtp(
+        email: email,
+        token: token,
+        isRegister: isRegister,
+      ),
+    );
     handleResult(result);
   }
 
@@ -60,15 +63,30 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
     handleResult(result);
   }
 
+  Future<void> signOut() async {
+    state = const AsyncValue.loading();
+    final authRepo = ref.read(authenticationRepositoryProvider);
+    final result = await AsyncValue.guard(authRepo.signOut);
+
+    if (result is AsyncError) {
+      state = AsyncError(result.error.toString(), StackTrace.current);
+      return;
+    }
+
+    state = const AsyncData(AuthenticationState());
+  }
+
   void handleResult(AsyncValue result) async {
-    debugPrint('${Constants.tag} [AuthenticationViewModel.handleResult] result: $result');
-    if (result.hasError) {
+    debugPrint(
+        '${Constants.tag} [AuthenticationViewModel.handleResult] result: $result');
+    if (result is AsyncError) {
       state = AsyncError(result.error.toString(), StackTrace.current);
       return;
     }
 
     final AuthResponse? authResponse = result.value;
-    debugPrint('${Constants.tag} [AuthenticationViewModel.handleResult] authResponse: ${authResponse?.user?.toJson()}');
+    debugPrint(
+        '${Constants.tag} [AuthenticationViewModel.handleResult] authResponse: ${authResponse?.user?.toJson()}');
     if (authResponse == null) {
       state = AsyncError('unexpected_error_occurred'.tr(), StackTrace.current);
       return;
@@ -80,10 +98,19 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
       ref.read(authenticationRepositoryProvider).setIsExistAccount(true);
     }
 
+    String? name;
+    String? avatar;
+    final metaData = authResponse.user?.userMetadata;
+    if (metaData != null) {
+      name = metaData['full_name'];
+      avatar = metaData['avatar_url'];
+    }
     ref.read(authenticationRepositoryProvider).setIsLogin(true);
-    ref
-        .read(profileViewModelProvider.notifier)
-        .updateProfile(email: authResponse.user?.email.orEmpty());
+    ref.read(profileViewModelProvider.notifier).updateProfile(
+          email: authResponse.user?.email.orEmpty(),
+          name: name,
+          avatar: avatar,
+        );
 
     state = AsyncData(
       AuthenticationState(

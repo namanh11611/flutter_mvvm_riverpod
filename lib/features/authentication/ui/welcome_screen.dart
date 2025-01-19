@@ -81,11 +81,11 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
         }
       }
 
-      if (next.hasError) {
+      if (next is AsyncError) {
         context.showErrorSnackBar(next.error.toString());
       }
 
-      if (next.hasValue) {
+      if (next is AsyncData) {
         debugPrint(
             '${Constants.tag} [WelcomeScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isSignInSuccessfully = ${next.value?.isSignInSuccessfully}');
         if (next.value?.isRegisterSuccessfully == true) {

@@ -4,6 +4,7 @@
   "confirm": "Confirm",
   "continue": "Continue",
   "no_data": "No data",
+  "offline": "Your device is offline",
   "unexpected_error_occurred": "Unexpected error occurred",
   "validator_required_field": "Required field, please enter a valid value",
   "validator_invalid_email_format": "Invalid email format, please try again",

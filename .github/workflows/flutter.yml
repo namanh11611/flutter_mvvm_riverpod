@@ -54,10 +54,3 @@ jobs:
       # Step 8: Build Android App Bundle
       - name: Build Android App Bundle
         run: flutter build appbundle --release
-
-      # Step 9: Upload artifacts
-      - name: Upload App Bundle
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-bundle
-          path: build/app/outputs/bundle/release/app-release.aab

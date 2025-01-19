@@ -12,6 +12,8 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../constants/languages.dart';
+
 part 'authentication_repository.g.dart';
 
 @riverpod
@@ -34,7 +36,7 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception('unexpected_error_occurred'.tr());
+      throw Exception(Languages.unexpectedErrorOccurred);
     }
   }
 
@@ -65,7 +67,7 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception('unexpected_error_occurred'.tr());
+      throw Exception(Languages.unexpectedErrorOccurred);
     }
   }
 
@@ -115,7 +117,7 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception('unexpected_error_occurred'.tr());
+      throw Exception(Languages.unexpectedErrorOccurred);
     }
   }
 
@@ -158,7 +160,21 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception('unexpected_error_occurred'.tr());
+      throw Exception(Languages.unexpectedErrorOccurred);
+    }
+  }
+
+  Future<void> signOut() async {
+    // TODO: fake data
+    return;
+
+    try {
+      await supabase.auth.signOut();
+      setIsLogin(false);
+    } on AuthException catch (error) {
+      throw Exception(error.message);
+    } catch (error) {
+      throw Exception(Languages.unexpectedErrorOccurred);
     }
   }
 

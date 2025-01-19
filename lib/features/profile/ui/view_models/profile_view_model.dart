@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../features/authentication/repository/authentication_repository.dart';
 import '../../../../features/profile/model/profile.dart';
 import '../../../../features/profile/repository/profile_repository.dart';
 import '../../../../features/profile/ui/state/profile_state.dart';
+import '../../../authentication/ui/view_models/authentication_view_model.dart';
 
 part 'profile_view_model.g.dart';
 
@@ -55,8 +55,7 @@ class ProfileViewModel extends _$ProfileViewModel {
   Future<void> signOut() async {
     state = const AsyncValue.loading();
     try {
-      await ref.read(authenticationRepositoryProvider).setIsLogin(false);
-      // Add any additional sign-out logic here, such as clearing user data
+      await ref.read(authenticationViewModelProvider.notifier).signOut();
       state = AsyncData(ProfileState(profile: null));
     } catch (error) {
       state = AsyncError(error, StackTrace.current);

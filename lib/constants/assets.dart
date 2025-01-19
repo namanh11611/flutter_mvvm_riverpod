@@ -10,6 +10,6 @@ class Assets {
   static const otp = 'assets/images/otp.svg';
   static const googleLogo = 'assets/images/google_logo.svg';
   static const appleLogo = 'assets/images/apple_logo.svg';
-  static const avatar = 'assets/images/avatar.png';
+  static const avatar = 'assets/images/avatar.webp';
 
 }

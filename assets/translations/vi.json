@@ -4,6 +4,7 @@
   "confirm": "Xác nhận",
   "continue": "Tiếp tục",
   "no_data": "Không có dữ liệu",
+  "offline": "Thiết bị của bạn không có mạng",
   "unexpected_error_occurred": "Đã có lỗi xảy ra",
   "validator_required_field": "Thông tin bắt buộc, vui lòng nhập giá trị hợp lệ",
   "validator_invalid_email_format": "Email không hợp lệ, vui lòng thử lại",
