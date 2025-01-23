@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_riverpod/constants/constants.dart';
 
 import '../../../../constants/languages.dart';
 import '../../../../extensions/build_context_extension.dart';
@@ -26,7 +27,7 @@ class SignInAgreement extends StatelessWidget {
                 style: AppTheme.titleTiny12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    context.tryLaunchUrl('https://github.com/namanh11611/flutter_mvvm_riverpod');
+                    context.tryLaunchUrl(Constants.termOfService);
                   },
               ),
               TextSpan(text: ' ${Languages.signInAgreementMiddle} '),
@@ -35,7 +36,7 @@ class SignInAgreement extends StatelessWidget {
                 style: AppTheme.titleTiny12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    context.tryLaunchUrl('https://github.com/namanh11611/flutter_mvvm_riverpod');
+                    context.tryLaunchUrl(Constants.privacyPolicy);
                   },
               ),
               TextSpan(text: ' ${Languages.signInAgreementSuffix}'),

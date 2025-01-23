@@ -6,6 +6,14 @@ class Constants {
   static const String supabaseLoginCallback = 'com.areser.flutter_mvvm_riverpod://login-callback/';
   static const String googleEmailScope = 'email';
   static const String googleUserInfoScope = 'https://www.googleapis.com/auth/userinfo.profile';
+  static const String defaultName = 'Henry Nguyen';
+  static const String defaultEmail = 'namanh11611@gmail.com';
+  static const String termOfService = 'https://github.com/namanh11611/flutter_mvvm_riverpod';
+  static const String privacyPolicy = 'https://github.com/namanh11611/flutter_mvvm_riverpod';
+  static const String aboutUs = 'https://github.com/namanh11611';
+  static const String appStore = 'https://apps.apple.com/us/developer/anh-nguyen/id1760383102';
+  static const String playStore = 'https://play.google.com/store/apps/developer?id=Areser+JSC';
+  static const String facebookPage = 'https://facebook.com/namanh11611';
 
   static const String hello = 'hello';
 

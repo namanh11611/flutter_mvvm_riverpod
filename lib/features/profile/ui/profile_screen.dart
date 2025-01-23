@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +18,7 @@ import '../../../../routing/routes.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../../utils/global_loading.dart';
+import '../../../constants/constants.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -58,13 +61,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             const SizedBox(height: 16),
             Center(
               child: Text(
-                profile?.name ?? 'Henry Nguyen',
+                profile?.name ?? Constants.defaultName,
                 style: AppTheme.titleExtraLarge24,
               ),
             ),
             Center(
               child: Text(
-                profile?.email ?? 'namanh11611@gmail.com',
+                profile?.email ?? Constants.defaultEmail,
                 style: AppTheme.bodyMedium14.copyWith(
                   color: context.secondaryTextColor,
                 ),
@@ -110,27 +113,28 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ProfileItem(
               icon: HugeIcons.strokeRoundedNews,
               text: 'term_of_service'.tr(),
-              onTap: () {},
+              onTap: () => context.tryLaunchUrl(Constants.termOfService),
             ),
             ProfileItem(
               icon: HugeIcons.strokeRoundedShield01,
               text: 'privacy_policy'.tr(),
-              onTap: () {},
+              onTap: () => context.tryLaunchUrl(Constants.privacyPolicy),
             ),
             ProfileItem(
               icon: HugeIcons.strokeRoundedUserMultiple,
               text: 'about_us'.tr(),
-              onTap: () {},
+              onTap: () => context.tryLaunchUrl(Constants.aboutUs),
             ),
             ProfileItem(
               icon: HugeIcons.strokeRoundedStar,
               text: 'rate_us'.tr(),
-              onTap: () {},
+              onTap: () => context.tryLaunchUrl(
+                  Platform.isIOS ? Constants.appStore : Constants.playStore),
             ),
             ProfileItem(
               icon: HugeIcons.strokeRoundedSettingError04,
               text: 'report_a_problem'.tr(),
-              onTap: () {},
+              onTap: () => context.tryLaunchUrl(Constants.facebookPage),
             ),
             const SizedBox(height: 16),
             Padding(
