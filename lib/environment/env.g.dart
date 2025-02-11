@@ -52,4 +52,29 @@ final class _Env {
   ).map((int i) =>
           _envieddatagoogleServerClientId[i] ^
           _enviedkeygoogleServerClientId[i]));
+
+  static const List<int> _enviedkeyrevenueCatPlayStore = <int>[];
+
+  static const List<int> _envieddatarevenueCatPlayStore = <int>[];
+
+  static final String revenueCatPlayStore = String.fromCharCodes(
+      List<int>.generate(
+    _envieddatarevenueCatPlayStore.length,
+    (int i) => i,
+    growable: false,
+  ).map((int i) =>
+          _envieddatarevenueCatPlayStore[i] ^
+          _enviedkeyrevenueCatPlayStore[i]));
+
+  static const List<int> _enviedkeyrevenueCatAppStore = <int>[];
+
+  static const List<int> _envieddatarevenueCatAppStore = <int>[];
+
+  static final String revenueCatAppStore = String.fromCharCodes(
+      List<int>.generate(
+    _envieddatarevenueCatAppStore.length,
+    (int i) => i,
+    growable: false,
+  ).map((int i) =>
+          _envieddatarevenueCatAppStore[i] ^ _enviedkeyrevenueCatAppStore[i]));
 }

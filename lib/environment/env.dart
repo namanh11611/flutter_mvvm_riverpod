@@ -15,4 +15,10 @@ abstract class Env {
 
   @EnviedField(varName: 'GOOGLE_SERVER_CLIENT_ID', obfuscate: true)
   static final String googleServerClientId = _Env.googleServerClientId;
+
+  @EnviedField(varName: 'REVENUE_CAT_PLAY_STORE', obfuscate: true)
+  static final String revenueCatPlayStore = _Env.revenueCatPlayStore;
+
+  @EnviedField(varName: 'REVENUE_CAT_APP_STORE', obfuscate: true)
+  static final String revenueCatAppStore = _Env.revenueCatAppStore;
 }

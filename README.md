@@ -13,6 +13,7 @@ This project was inspired by the [Flutter App Architecture Guide](https://docs.f
 - **Localization**: Multi-language support
 - **Authentication**: Email & Social login ready
 - **Routing**: Declarative routing with go_router
+- **In-App Purchases**: RevenueCat integration for subscriptions and purchases
 
 ## 📚 Libraries & Tools
 
@@ -47,6 +48,7 @@ This project was inspired by the [Flutter App Architecture Guide](https://docs.f
 |                      | `firebase_crashlytics` | Crash reporting              |
 | **Monetization**     |
 |                      | `in_app_purchase`      | In-app purchases             |
+|                      | `purchases_flutter`    | RevenueCat integration       |
 
 ## 🏗 Project Structure
 
@@ -61,6 +63,7 @@ lib/
 │   ├── home/
 │   ├── onboarding/
 │   ├── profile/
+│   ├── premium/
 ├── routing/           # Route configurations
 ├── theme/             # Theme configurations
 └── utils/             # Utility functions

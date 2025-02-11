@@ -11,5 +11,5 @@ class Assets {
   static const googleLogo = 'assets/images/google_logo.svg';
   static const appleLogo = 'assets/images/apple_logo.svg';
   static const avatar = 'assets/images/avatar.webp';
-
+  static const premiumBackground = 'assets/images/premium_background.webp';
 }

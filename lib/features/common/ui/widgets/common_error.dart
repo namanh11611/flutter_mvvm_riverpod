@@ -14,7 +14,6 @@ class CommonError extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 100),
           const Icon(
             Icons.error,
             size: 60,

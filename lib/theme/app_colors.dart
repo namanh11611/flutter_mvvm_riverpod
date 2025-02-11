@@ -62,4 +62,6 @@ class AppColors {
   static const gradient60 = Color(0x99000000);
   static const gradient80 = Color(0xCC000000);
   static const gradient100 = Color(0xFF000000);
+
+  static const premiumBackground = Color(0xFF000000);
 }

@@ -39,6 +39,11 @@ class AppTheme {
     fontWeight: FontWeight.w700,
   );
 
+  static final titleExtraTiny10 = GoogleFonts.nunito(
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+  );
+
   static final bodyHuge20 = GoogleFonts.nunito(
     fontSize: 20,
     fontWeight: FontWeight.w400,

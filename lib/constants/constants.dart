@@ -4,6 +4,7 @@ class Constants {
   static const String tag = 'FMR';
 
   static const String supabaseLoginCallback = 'com.areser.flutter_mvvm_riverpod://login-callback/';
+  static const String supabaseProfileTable = 'profile';
   static const String googleEmailScope = 'email';
   static const String googleUserInfoScope = 'https://www.googleapis.com/auth/userinfo.profile';
   static const String defaultName = 'Henry Nguyen';
@@ -14,6 +15,10 @@ class Constants {
   static const String appStore = 'https://apps.apple.com/us/developer/anh-nguyen/id1760383102';
   static const String playStore = 'https://play.google.com/store/apps/developer?id=Areser+JSC';
   static const String facebookPage = 'https://facebook.com/namanh11611';
+  static const String premium = 'premium';
+  static const String premiumMonthly = '\$rc_monthly';
+  static const String premiumYearly = '\$rc_annual';
+  static const String premiumLifeTime = '\$rc_lifetime';
 
   static const String hello = 'hello';
 

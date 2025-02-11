@@ -14,7 +14,6 @@ class CommonEmptyData extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 100),
           SizedBox(
             width: 100,
             height: 100,

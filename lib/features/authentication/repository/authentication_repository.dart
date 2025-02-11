@@ -7,6 +7,7 @@ import 'package:flutter_mvvm_riverpod/environment/env.dart';
 import 'package:flutter_mvvm_riverpod/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -171,6 +172,7 @@ class AuthenticationRepository {
     try {
       await supabase.auth.signOut();
       setIsLogin(false);
+      Purchases.logOut();
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {

@@ -56,6 +56,7 @@ dependencies:
   package_info_plus: ^8.0.0
   path: ^1.9.0
   pinput: ^5.0.0
+  purchases_flutter: ^8.4.2
   riverpod_annotation: ^2.6.1
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0

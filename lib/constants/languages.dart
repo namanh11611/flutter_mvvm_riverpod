@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 
 class Languages {
@@ -56,4 +58,39 @@ class Languages {
   static String deleteAccount = 'delete_account'.tr();
   static String deleteAccountTitle = 'delete_account_title'.tr();
   static String deleteAccountMessage = 'delete_account_message'.tr();
+
+  // Premium
+  static String premium = 'premium'.tr();
+  static String premiumLifetime = 'premium_lifetime'.tr();
+  static String until = 'until'.tr();
+  static String selectPlan = 'select_plan'.tr();
+  static String premiumBenefits = 'premium_benefits'.tr();
+  static String benefitTitle1 = 'benefit_title_1'.tr();
+  static String benefitDescription1 = 'benefit_description_1'.tr();
+  static String benefitTitle2 = 'benefit_title_2'.tr();
+  static String benefitDescription2 = 'benefit_description_2'.tr();
+  static String benefitTitle3 = 'benefit_title_3'.tr();
+  static String benefitDescription3 = 'benefit_description_3'.tr();
+  static String monthly = 'monthly'.tr();
+  static String monthlyDescription = 'monthly_description'.tr();
+  static String yearly = 'yearly'.tr();
+  static String yearlyDescription = 'yearly_description'.tr();
+  static String lifetime = 'lifetime'.tr();
+  static String lifetimeDescription = 'lifetime_description'.tr();
+  static String starter = 'starter'.tr();
+  static String mostPopular = 'most_popular'.tr();
+  static String bestPrice = 'best_price'.tr();
+  static String premiumAgreementPrefix = 'premium_agreement_prefix'.tr();
+  static String premiumAgreementMiddle = 'premium_agreement_middle'.tr();
+  static String subscriptionInfo = Platform.isIOS
+      ? 'subscription_info_ios'.tr()
+      : 'subscription_info_android'.tr();
+  static String restorePurchases = 'restore_purchases'.tr();
+  static String fetchOfferingsError = 'fetch_offerings_error'.tr();
+  static String packageNotFoundError = 'package_not_found_error'.tr();
+  static String purchaseSuccess = 'purchase_success'.tr();
+  static String purchaseError = 'purchase_error'.tr();
+  static String restorePurchasesSuccess = 'restore_purchases_success'.tr();
+  static String noActivePurchases = 'no_active_purchases'.tr();
+  static String restorePurchasesError = 'restore_purchases_error'.tr();
 }

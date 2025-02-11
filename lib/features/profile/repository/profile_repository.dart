@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,11 +28,36 @@ class ProfileRepository {
     final profile = Profile.fromJson(jsonDecode(profileStr));
     return profile;
 
-    final userId = supabase.auth.currentUser?.id ?? '';
-    final data =
-        await supabase.from('profiles').select().eq('id', userId).single();
+    final userId = supabase.auth.currentUser?.id;
+    if (userId == null) return null;
+
+    final data = await supabase
+        .from(Constants.supabaseProfileTable)
+        .select()
+        .eq('id', userId)
+        .single();
     final result = Profile.fromJson(data);
-    return result;
+
+    DateTime? expiryDatePremium;
+    bool? isLifetimePremium;
+
+    // Get purchase information
+    final logInResult = await Purchases.logIn(userId);
+    final activeEntitlements = logInResult.customerInfo.entitlements.active;
+    if (activeEntitlements.containsKey(Constants.premium)) {
+      final premiumEntitlement = activeEntitlements[Constants.premium];
+      final date = premiumEntitlement?.expirationDate;
+      if (date != null) {
+        expiryDatePremium = DateTime.parse(date);
+      } else {
+        isLifetimePremium = true;
+      }
+    }
+
+    return result.copyWith(
+      expiryDatePremium: expiryDatePremium,
+      isLifetimePremium: isLifetimePremium,
+    );
   }
 
   Future<void> update(Profile profile) async {
@@ -40,9 +66,11 @@ class ProfileRepository {
     prefs.setString(Constants.profileKey, jsonEncode(profile.toJson()));
     return;
 
+    final userId = profile.id;
+    if (userId == null) return;
     try {
       await supabase
-          .from('profiles')
+          .from(Constants.supabaseProfileTable)
           .update({
             if (profile.email != null) 'email': profile.email,
             if (profile.name != null) 'name': profile.name,
@@ -54,8 +82,9 @@ class ProfileRepository {
                   profile.expiryDatePremium?.toIso8601String(),
             if (profile.isLifetimePremium != null)
               'is_lifetime_premium': profile.isLifetimePremium,
+            'updated_at': DateTime.now().toIso8601String(),
           })
-          .eq('id', profile.id ?? '')
+          .eq('id', userId)
           .select();
     } catch (e) {
       rethrow;
