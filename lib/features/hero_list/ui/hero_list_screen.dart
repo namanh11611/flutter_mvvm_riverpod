@@ -94,7 +94,6 @@ class HeroListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final heroListState = ref.watch(heroListViewModelProvider);
-    final count = ref.watch(heroCountProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -146,19 +145,6 @@ class HeroListScreen extends ConsumerWidget {
         },
         loading: () => const ShimmerHeroGrid(),
         error: (error, stack) => Center(child: Text(error.toString())),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final randomHero = sampleHeroes[count % sampleHeroes.length];
-          await ref.read(heroListViewModelProvider.notifier).addHero(
-                name: randomHero.name,
-                description: randomHero.description,
-                imageUrl: randomHero.imageUrl,
-                power: randomHero.power,
-              );
-          ref.read(heroCountProvider.notifier).increment();
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }
