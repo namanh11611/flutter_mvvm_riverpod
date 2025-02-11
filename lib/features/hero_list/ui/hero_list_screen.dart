@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/widgets/common_error.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
@@ -112,7 +113,7 @@ class HeroListScreen extends ConsumerWidget {
           }
 
           if (state.errorMessage != null) {
-            return Center(child: Text(state.errorMessage!));
+            return const CommonError();
           }
 
           if (state.heroes.isEmpty) {

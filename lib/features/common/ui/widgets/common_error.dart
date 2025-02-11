@@ -1,8 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../constants/assets.dart';
+import '../../../../constants/languages.dart';
 import '../../../../extensions/build_context_extension.dart';
-import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_theme.dart';
 
 class CommonError extends StatelessWidget {
@@ -14,14 +15,18 @@ class CommonError extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.error,
-            size: 60,
-            color: AppColors.rambutan100,
+          SizedBox(
+            width: 200,
+            height: 200,
+            child: SvgPicture.asset(
+              Assets.error404,
+              fit: BoxFit.contain,
+              semanticsLabel: 'Error',
+            ),
           ),
           const SizedBox(height: 16),
           Text(
-            'oops_something_unexpected_happened'.tr(),
+            Languages.unexpectedErrorOccurred,
             style: AppTheme.bodyMedium14.copyWith(
               color: context.secondaryTextColor,
             ),

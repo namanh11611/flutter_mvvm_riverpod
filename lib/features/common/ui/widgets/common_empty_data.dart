@@ -1,7 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../constants/assets.dart';
+import '../../../../constants/languages.dart';
 import '../../../../extensions/build_context_extension.dart';
 import '../../../../theme/app_theme.dart';
 
@@ -15,13 +16,17 @@ class CommonEmptyData extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: 100,
-            height: 100,
-            child: Image.asset(Assets.empty),
+            width: 200,
+            height: 200,
+            child: SvgPicture.asset(
+              Assets.empty,
+              fit: BoxFit.contain,
+              semanticsLabel: 'Empty',
+            ),
           ),
           const SizedBox(height: 16),
           Text(
-            'no_data'.tr(),
+            Languages.noData,
             style: AppTheme.bodyMedium14.copyWith(
               color: context.secondaryTextColor,
             ),

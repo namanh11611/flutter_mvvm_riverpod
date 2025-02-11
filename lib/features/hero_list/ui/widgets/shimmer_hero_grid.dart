@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../theme/app_colors.dart';
 import '../../../common/ui/widgets/common_shimmer.dart';
 
 class ShimmerHeroGrid extends StatelessWidget {
@@ -17,40 +18,15 @@ class ShimmerHeroGrid extends StatelessWidget {
       ),
       itemCount: 6, // Show 6 shimmer items while loading
       itemBuilder: (context, index) {
-        return const ShimmerHeroItem();
+        return CommonShimmer(
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.mono0,
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        );
       },
-    );
-  }
-}
-
-class ShimmerHeroItem extends StatelessWidget {
-  const ShimmerHeroItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: CommonShimmer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Expanded(
-              flex: 4,
-              child: ColoredBox(
-                color: Colors.white,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
