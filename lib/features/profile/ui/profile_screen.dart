@@ -42,129 +42,130 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final dangerousColor =
         context.isDarkMode ? AppColors.rambutan80 : AppColors.rambutan100;
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 32),
-          children: [
-            Column(
-              children: [
-                CircleAvatar(
-                  radius: 48,
-                  backgroundColor: AppColors.blueberry80,
-                  backgroundImage: AssetImage(Assets.avatar),
-                  foregroundImage: profile?.avatar != null
-                      ? NetworkImage(profile?.avatar ?? '')
-                      : null,
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Center(
-              child: Text(
-                profile?.name ?? Constants.defaultName,
-                style: AppTheme.titleExtraLarge24,
-              ),
-            ),
-            Center(
-              child: Text(
-                profile?.email ?? Constants.defaultEmail,
-                style: AppTheme.bodyMedium14.copyWith(
-                  color: context.secondaryTextColor,
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            UpgradePremiumButton(),
-            const SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'general'.tr(),
-                style: AppTheme.titleLarge20,
-              ),
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedUser,
-              text: 'account_information'.tr(),
-              onTap: () {},
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedIdea,
-              text: 'appearances'.tr(),
-              onTap: () {
-                context.push(Routes.appearances);
-              },
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedCoinsSwap,
-              text: 'language'.tr(),
-              onTap: () {
-                context.push(Routes.languages);
-              },
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'preferences'.tr(),
-                style: AppTheme.titleLarge20,
-              ),
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedNews,
-              text: 'term_of_service'.tr(),
-              onTap: () => context.tryLaunchUrl(Constants.termOfService),
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedShield01,
-              text: 'privacy_policy'.tr(),
-              onTap: () => context.tryLaunchUrl(Constants.privacyPolicy),
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedUserMultiple,
-              text: 'about_us'.tr(),
-              onTap: () => context.tryLaunchUrl(Constants.aboutUs),
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedStar,
-              text: 'rate_us'.tr(),
-              onTap: () => context.tryLaunchUrl(
-                  Platform.isIOS ? Constants.appStore : Constants.playStore),
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedSettingError04,
-              text: 'report_a_problem'.tr(),
-              onTap: () => context.tryLaunchUrl(Constants.facebookPage),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'dangerous_zone'.tr(),
-                style: AppTheme.titleLarge20,
-              ),
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedLogout01,
-              text: 'log_out'.tr(),
-              textColor: dangerousColor,
-              onTap: () => _signOut(context),
-            ),
-            ProfileItem(
-              icon: HugeIcons.strokeRoundedDelete01,
-              text: 'delete_account'.tr(),
-              textColor: dangerousColor,
-              onTap: () => _deleteAccount(context),
-            ),
-            const SizedBox(height: 24),
-            Center(
-              child: Text(
-                'Version $_version',
-                style: AppTheme.bodySmall12,
-              ),
-            ),
-          ],
+      body: ListView(
+        padding: EdgeInsets.only(
+          top: MediaQuery.paddingOf(context).top + 32,
+          bottom: MediaQuery.paddingOf(context).bottom,
         ),
+        children: [
+          Column(
+            children: [
+              CircleAvatar(
+                radius: 48,
+                backgroundColor: AppColors.blueberry80,
+                backgroundImage: AssetImage(Assets.avatar),
+                foregroundImage: profile?.avatar != null
+                    ? NetworkImage(profile?.avatar ?? '')
+                    : null,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Center(
+            child: Text(
+              profile?.name ?? Constants.defaultName,
+              style: AppTheme.titleExtraLarge24,
+            ),
+          ),
+          Center(
+            child: Text(
+              profile?.email ?? Constants.defaultEmail,
+              style: AppTheme.bodyMedium14.copyWith(
+                color: context.secondaryTextColor,
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          UpgradePremiumButton(),
+          const SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'general'.tr(),
+              style: AppTheme.titleLarge20,
+            ),
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedUser,
+            text: 'account_information'.tr(),
+            onTap: () {},
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedIdea,
+            text: 'appearances'.tr(),
+            onTap: () {
+              context.push(Routes.appearances);
+            },
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedCoinsSwap,
+            text: 'language'.tr(),
+            onTap: () {
+              context.push(Routes.languages);
+            },
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'preferences'.tr(),
+              style: AppTheme.titleLarge20,
+            ),
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedNews,
+            text: 'term_of_service'.tr(),
+            onTap: () => context.tryLaunchUrl(Constants.termOfService),
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedShield01,
+            text: 'privacy_policy'.tr(),
+            onTap: () => context.tryLaunchUrl(Constants.privacyPolicy),
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedUserMultiple,
+            text: 'about_us'.tr(),
+            onTap: () => context.tryLaunchUrl(Constants.aboutUs),
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedStar,
+            text: 'rate_us'.tr(),
+            onTap: () => context.tryLaunchUrl(
+                Platform.isIOS ? Constants.appStore : Constants.playStore),
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedSettingError04,
+            text: 'report_a_problem'.tr(),
+            onTap: () => context.tryLaunchUrl(Constants.facebookPage),
+          ),
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'dangerous_zone'.tr(),
+              style: AppTheme.titleLarge20,
+            ),
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedLogout01,
+            text: 'log_out'.tr(),
+            textColor: dangerousColor,
+            onTap: () => _signOut(context),
+          ),
+          ProfileItem(
+            icon: HugeIcons.strokeRoundedDelete01,
+            text: 'delete_account'.tr(),
+            textColor: dangerousColor,
+            onTap: () => _deleteAccount(context),
+          ),
+          const SizedBox(height: 24),
+          Center(
+            child: Text(
+              'Version $_version',
+              style: AppTheme.bodySmall12,
+            ),
+          ),
+        ],
       ),
     );
   }
