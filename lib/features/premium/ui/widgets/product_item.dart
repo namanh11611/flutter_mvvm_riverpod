@@ -24,7 +24,7 @@ class ProductItem extends StatelessWidget {
         radius: 16,
         onTap: onTap,
         child: AnimatedContainer(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 24),
+          padding: EdgeInsets.only(bottom: 24),
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
             color: isSelected
@@ -34,8 +34,9 @@ class ProductItem extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Align(
+              Container(
                 alignment: Alignment.topRight,
+                margin: EdgeInsets.only(right: 16),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     vertical: 2,
