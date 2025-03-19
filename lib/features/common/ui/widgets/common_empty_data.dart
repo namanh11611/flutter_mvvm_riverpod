@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../constants/assets.dart';
-import '../../../../constants/languages.dart';
-import '../../../../extensions/build_context_extension.dart';
-import '../../../../theme/app_theme.dart';
+import '/constants/assets.dart';
+import '/constants/languages.dart';
+import '/extensions/build_context_extension.dart';
+import '/theme/app_theme.dart';
 
 class CommonEmptyData extends StatelessWidget {
   const CommonEmptyData({super.key});

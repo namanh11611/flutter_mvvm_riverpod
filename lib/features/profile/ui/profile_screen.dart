@@ -8,17 +8,17 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../constants/assets.dart';
-import '../../../../extensions/build_context_extension.dart';
-import '../../../../features/common/ui/widgets/common_dialog.dart';
-import '../../../../features/profile/ui/view_models/profile_view_model.dart';
-import '../../../../features/profile/ui/widgets/profile_item.dart';
-import '../../../../features/profile/ui/widgets/upgrade_premium_button.dart';
-import '../../../../routing/routes.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../theme/app_theme.dart';
-import '../../../../utils/global_loading.dart';
+import '/constants/assets.dart';
+import '/extensions/build_context_extension.dart';
+import '/routing/routes.dart';
+import '/theme/app_colors.dart';
+import '/theme/app_theme.dart';
+import '/utils/global_loading.dart';
 import '../../../constants/constants.dart';
+import '../../common/ui/widgets/common_dialog.dart';
+import 'view_models/profile_view_model.dart';
+import 'widgets/profile_item.dart';
+import 'widgets/upgrade_premium_button.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});

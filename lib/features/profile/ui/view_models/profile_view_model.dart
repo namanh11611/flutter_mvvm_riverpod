@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../features/profile/model/profile.dart';
-import '../../../../features/profile/repository/profile_repository.dart';
-import '../../../../features/profile/ui/state/profile_state.dart';
+import '/features/profile/model/profile.dart';
+import '/features/profile/repository/profile_repository.dart';
+import '/features/profile/ui/state/profile_state.dart';
 import '../../../authentication/ui/view_models/authentication_view_model.dart';
 
 part 'profile_view_model.g.dart';

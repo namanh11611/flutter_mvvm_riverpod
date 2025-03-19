@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../constants/constants.dart';
-import '../../../../extensions/string_extension.dart';
-import '../../../../features/authentication/repository/authentication_repository.dart';
-import '../../../../features/authentication/ui/state/authentication_state.dart';
-import '../../../../features/profile/ui/view_models/profile_view_model.dart';
+import '/constants/constants.dart';
+import '/extensions/string_extension.dart';
+import '/features/profile/ui/view_models/profile_view_model.dart';
+import '../../repository/authentication_repository.dart';
+import '../../ui/state/authentication_state.dart';
 
 part 'authentication_view_model.g.dart';
 

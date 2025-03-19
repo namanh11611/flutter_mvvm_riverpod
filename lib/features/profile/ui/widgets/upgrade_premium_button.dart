@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../features/common/ui/widgets/material_ink_well.dart';
-import '../../../../routing/routes.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../theme/app_theme.dart';
+import '/features/common/ui/widgets/material_ink_well.dart';
+import '/routing/routes.dart';
+import '/theme/app_colors.dart';
+import '/theme/app_theme.dart';
 
 class UpgradePremiumButton extends StatelessWidget {
   const UpgradePremiumButton({super.key});

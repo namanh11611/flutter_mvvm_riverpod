@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../theme/app_colors.dart';
+import '/theme/app_colors.dart';
 import '../../../common/ui/widgets/common_shimmer.dart';
 
 class ShimmerHeroGrid extends StatelessWidget {

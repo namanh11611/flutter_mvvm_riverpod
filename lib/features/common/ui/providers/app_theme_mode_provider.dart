@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../constants/constants.dart';
+import '/constants/constants.dart';
 
 part 'app_theme_mode_provider.g.dart';
 

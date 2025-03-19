@@ -5,10 +5,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../constants/constants.dart';
-import '../../../../constants/languages.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../theme/app_theme.dart';
+import '/constants/constants.dart';
+import '/constants/languages.dart';
+import '/theme/app_colors.dart';
+import '/theme/app_theme.dart';
 
 class OfflineContainer extends ConsumerStatefulWidget {
   final Widget? child;

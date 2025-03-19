@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/constants/constants.dart';
+import '/constants/constants.dart';
 
-import '../../../../constants/languages.dart';
-import '../../../../extensions/build_context_extension.dart';
-import '../../../../theme/app_theme.dart';
+import '/constants/languages.dart';
+import '/extensions/build_context_extension.dart';
+import '/theme/app_theme.dart';
 
 class SignInAgreement extends StatelessWidget {
   const SignInAgreement({super.key});

@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../extensions/build_context_extension.dart';
-import '../../../../features/common/ui/widgets/common_header.dart';
-import '../../../../features/profile/model/language.dart';
-import '../../../../features/profile/ui/widgets/language_item.dart';
+import '/extensions/build_context_extension.dart';
+import '../../common/ui/widgets/common_header.dart';
+import '../model/language.dart';
+import 'widgets/language_item.dart';
 
 final languages = [
   const Language(id: '0', name: 'English', code: 'en', flag: ''),

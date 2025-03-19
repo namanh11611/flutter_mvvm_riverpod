@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants/constants.dart';
-import '../../../../constants/languages.dart';
-import '../../../../extensions/build_context_extension.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../theme/app_theme.dart';
+import '/constants/constants.dart';
+import '/constants/languages.dart';
+import '/extensions/build_context_extension.dart';
+import '/theme/app_colors.dart';
+import '/theme/app_theme.dart';
 
 class PremiumAgreement extends StatelessWidget {
   const PremiumAgreement({super.key});

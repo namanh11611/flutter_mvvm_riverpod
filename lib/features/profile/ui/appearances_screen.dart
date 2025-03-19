@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../extensions/build_context_extension.dart';
-import '../../../../features/common/ui/widgets/common_header.dart';
-import '../../../../features/profile/ui/widgets/appearance_item.dart';
+import '/extensions/build_context_extension.dart';
+import '/features/common/ui/widgets/common_header.dart';
+import 'widgets/appearance_item.dart';
 
 class AppearancesScreen extends ConsumerWidget {
   const AppearancesScreen({super.key});

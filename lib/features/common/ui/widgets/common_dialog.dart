@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../extensions/build_context_extension.dart';
-import '../../../../features/common/ui/widgets/primary_button.dart';
-import '../../../../features/common/ui/widgets/secondary_button.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../theme/app_theme.dart';
+import '/extensions/build_context_extension.dart';
+import '/theme/app_colors.dart';
+import '/theme/app_theme.dart';
+import 'primary_button.dart';
+import 'secondary_button.dart';
 
 class CommonDialog extends ConsumerWidget {
   final String title;

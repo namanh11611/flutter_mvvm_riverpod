@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../constants/assets.dart';
-import '../../../../theme/app_colors.dart';
+import '/constants/assets.dart';
+import '/theme/app_colors.dart';
 
 class Loading extends StatelessWidget {
   const Loading({super.key});

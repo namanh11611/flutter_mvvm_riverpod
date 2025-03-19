@@ -3,9 +3,9 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../constants/constants.dart';
-import '../../../../constants/languages.dart';
-import '../../../../theme/app_colors.dart';
+import '/constants/constants.dart';
+import '/constants/languages.dart';
+import '/theme/app_colors.dart';
 import '../../../profile/ui/view_models/profile_view_model.dart';
 import '../../model/benefit.dart';
 import '../../model/product.dart';

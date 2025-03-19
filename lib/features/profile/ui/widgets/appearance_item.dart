@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/extensions/build_context_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../features/common/ui/providers/app_theme_mode_provider.dart';
-import '../../../../features/profile/ui/widgets/common_rounded_item.dart';
-import '../../../../theme/app_colors.dart';
-import '../../../../theme/app_theme.dart';
+import '/extensions/build_context_extension.dart';
+import '/theme/app_colors.dart';
+import '/theme/app_theme.dart';
+import '../../../common/ui/providers/app_theme_mode_provider.dart';
+import 'common_rounded_item.dart';
 
 class AppearanceItem extends ConsumerWidget {
   final Widget icon;

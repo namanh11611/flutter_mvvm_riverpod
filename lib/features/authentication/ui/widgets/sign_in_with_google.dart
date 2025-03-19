@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../constants/assets.dart';
-import '../../../../features/authentication/ui/view_models/authentication_view_model.dart';
-import '../../../../features/common/ui/widgets/secondary_button.dart';
+import '/constants/assets.dart';
+import '/features/authentication/ui/view_models/authentication_view_model.dart';
+import '/features/common/ui/widgets/secondary_button.dart';
 
 class SignInWithGoogle extends ConsumerWidget {
   const SignInWithGoogle({super.key});

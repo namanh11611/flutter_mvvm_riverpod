@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/features/premium/ui/premium_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/authentication/ui/otp_screen.dart';
@@ -8,9 +7,10 @@ import '../features/authentication/ui/welcome_screen.dart';
 import '../features/home/ui/home_screen.dart';
 import '../features/onboarding/ui/onboarding_screen.dart';
 import '../features/onboarding/ui/splash_screen.dart';
+import '../features/premium/ui/premium_screen.dart';
 import '../features/profile/ui/appearances_screen.dart';
 import '../features/profile/ui/lanaguages_screen.dart';
-import '../routing/routes.dart';
+import 'routes.dart';
 
 enum SlideDirection {
   right,

@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../features/common/ui/widgets/material_ink_well.dart';
-import '../../../../features/profile/model/language.dart';
-import '../../../../features/profile/ui/widgets/common_rounded_item.dart';
-import '../../../../theme/app_theme.dart';
+import '/features/common/ui/widgets/material_ink_well.dart';
+import '/features/profile/model/language.dart';
+import '/features/profile/ui/widgets/common_rounded_item.dart';
+import '/theme/app_theme.dart';
 
 class LanguageItem extends ConsumerWidget {
   final Language language;

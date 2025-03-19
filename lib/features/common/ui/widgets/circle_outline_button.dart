@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../extensions/build_context_extension.dart';
-import '../../../../features/common/ui/widgets/material_ink_well.dart';
+import '/extensions/build_context_extension.dart';
+import 'material_ink_well.dart';
 
 class CircleOutlineButton extends ConsumerWidget {
   final IconData icon;
