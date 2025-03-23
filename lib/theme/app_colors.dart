@@ -47,6 +47,7 @@ class AppColors {
   static const rambutan90 = Color(0xFFE82754);
   static const rambutan100 = Color(0xFFE60F41);
 
+  static const whiteBg = Color(0xFFFFF5EE);
   static const mono0 = Color(0xFFFFFFFF);
   static const mono20 = Color(0xFFEFEFEF);
   static const mono40 = Color(0xFFBEBEBE);

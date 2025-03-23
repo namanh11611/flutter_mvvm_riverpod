@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
     <application
-        android:label="flutter_mvvm_riverpod"
+        android:label="FMR"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

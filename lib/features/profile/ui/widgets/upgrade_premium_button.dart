@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '/features/common/ui/widgets/material_ink_well.dart';
-import '/routing/routes.dart';
-import '/theme/app_colors.dart';
-import '/theme/app_theme.dart';
+import '../../../../constants/languages.dart';
+import '../../../../features/common/ui/widgets/material_ink_well.dart';
+import '../../../../routing/routes.dart';
+import '../../../../theme/app_colors.dart';
+import '../../../../theme/app_theme.dart';
 
 class UpgradePremiumButton extends StatelessWidget {
   const UpgradePremiumButton({super.key});
@@ -13,28 +14,30 @@ class UpgradePremiumButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-          horizontal: (MediaQuery.sizeOf(context).width - 140) / 2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
+            AppColors.cempedak80,
             AppColors.cempedak60,
             AppColors.cempedak100,
           ],
         ),
       ),
       child: MaterialInkWell(
-        onTap: () {
-          context.push(Routes.premium);
+        onTap: () async {
+          if (context.mounted) {
+            context.push(Routes.premium);
+          }
         },
         radius: 24,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               HugeIcon(
                 icon: HugeIcons.strokeRoundedNewReleases,
@@ -43,7 +46,7 @@ class UpgradePremiumButton extends StatelessWidget {
               ),
               const SizedBox(width: 4),
               Text(
-                'Premium',
+                Languages.premium,
                 style:
                     AppTheme.titleExtraSmall14.copyWith(color: AppColors.mono0),
               ),

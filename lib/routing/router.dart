@@ -8,6 +8,8 @@ import '../features/home/ui/home_screen.dart';
 import '../features/onboarding/ui/onboarding_screen.dart';
 import '../features/onboarding/ui/splash_screen.dart';
 import '../features/premium/ui/premium_screen.dart';
+import '../features/profile/model/profile.dart';
+import '../features/profile/ui/account_info_screen.dart';
 import '../features/profile/ui/appearances_screen.dart';
 import '../features/profile/ui/lanaguages_screen.dart';
 import 'routes.dart';
@@ -104,6 +106,13 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: Routes.home,
       pageBuilder: (context, state) => state.slidePage(const HomeScreen()),
+    ),
+    GoRoute(
+      path: Routes.accountInformation,
+      pageBuilder: (context, state) {
+        final profile = state.extra as Profile;
+        return state.slidePage(AccountInfoScreen(originalProfile: profile));
+      },
     ),
     GoRoute(
       path: Routes.appearances,

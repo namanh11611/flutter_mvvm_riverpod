@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  cached_network_image: ^3.4.1
   collection: ^1.19.0
   connectivity_plus: ^6.0.3
   cupertino_icons: ^1.0.6
@@ -49,6 +50,7 @@ dependencies:
 #  google_mobile_ads: ^5.2.0
   google_sign_in: ^6.2.2
   hugeicons: ^0.0.7
+  image_picker: ^1.1.2
   in_app_purchase: ^3.2.0
   in_app_update: ^4.2.3
   json_annotation: ^4.9.0
@@ -56,6 +58,8 @@ dependencies:
   ming_cute_icons: ^0.0.7
   package_info_plus: ^8.0.0
   path: ^1.9.0
+  path_provider: ^2.1.5
+  permission_handler: ^11.4.0
   persistent_bottom_nav_bar: ^6.2.1
   pinput: ^5.0.0
   purchases_flutter: ^8.4.2

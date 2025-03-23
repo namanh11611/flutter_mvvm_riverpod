@@ -20,11 +20,10 @@ class Constants {
   static const String premiumYearly = '\$rc_annual';
   static const String premiumLifeTime = '\$rc_lifetime';
 
-  static const String hello = 'hello';
-
   // SharedPreferences key
   static const String themeModeKey = 'theme_mode_key';
   static const String profileKey = 'profile_key';
   static const String isLoginKey = 'is_login_key';
   static const String isExistAccountKey = 'is_exist_account_key';
+  static const String lastDayShowPremiumKey = 'last_day_show_premium_key';
 }

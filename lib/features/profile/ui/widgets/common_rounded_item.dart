@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/extensions/build_context_extension.dart';
+import '../../../../extensions/build_context_extension.dart';
 
 class CommonRoundedItem extends ConsumerWidget {
   final Widget child;
@@ -20,11 +20,6 @@ class CommonRoundedItem extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         color: context.secondaryWidgetColor,
-        border: Border(
-          bottom: isLast
-              ? BorderSide.none
-              : BorderSide(color: context.dividerColor),
-        ),
         borderRadius: BorderRadius.vertical(
           top: isFirst ? const Radius.circular(16) : Radius.zero,
           bottom: isLast ? const Radius.circular(16) : Radius.zero,

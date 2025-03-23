@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hugeicons/hugeicons.dart';
 
-import '/features/common/ui/widgets/material_ink_well.dart';
-import '/features/profile/model/language.dart';
-import '/features/profile/ui/widgets/common_rounded_item.dart';
-import '/theme/app_theme.dart';
+import '../../../../extensions/build_context_extension.dart';
+import '../../../../features/common/ui/widgets/material_ink_well.dart';
+import '../../../../features/profile/model/language.dart';
+import '../../../../features/profile/ui/widgets/common_rounded_item.dart';
+import '../../../../theme/app_theme.dart';
 
 class LanguageItem extends ConsumerWidget {
   final Language language;
@@ -29,8 +31,15 @@ class LanguageItem extends ConsumerWidget {
           context.setLocale(Locale(language.code));
         },
         child: Container(
-          height: 60,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          height: 56,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: isLast
+                  ? BorderSide.none
+                  : BorderSide(color: context.dividerColor),
+            ),
+          ),
           child: Row(
             children: [
               Expanded(
@@ -44,7 +53,7 @@ class LanguageItem extends ConsumerWidget {
                 ),
               ),
               if (language.code == context.locale.languageCode)
-                const Icon(Icons.check),
+                Icon(HugeIcons.strokeRoundedTick01),
             ],
           ),
         ),

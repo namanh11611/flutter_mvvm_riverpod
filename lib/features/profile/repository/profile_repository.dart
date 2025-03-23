@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants/constants.dart';
 import '../../../features/profile/model/profile.dart';
 import '../../../main.dart';
+import '../../../utils/utils.dart';
 
 part 'profile_repository.g.dart';
 
@@ -89,5 +90,18 @@ class ProfileRepository {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<bool> isShowPremium() async {
+    final prefs = await SharedPreferences.getInstance();
+    final day = prefs.getString(Constants.lastDayShowPremiumKey);
+    if (day == null) return true;
+    return Utils.today().difference(DateTime.parse(day)).inDays >= 3;
+  }
+
+  Future<void> setIsShowPremium() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+        Constants.lastDayShowPremiumKey, Utils.today().toIso8601String());
   }
 }

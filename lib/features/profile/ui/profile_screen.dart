@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,15 +7,19 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '/constants/assets.dart';
+import '/constants/constants.dart';
+import '/constants/languages.dart';
 import '/extensions/build_context_extension.dart';
+import '/extensions/profile_extension.dart';
 import '/routing/routes.dart';
 import '/theme/app_colors.dart';
 import '/theme/app_theme.dart';
 import '/utils/global_loading.dart';
-import '../../../constants/constants.dart';
-import '../../common/ui/widgets/common_dialog.dart';
+import '../../../../features/common/ui/widgets/common_dialog.dart';
+import '../model/profile.dart';
 import 'view_models/profile_view_model.dart';
+import 'widgets/avatar.dart';
+import 'widgets/premium_info.dart';
 import 'widgets/profile_item.dart';
 import 'widgets/upgrade_premium_button.dart';
 
@@ -38,124 +41,153 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final profile = ref.watch(profileViewModelProvider).value?.profile;
+    final profile =
+        ref.watch(profileViewModelProvider.select((it) => it.value?.profile));
     final dangerousColor =
         context.isDarkMode ? AppColors.rambutan80 : AppColors.rambutan100;
     return Scaffold(
+      backgroundColor: context.secondaryBackgroundColor,
       body: ListView(
-        padding: EdgeInsets.only(
-          top: MediaQuery.paddingOf(context).top + 32,
-          bottom: MediaQuery.paddingOf(context).bottom,
+        padding: EdgeInsets.fromLTRB(
+          16,
+          MediaQuery.paddingOf(context).top + 48,
+          16,
+          48,
         ),
         children: [
-          Column(
-            children: [
-              CircleAvatar(
-                radius: 48,
-                backgroundColor: AppColors.blueberry80,
-                backgroundImage: AssetImage(Assets.avatar),
-                foregroundImage: profile?.avatar != null
-                    ? NetworkImage(profile?.avatar ?? '')
-                    : null,
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Center(
-            child: Text(
-              profile?.name ?? Constants.defaultName,
-              style: AppTheme.titleExtraLarge24,
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 16),
+            decoration: BoxDecoration(
+              color: context.secondaryWidgetColor,
+              borderRadius: BorderRadius.circular(16),
             ),
-          ),
-          Center(
-            child: Text(
-              profile?.email ?? Constants.defaultEmail,
-              style: AppTheme.bodyMedium14.copyWith(
-                color: context.secondaryTextColor,
-              ),
+            child: Column(
+              children: [
+                Transform.translate(
+                  offset: Offset(0, -48),
+                  child: Column(
+                    children: [
+                      Avatar(url: profile?.avatar),
+                      const SizedBox(height: 16),
+                      Center(
+                        child: Text(
+                          profile?.name ?? Constants.defaultName,
+                          style: AppTheme.titleExtraLarge24,
+                        ),
+                      ),
+                      Center(
+                        child: Text(
+                          profile?.email ?? '',
+                          style: AppTheme.bodyMedium14.copyWith(
+                            color: context.secondaryTextColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Transform.translate(
+                  offset: Offset(0, -32),
+                  child: profile.isPremium
+                      ? PremiumInfo(expiryDate: profile?.expiryDatePremium)
+                      : UpgradePremiumButton(),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 8),
-          UpgradePremiumButton(),
-          const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'general'.tr(),
+              Languages.general,
               style: AppTheme.titleLarge20,
             ),
           ),
+          const SizedBox(height: 8),
           ProfileItem(
             icon: HugeIcons.strokeRoundedUser,
-            text: 'account_information'.tr(),
-            onTap: () {},
+            text: Languages.accountInformation,
+            isFirst: true,
+            onTap: () {
+              context.push(
+                Routes.accountInformation,
+                extra: profile ?? Profile(),
+              );
+            },
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedIdea,
-            text: 'appearances'.tr(),
+            text: Languages.appearances,
             onTap: () {
               context.push(Routes.appearances);
             },
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedCoinsSwap,
-            text: 'language'.tr(),
+            text: Languages.language,
+            isLast: true,
             onTap: () {
               context.push(Routes.languages);
             },
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'preferences'.tr(),
+              Languages.preferences,
               style: AppTheme.titleLarge20,
             ),
           ),
+          const SizedBox(height: 8),
           ProfileItem(
             icon: HugeIcons.strokeRoundedNews,
-            text: 'term_of_service'.tr(),
+            text: Languages.termOfService,
+            isFirst: true,
             onTap: () => context.tryLaunchUrl(Constants.termOfService),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedShield01,
-            text: 'privacy_policy'.tr(),
+            text: Languages.privacyPolicy,
             onTap: () => context.tryLaunchUrl(Constants.privacyPolicy),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedUserMultiple,
-            text: 'about_us'.tr(),
+            text: Languages.aboutUs,
             onTap: () => context.tryLaunchUrl(Constants.aboutUs),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedStar,
-            text: 'rate_us'.tr(),
+            text: Languages.rateUs,
             onTap: () => context.tryLaunchUrl(
                 Platform.isIOS ? Constants.appStore : Constants.playStore),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedSettingError04,
-            text: 'report_a_problem'.tr(),
+            text: Languages.reportAProblem,
+            isLast: true,
             onTap: () => context.tryLaunchUrl(Constants.facebookPage),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'dangerous_zone'.tr(),
+              Languages.dangerousZone,
               style: AppTheme.titleLarge20,
             ),
           ),
+          const SizedBox(height: 8),
           ProfileItem(
             icon: HugeIcons.strokeRoundedLogout01,
-            text: 'log_out'.tr(),
+            text: Languages.logOut,
             textColor: dangerousColor,
+            isFirst: true,
             onTap: () => _signOut(context),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedDelete01,
-            text: 'delete_account'.tr(),
+            text: Languages.deleteAccount,
             textColor: dangerousColor,
+            isLast: true,
             onTap: () => _deleteAccount(context),
           ),
           const SizedBox(height: 24),
@@ -176,7 +208,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         _version = info.version;
       });
     }).catchError((error) {
-      debugPrint('Error: $error');
+      debugPrint(
+          '${Constants.tag} [_ProfileScreenState._getPackageInfo] Error: $error');
     });
   }
 
@@ -184,11 +217,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => CommonDialog(
-        title: 'log_out_title'.tr(),
-        content: 'log_out_message'.tr(),
-        primaryButtonLabel: 'log_out'.tr(),
+        title: Languages.logOutTitle,
+        content: Languages.logOutMessage,
+        primaryButtonLabel: Languages.logOut,
         primaryButtonBackground: AppColors.rambutan100,
-        secondaryButtonLabel: 'cancel'.tr(),
+        secondaryButtonLabel: Languages.cancel,
         primaryButtonAction: () async {
           try {
             Global.showLoading(context);
@@ -199,7 +232,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             }
           } catch (error) {
             if (context.mounted) {
-              context.showErrorSnackBar('unexpected_error_occurred'.tr());
+              context.showErrorSnackBar(Languages.unexpectedErrorOccurred);
             }
           } finally {
             if (context.mounted) {
@@ -216,11 +249,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => CommonDialog(
-        title: 'delete_account_title'.tr(),
-        content: 'delete_account_message'.tr(),
-        primaryButtonLabel: 'delete_account'.tr(),
+        title: Languages.deleteAccountTitle,
+        content: Languages.deleteAccountMessage,
+        primaryButtonLabel: Languages.deleteAccount,
         primaryButtonBackground: AppColors.rambutan100,
-        secondaryButtonLabel: 'cancel'.tr(),
+        secondaryButtonLabel: Languages.cancel,
         primaryButtonAction: () async {
           try {
             Global.showLoading(context);
@@ -231,7 +264,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             }
           } catch (error) {
             if (context.mounted) {
-              context.showErrorSnackBar('unexpected_error_occurred'.tr());
+              context.showErrorSnackBar(Languages.unexpectedErrorOccurred);
             }
           } finally {
             if (context.mounted) {

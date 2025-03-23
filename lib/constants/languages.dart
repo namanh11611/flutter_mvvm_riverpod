@@ -42,6 +42,10 @@ class Languages {
   static String preferences = 'preferences'.tr();
   static String dangerousZone = 'dangerous_zone'.tr();
   static String accountInformation = 'account_information'.tr();
+  static String selectAvatar = 'select_avatar'.tr();
+  static String noPhotoPermissionError = 'no_photo_permission_error'.tr();
+  static String email = 'email'.tr();
+  static String name = 'name'.tr();
   static String appearances = 'appearances'.tr();
   static String auto = 'auto'.tr();
   static String lightMode = 'light_mode'.tr();
