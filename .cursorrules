@@ -1,0 +1,81 @@
+// Flutter App Expert .cursorrules
+
+// Flexibility Notice
+
+// Flutter Best Practices
+
+const flutterBestPractices = [
+    "Adapt to existing project architecture while maintaining clean code principles",
+    "Use Flutter 3.29.0 features and Material 3 design",
+    "Implement MVVM with Riverpod pattern",
+    "Follow proper state management principles",
+    "Use proper dependency injection",
+    "Implement proper error handling",
+    "Follow platform-specific design guidelines",
+    "Use languages.dart, en.json, vi.json for localization techniques",
+];
+
+// Project Structure
+
+const projectStructure = `
+lib/
+  constants/
+  environment/
+  extensions/
+  features/
+    feature_name/
+      model/
+      repository/
+      ui/
+        state/
+        view_model/
+        widgets/
+  routing/
+  theme/
+  utils/
+  main.dart
+`;
+
+// Coding Guidelines
+
+const codingGuidelines = `
+1. Use proper null safety practices
+2. Implement proper error handling with Either type
+3. Follow proper naming conventions
+4. Use proper widget composition
+5. Implement proper routing using GoRouter
+6. Use proper form validation
+7. Follow proper state management with Riverpod
+8. Implement proper dependency injection using Riverpod
+9. Use proper asset management
+10. Follow proper testing practices
+11. For Text style, use app_theme.dart
+12. For background and text color, use build_context_extension.dart
+13. Padding, margin is a multiple of 8. For example: const EdgeInsets.all(16)
+14. The spacing between widgets is a multiple of 8. For example: const SizedBox(width: 8), const SizedBox(height: 16)
+`;
+
+// Widget Guidelines
+
+const widgetGuidelines = `
+1. Keep widgets small and focused
+2. Use const constructors when possible
+3. Implement proper widget keys
+4. Follow proper layout principles
+5. Use proper widget lifecycle methods
+6. Implement proper error boundaries
+7. Use proper performance optimization techniques
+8. Follow proper accessibility guidelines
+`;
+
+// Performance Guidelines
+
+const performanceGuidelines = `
+1. Use proper image caching
+2. Implement proper list view optimization
+3. Use proper build methods optimization
+4. Follow proper state management patterns
+5. Implement proper memory management
+6. Use proper platform channels when needed
+7. Follow proper compilation optimization techniques
+`;
