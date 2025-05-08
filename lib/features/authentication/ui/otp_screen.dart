@@ -8,7 +8,7 @@ import 'package:pinput/pinput.dart';
 
 import '../../../constants/assets.dart';
 import '../../../extensions/build_context_extension.dart';
-import '../../../features/authentication/ui/view_models/authentication_view_model.dart';
+import '../../../features/authentication/ui/view_model/authentication_view_model.dart';
 import '../../../features/common/ui/widgets/common_back_button.dart';
 import '../../../features/common/ui/widgets/primary_button.dart';
 import '../../../theme/app_theme.dart';

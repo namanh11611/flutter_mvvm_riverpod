@@ -17,7 +17,7 @@ import '/theme/app_theme.dart';
 import '/utils/global_loading.dart';
 import '../../../../features/common/ui/widgets/common_dialog.dart';
 import '../model/profile.dart';
-import 'view_models/profile_view_model.dart';
+import 'view_model/profile_view_model.dart';
 import 'widgets/avatar.dart';
 import 'widgets/premium_info.dart';
 import 'widgets/profile_item.dart';

@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../constants/assets.dart';
-import '../../../features/authentication/ui/view_models/authentication_view_model.dart';
+import '../../../features/authentication/ui/view_model/authentication_view_model.dart';
 import '../../../features/authentication/ui/widgets/horizontal_divider.dart';
 import '../../../features/authentication/ui/widgets/social_sign_in.dart';
 import '../../../features/common/ui/widgets/common_back_button.dart';

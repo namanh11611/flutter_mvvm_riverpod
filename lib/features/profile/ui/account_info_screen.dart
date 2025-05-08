@@ -13,7 +13,7 @@ import '../../common/ui/widgets/common_text_form_field.dart';
 import '../../common/ui/widgets/primary_button.dart';
 import '../../common/ui/widgets/secondary_button.dart';
 import '../model/profile.dart';
-import 'view_models/profile_view_model.dart';
+import 'view_model/profile_view_model.dart';
 import 'widgets/avatar.dart';
 
 class AccountInfoScreen extends ConsumerStatefulWidget {

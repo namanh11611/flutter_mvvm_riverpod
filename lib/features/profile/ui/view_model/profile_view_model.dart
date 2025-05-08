@@ -11,7 +11,7 @@ import '/extensions/build_context_extension.dart';
 import '/extensions/profile_extension.dart';
 import '/extensions/string_extension.dart';
 import '../../../../constants/constants.dart';
-import '../../../../features/authentication/ui/view_models/authentication_view_model.dart';
+import '../../../../features/authentication/ui/view_model/authentication_view_model.dart';
 import '../../../../features/profile/model/profile.dart';
 import '../../../../features/profile/repository/profile_repository.dart';
 import '../../../../features/profile/ui/state/profile_state.dart';

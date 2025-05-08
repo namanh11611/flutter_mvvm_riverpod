@@ -102,10 +102,9 @@ lib/
 
 ## 📱 Screenshots
 
-| Light Theme                                     | Dark Theme                                    |
-|-------------------------------------------------|-----------------------------------------------|
-| ![Hero Light](/screenshots/HeroLight.png)       | ![Hero Dark](/screenshots/HeroDark.png)       |
-| ![Profile Light](/screenshots/ProfileLight.png) | ![Profile Dark](/screenshots/ProfileDark.png) |
+| Light Hero                                | Light Profile                                   | Dark Hero                               | Dark Profile                                  |
+|-------------------------------------------|-------------------------------------------------|-----------------------------------------|-----------------------------------------------|
+| ![Hero Light](/screenshots/HeroLight.png) | ![Profile Light](/screenshots/ProfileLight.png) | ![Hero Dark](/screenshots/HeroDark.png) | ![Profile Dark](/screenshots/ProfileDark.png) |
 
 ## 🤝 Contributing
 

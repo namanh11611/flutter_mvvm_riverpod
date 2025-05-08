@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../extensions/build_context_extension.dart';
 import '../../../features/common/ui/widgets/common_text_form_field.dart';
 import '../../../features/common/ui/widgets/primary_button.dart';
-import '../../../features/profile/ui/view_models/profile_view_model.dart';
+import '../../../features/profile/ui/view_model/profile_view_model.dart';
 import '../../../routing/routes.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {

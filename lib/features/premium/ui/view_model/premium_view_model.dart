@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '/constants/constants.dart';
 import '/constants/languages.dart';
 import '/theme/app_colors.dart';
-import '../../../profile/ui/view_models/profile_view_model.dart';
+import '../../../profile/ui/view_model/profile_view_model.dart';
 import '../../model/benefit.dart';
 import '../../model/product.dart';
 import '../state/premium_state.dart';

@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '/constants/constants.dart';
 import '/extensions/string_extension.dart';
-import '/features/profile/ui/view_models/profile_view_model.dart';
+import '/features/profile/ui/view_model/profile_view_model.dart';
 import '../../repository/authentication_repository.dart';
 import '../../ui/state/authentication_state.dart';
 
