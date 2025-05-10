@@ -88,7 +88,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             name: _nameController.text.trim(),
           );
       if (context.mounted) {
-        context.pushReplacement(Routes.home);
+        context.pushReplacement(Routes.main);
       }
     } catch (error) {
       if (context.mounted) {

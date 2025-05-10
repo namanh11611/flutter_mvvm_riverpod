@@ -51,7 +51,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
         ref
             .read(profileViewModelProvider.notifier)
             .updateProfile(email: session.user.email ?? '');
-        context.go(Routes.home);
+        context.go(Routes.main);
       }
     });
   }
@@ -91,7 +91,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
         if (next.value?.isRegisterSuccessfully == true) {
           context.pushReplacement(Routes.onboarding);
         } else if (next.value?.isSignInSuccessfully == true) {
-          context.pushReplacement(Routes.home);
+          context.pushReplacement(Routes.main);
         }
       }
     });

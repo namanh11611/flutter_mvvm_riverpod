@@ -17,14 +17,14 @@ const List<Widget> _screens = [
   ProfileScreen(),
 ];
 
-class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({super.key});
+class MainScreen extends ConsumerStatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  ConsumerState createState() => _HomeScreenState();
+  ConsumerState createState() => _MainScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   late PersistentTabController _controller;
 
   @override

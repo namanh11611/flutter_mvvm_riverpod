@@ -26,7 +26,7 @@ class SplashScreen extends ConsumerWidget {
     await Future.delayed(const Duration(seconds: 1));
     if (!context.mounted) return;
     if (isLoggedIn) {
-      context.pushReplacement(Routes.home);
+      context.pushReplacement(Routes.main);
     } else {
       context.pushReplacement(Routes.welcome);
     }
