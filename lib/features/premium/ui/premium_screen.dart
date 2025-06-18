@@ -81,7 +81,7 @@ class PremiumScreen extends ConsumerWidget {
                       SizedBox(width: 36),
                       Text(
                         Languages.premium,
-                        style: AppTheme.headLineLarge32.copyWith(
+                        style: AppTheme.title32.copyWith(
                           color: AppColors.mono0,
                         ),
                       ),
@@ -95,7 +95,7 @@ class PremiumScreen extends ConsumerWidget {
                     children: [
                       Text(
                         Languages.premiumBenefits,
-                        style: AppTheme.titleExtraLarge24.copyWith(
+                        style: AppTheme.title24.copyWith(
                           color: AppColors.mono0,
                         ),
                       ),
@@ -120,7 +120,7 @@ class PremiumScreen extends ConsumerWidget {
                       const SizedBox(height: 24),
                       Text(
                         Languages.selectPlan,
-                        style: AppTheme.titleExtraLarge24.copyWith(
+                        style: AppTheme.title24.copyWith(
                           color: AppColors.mono0,
                         ),
                       ),
@@ -142,14 +142,14 @@ class PremiumScreen extends ConsumerWidget {
                       const SizedBox(height: 24),
                       Text(
                         '* ${products[selectedIndex].description}',
-                        style: AppTheme.bodyMedium14.copyWith(
+                        style: AppTheme.body14.copyWith(
                           color: AppColors.mono20,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         Languages.subscriptionInfo,
-                        style: AppTheme.bodyMedium14.copyWith(
+                        style: AppTheme.body14.copyWith(
                           color: AppColors.mono0,
                         ),
                         textAlign: TextAlign.justify,
@@ -200,7 +200,7 @@ class PremiumScreen extends ConsumerWidget {
                         .restorePurchases(),
                     child: Text(
                       Languages.restorePurchases,
-                      style: AppTheme.titleExtraSmall14.copyWith(
+                      style: AppTheme.title14.copyWith(
                         color: AppColors.mono0,
                       ),
                     ),

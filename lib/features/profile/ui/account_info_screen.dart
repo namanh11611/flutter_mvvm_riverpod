@@ -85,11 +85,11 @@ class _AccountInfoScreenState extends ConsumerState<AccountInfoScreen> {
                   ],
                 ),
                 const SizedBox(height: 32),
-                Text(Languages.email, style: AppTheme.bodySmall12),
+                Text(Languages.email, style: AppTheme.body12),
                 const SizedBox(height: 6),
                 Text(
                   widget.originalProfile.email.orEmpty(),
-                  style: AppTheme.bodyLarge16,
+                  style: AppTheme.body16,
                 ),
                 const SizedBox(height: 32),
                 CommonTextFormField(

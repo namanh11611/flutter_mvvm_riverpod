@@ -50,7 +50,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
       obscureText: _isObscure,
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle: AppTheme.bodyLarge16,
+        labelStyle: AppTheme.body16,
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
@@ -67,7 +67,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
               )
             : null,
         errorText: widget.errorText ?? _errorText,
-        errorStyle: AppTheme.bodySmall12.copyWith(color: AppColors.rambutan100),
+        errorStyle: AppTheme.body12.copyWith(color: AppColors.rambutan100),
       ),
       onChanged: (value) {
         final error = widget.validator?.call(widget.controller?.text);

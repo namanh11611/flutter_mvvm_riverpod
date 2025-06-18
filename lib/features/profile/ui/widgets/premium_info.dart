@@ -28,7 +28,7 @@ class PremiumInfo extends StatelessWidget {
       child: expiryDate == null
           ? Text(
               Languages.premiumLifetime,
-              style: AppTheme.titleExtraSmall14.copyWith(
+              style: AppTheme.title14.copyWith(
                 color: AppColors.mono0,
               ),
             )
@@ -37,21 +37,21 @@ class PremiumInfo extends StatelessWidget {
               children: [
                 Text(
                   Languages.premium,
-                  style: AppTheme.titleExtraSmall14.copyWith(
+                  style: AppTheme.title14.copyWith(
                     color: AppColors.mono0,
                   ),
                 ),
                 const SizedBox(width: 4),
                 Text(
                   Languages.until,
-                  style: AppTheme.bodyMedium14.copyWith(
+                  style: AppTheme.body14.copyWith(
                     color: AppColors.mono0,
                   ),
                 ),
                 const SizedBox(width: 4),
                 Text(
                   (expiryDate ?? DateTime.now()).toddMMYYYY(),
-                  style: AppTheme.titleExtraSmall14.copyWith(
+                  style: AppTheme.title14.copyWith(
                     color: AppColors.mono0,
                   ),
                 ),

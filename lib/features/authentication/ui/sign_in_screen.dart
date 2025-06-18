@@ -67,7 +67,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   ),
                   Text(
                     'sign_in'.tr(),
-                    style: AppTheme.headLineLarge32,
+                    style: AppTheme.title32,
                   ),
                   const SizedBox(height: 24),
                   CommonTextFormField(

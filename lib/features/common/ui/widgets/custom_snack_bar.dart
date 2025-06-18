@@ -15,7 +15,7 @@ class CustomSnackBar extends SnackBar {
               Expanded(
                 child: Text(
                   text,
-                  style: AppTheme.bodyMedium14.copyWith(color: AppColors.mono0),
+                  style: AppTheme.body14.copyWith(color: AppColors.mono0),
                 ),
               ),
             ],
@@ -38,7 +38,7 @@ class CustomSnackBar extends SnackBar {
               const Icon(Icons.info_outline, size: 24, color: AppColors.mono0),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(text, style: AppTheme.bodyMedium14),
+                child: Text(text, style: AppTheme.body14),
               ),
             ],
           ),
@@ -60,7 +60,7 @@ class CustomSnackBar extends SnackBar {
               const Icon(Icons.warning_amber, size: 24),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(text, style: AppTheme.bodyMedium14),
+                child: Text(text, style: AppTheme.body14),
               ),
             ],
           ),
@@ -84,7 +84,7 @@ class CustomSnackBar extends SnackBar {
               Expanded(
                 child: Text(
                   text,
-                  style: AppTheme.bodyMedium14.copyWith(color: AppColors.mono0),
+                  style: AppTheme.body14.copyWith(color: AppColors.mono0),
                 ),
               ),
             ],

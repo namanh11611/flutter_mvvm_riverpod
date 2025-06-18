@@ -21,7 +21,7 @@ class HorizontalDivider extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             'or'.tr(),
-            style: AppTheme.bodyMedium14
+            style: AppTheme.body14
                 .copyWith(color: context.secondaryTextColor),
           ),
         ),

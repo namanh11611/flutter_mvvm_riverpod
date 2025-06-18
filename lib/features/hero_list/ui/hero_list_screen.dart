@@ -98,7 +98,7 @@ class HeroListScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           context.tr(_getGreeting()),
-          style: AppTheme.headLineLarge32,
+          style: AppTheme.title32,
         ),
         automaticallyImplyLeading: false,
         backgroundColor: context.primaryBackgroundColor,

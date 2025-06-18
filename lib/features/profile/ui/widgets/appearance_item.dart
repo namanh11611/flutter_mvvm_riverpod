@@ -50,7 +50,7 @@ class AppearanceItem extends ConsumerWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   text,
-                  style: AppTheme.bodyLarge16,
+                  style: AppTheme.body16,
                 ),
               ),
             ),

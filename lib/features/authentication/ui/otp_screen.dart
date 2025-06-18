@@ -83,11 +83,11 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                   ),
                   Text(
                     'otp_enter_title'.tr(),
-                    style: AppTheme.titleLarge20,
+                    style: AppTheme.title20,
                   ),
                   Text(
                     'otp_enter_description'.tr(),
-                    style: AppTheme.bodyLarge16,
+                    style: AppTheme.body16,
                   ),
                   const SizedBox(height: 16),
                   Center(
@@ -97,7 +97,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                       defaultPinTheme: PinTheme(
                         width: 48,
                         height: 48,
-                        textStyle: AppTheme.bodyLarge16,
+                        textStyle: AppTheme.body16,
                         decoration: BoxDecoration(
                           border: Border.all(color: context.secondaryTextColor),
                           borderRadius: BorderRadius.circular(16),
@@ -111,7 +111,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                     children: [
                       Text(
                         'did_not_receive_otp'.tr(),
-                        style: AppTheme.bodyMedium14.copyWith(
+                        style: AppTheme.body14.copyWith(
                           color: context.secondaryTextColor,
                         ),
                       ),
@@ -128,7 +128,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                             : null,
                         child: Text(
                           'resend_otp'.tr(),
-                          style: AppTheme.titleTiny12,
+                          style: AppTheme.title12,
                         ),
                       ),
                     ],
@@ -138,7 +138,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                           padding: const EdgeInsets.only(top: 16, bottom: 32),
                           child: Text(
                             'try_again_after',
-                            style: AppTheme.bodyMedium14.copyWith(
+                            style: AppTheme.body14.copyWith(
                               color: context.secondaryTextColor,
                             ),
                           ).tr(args: ['$count']),

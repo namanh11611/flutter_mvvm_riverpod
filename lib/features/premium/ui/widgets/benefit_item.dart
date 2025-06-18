@@ -26,12 +26,12 @@ class BenefitItem extends StatelessWidget {
           children: [
             Text(
               title,
-              style: AppTheme.titleSmall16.copyWith(color: AppColors.mono0),
+              style: AppTheme.title16.copyWith(color: AppColors.mono0),
             ),
             const SizedBox(height: 4),
             Text(
               description,
-              style: AppTheme.bodyMedium14.copyWith(color: AppColors.mono0),
+              style: AppTheme.body14.copyWith(color: AppColors.mono0),
             ),
           ],
         ),

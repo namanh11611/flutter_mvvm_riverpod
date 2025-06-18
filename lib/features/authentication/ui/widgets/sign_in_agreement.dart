@@ -17,14 +17,14 @@ class SignInAgreement extends StatelessWidget {
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-            style: AppTheme.bodySmall12.copyWith(
+            style: AppTheme.body12.copyWith(
               color: context.secondaryTextColor,
             ),
             children: [
               TextSpan(text: '${Languages.signInAgreementPrefix} '),
               TextSpan(
                 text: Languages.termOfService,
-                style: AppTheme.titleTiny12,
+                style: AppTheme.title12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     context.tryLaunchUrl(Constants.termOfService);
@@ -33,7 +33,7 @@ class SignInAgreement extends StatelessWidget {
               TextSpan(text: ' ${Languages.signInAgreementMiddle} '),
               TextSpan(
                 text: Languages.privacyPolicy,
-                style: AppTheme.titleTiny12,
+                style: AppTheme.title12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     context.tryLaunchUrl(Constants.privacyPolicy);

@@ -46,9 +46,9 @@ class CommonDialog extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: AppTheme.titleLarge20),
+            Text(title, style: AppTheme.title20),
             const SizedBox(height: 16),
-            Text(content, style: AppTheme.bodyMedium14),
+            Text(content, style: AppTheme.body14),
             const SizedBox(height: 16),
             secondaryButtonLabel != null
                 ? Row(

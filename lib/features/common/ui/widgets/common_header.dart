@@ -32,7 +32,7 @@ class CommonHeader extends ConsumerWidget {
           Expanded(
             child: Text(
               header,
-              style: AppTheme.headLineLarge32,
+              style: AppTheme.title32,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),

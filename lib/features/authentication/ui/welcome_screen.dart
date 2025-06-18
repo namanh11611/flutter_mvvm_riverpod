@@ -113,7 +113,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
               ),
               Text(
                 'register'.tr(),
-                style: AppTheme.headLineLarge32,
+                style: AppTheme.title32,
               ),
               const SizedBox(height: 24),
               CommonTextFormField(
@@ -143,7 +143,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
                 children: [
                   Text(
                     'already_have_account'.tr(),
-                    style: AppTheme.bodyMedium14,
+                    style: AppTheme.body14,
                   ),
                   const SizedBox(width: 4),
                   TextButton(
@@ -152,7 +152,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
                     },
                     child: Text(
                       'sign_in'.tr(),
-                      style: AppTheme.titleExtraSmall14,
+                      style: AppTheme.title14,
                     ),
                   ),
                 ],

@@ -50,7 +50,7 @@ class ProductItem extends StatelessWidget {
                   ),
                   child: Text(
                     '- ${product.savePercent}%',
-                    style: AppTheme.bodySmall12.copyWith(
+                    style: AppTheme.body12.copyWith(
                       color: AppColors.mono0,
                     ),
                   ),
@@ -59,14 +59,14 @@ class ProductItem extends StatelessWidget {
               const SizedBox(height: 24),
               Text(
                 product.title,
-                style: AppTheme.titleSmall16.copyWith(
+                style: AppTheme.title16.copyWith(
                   color: AppColors.mono0,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 product.currentPrice,
-                style: AppTheme.titleLarge20.copyWith(
+                style: AppTheme.title20.copyWith(
                   color: AppColors.mono0,
                 ),
               ),
@@ -84,7 +84,7 @@ class ProductItem extends StatelessWidget {
                       ),
                       child: Text(
                         product.label!,
-                        style: AppTheme.titleExtraTiny10.copyWith(
+                        style: AppTheme.title10.copyWith(
                           color: AppColors.mono0,
                         ),
                       ),

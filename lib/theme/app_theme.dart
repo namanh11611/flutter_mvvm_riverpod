@@ -4,67 +4,87 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   AppTheme._();
 
-  static final headLineLarge32 = GoogleFonts.nunito(
+  static final title32 = GoogleFonts.nunito(
     fontSize: 32,
     fontWeight: FontWeight.w700,
   );
 
-  static final titleExtraLarge24 = GoogleFonts.nunito(
+  static final title24 = GoogleFonts.nunito(
     fontSize: 24,
     fontWeight: FontWeight.w700,
   );
 
-  static final titleLarge20 = GoogleFonts.nunito(
+  static final title20 = GoogleFonts.nunito(
     fontSize: 20,
     fontWeight: FontWeight.w700,
   );
 
-  static final titleMedium18 = GoogleFonts.nunito(
+  static final title18 = GoogleFonts.nunito(
     fontSize: 18,
     fontWeight: FontWeight.w700,
   );
 
-  static final titleSmall16 = GoogleFonts.nunito(
+  static final title16 = GoogleFonts.nunito(
     fontSize: 16,
     fontWeight: FontWeight.w700,
   );
 
-  static final titleExtraSmall14 = GoogleFonts.nunito(
+  static final title14 = GoogleFonts.nunito(
     fontSize: 14,
     fontWeight: FontWeight.w700,
   );
 
-  static final titleTiny12 = GoogleFonts.nunito(
+  static final title12 = GoogleFonts.nunito(
     fontSize: 12,
     fontWeight: FontWeight.w700,
   );
 
-  static final titleExtraTiny10 = GoogleFonts.nunito(
+  static final title10 = GoogleFonts.nunito(
     fontSize: 10,
     fontWeight: FontWeight.w700,
   );
 
-  static final bodyHuge20 = GoogleFonts.nunito(
-    fontSize: 20,
-    fontWeight: FontWeight.w400,
+  static final subtitle16 = GoogleFonts.nunito(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
   );
 
-  static final bodyExtraLarge18 = GoogleFonts.nunito(
-    fontSize: 18,
-    fontWeight: FontWeight.w400,
+  static final subtitle14 = GoogleFonts.nunito(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
   );
 
-  static final bodyLarge16 = GoogleFonts.nunito(
+  static final subtitle12 = GoogleFonts.nunito(
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+  );
+
+  static final label16 = GoogleFonts.nunito(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+
+  static final label14 = GoogleFonts.nunito(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
+
+  static final label12 = GoogleFonts.nunito(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
+
+  static final body16 = GoogleFonts.nunito(
     fontSize: 16,
     fontWeight: FontWeight.w400,
   );
 
-  static final bodyMedium14 = GoogleFonts.nunito(
+  static final body14 = GoogleFonts.nunito(
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
 
-  static final bodySmall12 = GoogleFonts.nunito(
+  static final body12 = GoogleFonts.nunito(
     fontSize: 12,
     fontWeight: FontWeight.w400,
   );

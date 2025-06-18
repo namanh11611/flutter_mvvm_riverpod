@@ -55,7 +55,7 @@ class SecondaryButton extends ConsumerWidget {
                     const SizedBox(width: 8),
                     Text(
                       text,
-                      style: AppTheme.titleExtraSmall14.copyWith(
+                      style: AppTheme.title14.copyWith(
                         color: isEnable ? txtColor : AppColors.mono40,
                       ),
                     ),
@@ -63,7 +63,7 @@ class SecondaryButton extends ConsumerWidget {
                 )
               : Text(
                   text,
-                  style: AppTheme.titleExtraSmall14.copyWith(
+                  style: AppTheme.title14.copyWith(
                     color: isEnable ? txtColor : AppColors.mono40,
                   ),
                 ),
