@@ -64,6 +64,10 @@ extension ThemeModeExtension on BuildContext {
     ScaffoldMessenger.of(this).showSnackBar(CustomSnackBar.error(text: text));
   }
 
+  void hideKeyboard() {
+    FocusScope.of(this).unfocus();
+  }
+
   void tryLaunchUrl(String url) async {
     try {
       await launchUrl(Uri.parse(url));

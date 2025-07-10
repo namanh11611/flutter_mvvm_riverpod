@@ -11,7 +11,7 @@ import '../features/premium/ui/premium_screen.dart';
 import '../features/profile/model/profile.dart';
 import '../features/profile/ui/account_info_screen.dart';
 import '../features/profile/ui/appearances_screen.dart';
-import '../features/profile/ui/lanaguages_screen.dart';
+import '../features/profile/ui/languages_screen.dart';
 import 'routes.dart';
 
 enum SlideDirection {
