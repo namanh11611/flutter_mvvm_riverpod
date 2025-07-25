@@ -56,7 +56,7 @@ void main() async {
   // MobileAds.instance.initialize();
 
   /// RevenueCat
-  await initPlatformState();
+  // await initPlatformState();
 
   /// Localization
   await EasyLocalization.ensureInitialized();
