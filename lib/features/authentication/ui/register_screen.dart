@@ -7,14 +7,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '/constants/assets.dart';
-import '/constants/constants.dart';
-import '/extensions/build_context_extension.dart';
-import '/main.dart';
-import '/routing/routes.dart';
-import '/theme/app_theme.dart';
-import '/utils/global_loading.dart';
-import '/utils/validator.dart';
+import '../../../constants/assets.dart';
+import '../../../constants/constants.dart';
+import '../../../extensions/build_context_extension.dart';
+import '../../../main.dart';
+import '../../../routing/routes.dart';
+import '../../../theme/app_theme.dart';
+import '../../../utils/global_loading.dart';
+import '../../../utils/validator.dart';
 import '../../common/ui/widgets/common_text_form_field.dart';
 import '../../common/ui/widgets/primary_button.dart';
 import '../../profile/ui/view_model/profile_view_model.dart';
@@ -23,14 +23,14 @@ import 'widgets/horizontal_divider.dart';
 import 'widgets/sign_in_agreement.dart';
 import 'widgets/social_sign_in.dart';
 
-class WelcomeScreen extends ConsumerStatefulWidget {
-  const WelcomeScreen({super.key});
+class RegisterScreen extends ConsumerStatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  ConsumerState<WelcomeScreen> createState() => _WelcomeScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   late final TextEditingController _emailController;
   late final StreamSubscription<AuthState> _authSubscription;
   bool _isEmailValid = false;
@@ -45,7 +45,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
       final AuthChangeEvent event = data.event;
       final Session? session = data.session;
       debugPrint(
-          '${Constants.tag} [WelcomeScreen.initState] Auth change: $event, session: $session');
+          '${Constants.tag} [RegisterScreen.initState] Auth change: $event, session: $session');
 
       if (event == AuthChangeEvent.signedIn && session != null) {
         ref
@@ -87,7 +87,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
 
       if (next is AsyncData) {
         debugPrint(
-            '${Constants.tag} [WelcomeScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isSignInSuccessfully = ${next.value?.isSignInSuccessfully}');
+            '${Constants.tag} [RegisterScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isSignInSuccessfully = ${next.value?.isSignInSuccessfully}');
         if (next.value?.isRegisterSuccessfully == true) {
           context.pushReplacement(Routes.onboarding);
         } else if (next.value?.isSignInSuccessfully == true) {

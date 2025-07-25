@@ -2,7 +2,7 @@ class Routes {
   Routes._();
 
   static const splash = '/';
-  static const welcome = '/welcome';
+  static const register = '/register';
   static const login = '/login';
   static const otp = '/otp';
   static const onboarding = '/onboarding';

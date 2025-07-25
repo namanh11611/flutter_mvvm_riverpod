@@ -237,7 +237,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           } finally {
             if (context.mounted) {
               Global.hideLoading();
-              context.pushReplacement(Routes.welcome);
+              context.pushReplacement(Routes.register);
             }
           }
         },
@@ -269,7 +269,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           } finally {
             if (context.mounted) {
               Global.hideLoading();
-              context.pushReplacement(Routes.welcome);
+              context.pushReplacement(Routes.register);
             }
           }
         },

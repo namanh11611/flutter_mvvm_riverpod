@@ -40,7 +40,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     if (isLoggedIn) {
       context.pushReplacement(Routes.main);
     } else {
-      context.pushReplacement(Routes.welcome);
+      context.pushReplacement(Routes.register);
     }
   }
 }
