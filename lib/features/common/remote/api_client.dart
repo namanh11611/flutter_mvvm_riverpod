@@ -43,10 +43,10 @@ class ApiClient {
   }
 
   Future<T> get<T>(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
       final response = await _dio.get<T>(
         path,
@@ -60,11 +60,11 @@ class ApiClient {
   }
 
   Future<T> post<T>(
-      String path, {
-        dynamic data,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-      }) async {
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
       final response = await _dio.post<T>(
         path,

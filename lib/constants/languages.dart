@@ -9,7 +9,7 @@ class Languages {
   static String ok = 'ok'.tr();
   static String cancel = 'cancel'.tr();
   static String confirm = 'confirm'.tr();
-  static String continueText = 'continue'.tr();
+  static String continueText = 'continue_text'.tr();
   static String noData = 'no_data'.tr();
   static String offline = 'offline'.tr();
   static String unexpectedErrorOccurred = 'unexpected_error_occurred'.tr();

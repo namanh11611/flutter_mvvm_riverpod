@@ -81,12 +81,17 @@ lib/
    flutter pub get
    ```
 
-3. Generate code
+3. Generate localization files
+   ```bash
+   dart run easy_localization:generate -f keys -o locale_keys.g.dart --source-dir assets/translations
+   ```
+
+4. Generate code
    ```bash
    dart run build_runner build --delete-conflicting-outputs
    ```
 
-4. Change the app information
+5. Change the app information
    - To change the app package name, run the following command:
    ```bash
    dart run change_app_package_name:main com.new.package.name
@@ -95,7 +100,7 @@ lib/
    - To change the iOS app name, open the `ios/Runner/Info.plist` file, change the `CFBundleDisplayName` to `New App Name`
    - To change the iOS bundle name, open the `ios/Runner/Info.plist` file, change the `CFBundleName` to `new_bundle_name`
 
-5. Run the app
+6. Run the app
    ```bash
    flutter run
    ```

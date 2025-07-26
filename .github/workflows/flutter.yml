@@ -17,40 +17,35 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Setup Java
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '21'
 
-      # Step 3: Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
           flutter-version: '3.27.1'
 
-      # Step 4: Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # Step 5: Generate code
+      - name: Generate localization files
+        run: dart run easy_localization:generate -f keys -o locale_keys.g.dart --source-dir assets/translations
+
       - name: Generate code
         run: dart run build_runner build --delete-conflicting-outputs
 
-      # Step 6: Run tests
       - name: Run tests
         run: flutter test
 
-      # Step 7: Build iOS
       - name: Build iOS
         run: flutter build ios --release --no-codesign
 
-      # Step 8: Build Android App Bundle
       - name: Build Android App Bundle
         run: flutter build appbundle --release
