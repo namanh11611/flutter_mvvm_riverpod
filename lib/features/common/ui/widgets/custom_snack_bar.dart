@@ -7,10 +7,15 @@ class CustomSnackBar extends SnackBar {
   CustomSnackBar.success({
     super.key,
     required String text,
+    super.action,
   }) : super(
           content: Row(
             children: [
-              const Icon(Icons.check, size: 24, color: AppColors.mono0),
+              const Icon(
+                Icons.check,
+                size: 24,
+                color: AppColors.mono0,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -32,13 +37,21 @@ class CustomSnackBar extends SnackBar {
   CustomSnackBar.info({
     super.key,
     required String text,
+    super.action,
   }) : super(
           content: Row(
             children: [
-              const Icon(Icons.info_outline, size: 24, color: AppColors.mono0),
+              const Icon(
+                Icons.info_outline,
+                size: 24,
+                color: AppColors.mono0,
+              ),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(text, style: AppTheme.body14),
+                child: Text(
+                  text,
+                  style: AppTheme.body14.copyWith(color: AppColors.mono0),
+                ),
               ),
             ],
           ),
@@ -54,13 +67,21 @@ class CustomSnackBar extends SnackBar {
   CustomSnackBar.warning({
     super.key,
     required String text,
+    super.action,
   }) : super(
           content: Row(
             children: [
-              const Icon(Icons.warning_amber, size: 24),
+              const Icon(
+                Icons.warning_amber,
+                size: 24,
+                color: AppColors.mono100,
+              ),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(text, style: AppTheme.body14),
+                child: Text(
+                  text,
+                  style: AppTheme.body14.copyWith(color: AppColors.mono100),
+                ),
               ),
             ],
           ),
@@ -76,10 +97,15 @@ class CustomSnackBar extends SnackBar {
   CustomSnackBar.error({
     super.key,
     required String text,
+    super.action,
   }) : super(
           content: Row(
             children: [
-              const Icon(Icons.close, size: 24, color: AppColors.mono0),
+              const Icon(
+                Icons.close,
+                size: 24,
+                color: AppColors.mono0,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(

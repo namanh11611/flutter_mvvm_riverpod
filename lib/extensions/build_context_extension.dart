@@ -48,20 +48,28 @@ extension ThemeModeExtension on BuildContext {
             ),
       );
 
-  void showSuccessSnackBar(String text) {
-    ScaffoldMessenger.of(this).showSnackBar(CustomSnackBar.success(text: text));
+  void showSuccessSnackBar(String text, {SnackBarAction? action}) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      CustomSnackBar.success(text: text, action: action),
+    );
   }
 
-  void showInfoSnackBar(String text) {
-    ScaffoldMessenger.of(this).showSnackBar(CustomSnackBar.info(text: text));
+  void showInfoSnackBar(String text, {SnackBarAction? action}) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      CustomSnackBar.info(text: text, action: action),
+    );
   }
 
-  void showWarningSnackBar(String text) {
-    ScaffoldMessenger.of(this).showSnackBar(CustomSnackBar.warning(text: text));
+  void showWarningSnackBar(String text, {SnackBarAction? action}) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      CustomSnackBar.warning(text: text, action: action),
+    );
   }
 
-  void showErrorSnackBar(String text) {
-    ScaffoldMessenger.of(this).showSnackBar(CustomSnackBar.error(text: text));
+  void showErrorSnackBar(String text, {SnackBarAction? action}) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      CustomSnackBar.error(text: text, action: action),
+    );
   }
 
   void hideKeyboard() {
