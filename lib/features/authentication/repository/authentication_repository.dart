@@ -85,19 +85,20 @@ class AuthenticationRepository {
       ),
     );
 
+    // TODO: Uncomment when ready to use real Google Sign-In
+    /*
     try {
       const List<String> scopes = <String>[
         Constants.googleEmailScope,
         Constants.googleUserInfoScope,
       ];
 
-      final GoogleSignIn googleSignIn = GoogleSignIn(
-        clientId: Env.googleClientId,
-        serverClientId: Env.googleServerClientId,
-        scopes: scopes,
-      );
-      final googleUser = await googleSignIn.signIn();
-      final googleAuth = await googleUser!.authentication;
+      final GoogleSignIn googleSignIn = GoogleSignIn(scopes: scopes);
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      if (googleUser == null) {
+        throw Exception('Google sign in was cancelled');
+      }
+      final googleAuth = await googleUser.authentication;
       final accessToken = googleAuth.accessToken;
       final idToken = googleAuth.idToken;
 
@@ -120,6 +121,7 @@ class AuthenticationRepository {
     } catch (error) {
       throw Exception(Languages.unexpectedErrorOccurred);
     }
+    */
   }
 
   Future<AuthResponse> signInWithApple() async {

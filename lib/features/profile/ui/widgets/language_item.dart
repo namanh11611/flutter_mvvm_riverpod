@@ -46,14 +46,15 @@ class LanguageItem extends ConsumerWidget {
                 child: Container(
                   height: 60,
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    language.name,
-                    style: AppTheme.body16,
-                  ),
+                  child: Text(language.name, style: AppTheme.body16),
                 ),
               ),
               if (language.code == context.locale.languageCode)
-                Icon(HugeIcons.strokeRoundedTick01),
+                HugeIcon(
+                  icon: HugeIcons.strokeRoundedTick01,
+                  color: context.primaryTextColor,
+                  size: 20,
+                ),
             ],
           ),
         ),

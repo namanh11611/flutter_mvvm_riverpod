@@ -12,20 +12,24 @@ part of 'profile_repository.dart';
 @ProviderFor(profileRepository)
 const profileRepositoryProvider = ProfileRepositoryProvider._();
 
-final class ProfileRepositoryProvider extends $FunctionalProvider<
-    ProfileRepository,
-    ProfileRepository,
-    ProfileRepository> with $Provider<ProfileRepository> {
+final class ProfileRepositoryProvider
+    extends
+        $FunctionalProvider<
+          ProfileRepository,
+          ProfileRepository,
+          ProfileRepository
+        >
+    with $Provider<ProfileRepository> {
   const ProfileRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'profileRepositoryProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'profileRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$profileRepositoryHash();
@@ -33,8 +37,8 @@ final class ProfileRepositoryProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<ProfileRepository> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   ProfileRepository create(Ref ref) {

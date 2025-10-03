@@ -41,10 +41,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final profile =
-        ref.watch(profileViewModelProvider.select((it) => it.value?.profile));
-    final dangerousColor =
-        context.isDarkMode ? AppColors.rambutan80 : AppColors.rambutan100;
+    final profile = ref.watch(
+      profileViewModelProvider.select((it) => it.value?.profile),
+    );
+    final dangerousColor = context.isDarkMode
+        ? AppColors.rambutan80
+        : AppColors.rambutan100;
     return Scaffold(
       backgroundColor: context.secondaryBackgroundColor,
       body: ListView(
@@ -98,14 +100,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              Languages.general,
-              style: AppTheme.title20,
-            ),
+            child: Text(Languages.general, style: AppTheme.title20),
           ),
           const SizedBox(height: 8),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedUser,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedUser,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.accountInformation,
             isFirst: true,
             onTap: () {
@@ -116,14 +119,22 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             },
           ),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedIdea,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedIdea,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.appearances,
             onTap: () {
               context.push(Routes.appearances);
             },
           ),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedCoinsSwap,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedCoinsSwap,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.language,
             isLast: true,
             onTap: () {
@@ -133,36 +144,54 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              Languages.preferences,
-              style: AppTheme.title20,
-            ),
+            child: Text(Languages.preferences, style: AppTheme.title20),
           ),
           const SizedBox(height: 8),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedNews,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedNews,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.termOfService,
             isFirst: true,
             onTap: () => context.tryLaunchUrl(Constants.termOfService),
           ),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedShield01,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedShield01,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.privacyPolicy,
             onTap: () => context.tryLaunchUrl(Constants.privacyPolicy),
           ),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedUserMultiple,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedUserMultiple,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.aboutUs,
             onTap: () => context.tryLaunchUrl(Constants.aboutUs),
           ),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedStar,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedStar,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.rateUs,
             onTap: () => context.tryLaunchUrl(
-                Platform.isIOS ? Constants.appStore : Constants.playStore),
+              Platform.isIOS ? Constants.appStore : Constants.playStore,
+            ),
           ),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedSettingError04,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedSettingError04,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.reportAProblem,
             isLast: true,
             onTap: () => context.tryLaunchUrl(Constants.facebookPage),
@@ -170,47 +199,50 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           const SizedBox(height: 24),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              Languages.dangerousZone,
-              style: AppTheme.title20,
-            ),
+            child: Text(Languages.dangerousZone, style: AppTheme.title20),
           ),
           const SizedBox(height: 8),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedLogout01,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedLogout01,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.logOut,
             textColor: dangerousColor,
             isFirst: true,
             onTap: () => _signOut(context),
           ),
           ProfileItem(
-            icon: HugeIcons.strokeRoundedDelete01,
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedDelete01,
+              color: context.primaryTextColor,
+              size: 20,
+            ),
             text: Languages.deleteAccount,
             textColor: dangerousColor,
             isLast: true,
             onTap: () => _deleteAccount(context),
           ),
           const SizedBox(height: 24),
-          Center(
-            child: Text(
-              'Version $_version',
-              style: AppTheme.body12,
-            ),
-          ),
+          Center(child: Text('Version $_version', style: AppTheme.body12)),
         ],
       ),
     );
   }
 
   void _getPackageInfo() {
-    PackageInfo.fromPlatform().then((info) {
-      setState(() {
-        _version = info.version;
-      });
-    }).catchError((error) {
-      debugPrint(
-          '${Constants.tag} [_ProfileScreenState._getPackageInfo] Error: $error');
-    });
+    PackageInfo.fromPlatform()
+        .then((info) {
+          setState(() {
+            _version = info.version;
+          });
+        })
+        .catchError((error) {
+          debugPrint(
+            '${Constants.tag} [_ProfileScreenState._getPackageInfo] Error: $error',
+          );
+        });
   }
 
   void _signOut(BuildContext context) {

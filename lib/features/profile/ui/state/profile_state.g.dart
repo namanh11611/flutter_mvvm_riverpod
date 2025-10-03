@@ -14,6 +14,4 @@ _ProfileState _$ProfileStateFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ProfileStateToJson(_ProfileState instance) =>
-    <String, dynamic>{
-      'profile': instance.profile,
-    };
+    <String, dynamic>{'profile': instance.profile};

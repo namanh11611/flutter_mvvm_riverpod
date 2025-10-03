@@ -1,24 +1,15 @@
-import 'package:envied/envied.dart';
+// Environment variables for the app
+// Note: In production, these should be loaded from a .env file using envied package
+class Env {
+  // Supabase Configuration
+  static const String supabaseUrl = 'https://your-project.supabase.co';
+  static const String supabaseAnonKey = 'your-supabase-anon-key';
 
-part 'env.g.dart';
+  // Google Sign-In Configuration
+  static const String googleClientId = 'your-google-client-id';
+  static const String googleServerClientId = 'your-google-server-client-id';
 
-@envied
-abstract class Env {
-  @EnviedField(varName: 'SUPABASE_URL', obfuscate: true)
-  static final String supabaseUrl = _Env.supabaseUrl;
-
-  @EnviedField(varName: 'SUPABASE_ANON_KEY', obfuscate: true)
-  static final String supabaseAnonKey = _Env.supabaseAnonKey;
-
-  @EnviedField(varName: 'GOOGLE_CLIENT_ID', obfuscate: true)
-  static final String googleClientId = _Env.googleClientId;
-
-  @EnviedField(varName: 'GOOGLE_SERVER_CLIENT_ID', obfuscate: true)
-  static final String googleServerClientId = _Env.googleServerClientId;
-
-  @EnviedField(varName: 'REVENUE_CAT_PLAY_STORE', obfuscate: true)
-  static final String revenueCatPlayStore = _Env.revenueCatPlayStore;
-
-  @EnviedField(varName: 'REVENUE_CAT_APP_STORE', obfuscate: true)
-  static final String revenueCatAppStore = _Env.revenueCatAppStore;
+  // RevenueCat Configuration
+  static const String revenueCatPlayStore = 'your-revenue-cat-play-store-key';
+  static const String revenueCatAppStore = 'your-revenue-cat-app-store-key';
 }

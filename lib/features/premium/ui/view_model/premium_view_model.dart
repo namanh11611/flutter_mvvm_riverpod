@@ -15,17 +15,26 @@ part 'premium_view_model.g.dart';
 
 final List<Benefit> benefits = [
   Benefit(
-    icon: Icon(HugeIcons.strokeRoundedAlert01, color: AppColors.mono0),
+    icon: HugeIcon(
+      icon: HugeIcons.strokeRoundedAlert01,
+      color: AppColors.mono0,
+    ),
     title: Languages.benefitTitle1,
     description: Languages.benefitDescription1,
   ),
   Benefit(
-    icon: Icon(HugeIcons.strokeRoundedInfinity01, color: AppColors.mono0),
+    icon: HugeIcon(
+      icon: HugeIcons.strokeRoundedInfinity01,
+      color: AppColors.mono0,
+    ),
     title: Languages.benefitTitle2,
     description: Languages.benefitDescription2,
   ),
   Benefit(
-    icon: Icon(HugeIcons.strokeRoundedChartHistogram, color: AppColors.mono0),
+    icon: HugeIcon(
+      icon: HugeIcons.strokeRoundedChartHistogram,
+      color: AppColors.mono0,
+    ),
     title: Languages.benefitTitle3,
     description: Languages.benefitDescription3,
   ),
@@ -115,10 +124,8 @@ class PremiumViewModel extends _$PremiumViewModel {
       }
 
       final product = currentState.products[currentState.selectedIndex];
-      final revenueCatPackage =
-          currentState.availablePackages?.firstWhereOrNull(
-        (p) => p.identifier == product.identifier,
-      );
+      final revenueCatPackage = currentState.availablePackages
+          ?.firstWhereOrNull((p) => p.identifier == product.identifier);
 
       if (revenueCatPackage == null) {
         state = AsyncError(Languages.packageNotFoundError, StackTrace.current);
@@ -128,9 +135,12 @@ class PremiumViewModel extends _$PremiumViewModel {
       final customerInfo = await Purchases.purchasePackage(revenueCatPackage);
       await ref.read(profileViewModelProvider.notifier).refreshProfile();
 
-      state = AsyncData(currentState.copyWith(
-        isPurchaseSuccessfully: customerInfo.entitlements.active.isNotEmpty,
-      ));
+      state = AsyncData(
+        currentState.copyWith(
+          isPurchaseSuccessfully:
+              customerInfo.customerInfo.entitlements.active.isNotEmpty,
+        ),
+      );
     } catch (error) {
       state = AsyncError(Languages.purchaseError, StackTrace.current);
       rethrow;
@@ -143,9 +153,11 @@ class PremiumViewModel extends _$PremiumViewModel {
       final customerInfo = await Purchases.restorePurchases();
       await ref.read(profileViewModelProvider.notifier).refreshProfile();
 
-      state = AsyncData(state.value!.copyWith(
-        isRestoreSuccessfully: customerInfo.entitlements.active.isNotEmpty,
-      ));
+      state = AsyncData(
+        state.value!.copyWith(
+          isRestoreSuccessfully: customerInfo.entitlements.active.isNotEmpty,
+        ),
+      );
     } catch (error) {
       state = AsyncError(Languages.restorePurchasesError, StackTrace.current);
       rethrow;

@@ -12,20 +12,24 @@ part of 'authentication_repository.dart';
 @ProviderFor(authenticationRepository)
 const authenticationRepositoryProvider = AuthenticationRepositoryProvider._();
 
-final class AuthenticationRepositoryProvider extends $FunctionalProvider<
-    AuthenticationRepository,
-    AuthenticationRepository,
-    AuthenticationRepository> with $Provider<AuthenticationRepository> {
+final class AuthenticationRepositoryProvider
+    extends
+        $FunctionalProvider<
+          AuthenticationRepository,
+          AuthenticationRepository,
+          AuthenticationRepository
+        >
+    with $Provider<AuthenticationRepository> {
   const AuthenticationRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'authenticationRepositoryProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'authenticationRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$authenticationRepositoryHash();
@@ -33,8 +37,8 @@ final class AuthenticationRepositoryProvider extends $FunctionalProvider<
   @$internal
   @override
   $ProviderElement<AuthenticationRepository> $createElement(
-          $ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
   AuthenticationRepository create(Ref ref) {

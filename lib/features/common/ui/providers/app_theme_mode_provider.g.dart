@@ -15,15 +15,15 @@ const appThemeModeProvider = AppThemeModeProvider._();
 final class AppThemeModeProvider
     extends $AsyncNotifierProvider<AppThemeMode, ThemeMode> {
   const AppThemeModeProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'appThemeModeProvider',
-          isAutoDispose: true,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appThemeModeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$appThemeModeHash();
@@ -42,11 +42,14 @@ abstract class _$AppThemeMode extends $AsyncNotifier<ThemeMode> {
   void runBuild() {
     final created = build();
     final ref = this.ref as $Ref<AsyncValue<ThemeMode>, ThemeMode>;
-    final element = ref.element as $ClassProviderElement<
-        AnyNotifier<AsyncValue<ThemeMode>, ThemeMode>,
-        AsyncValue<ThemeMode>,
-        Object?,
-        Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<ThemeMode>, ThemeMode>,
+              AsyncValue<ThemeMode>,
+              Object?,
+              Object?
+            >;
     element.handleValue(ref, created);
   }
 }
