@@ -201,4 +201,14 @@ class AuthenticationRepository {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(Constants.isExistAccountKey, value);
   }
+
+  Future<bool> hasCompletedOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(Constants.hasCompletedOnboardingKey) ?? false;
+  }
+
+  Future<void> setHasCompletedOnboarding(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(Constants.hasCompletedOnboardingKey, value);
+  }
 }
