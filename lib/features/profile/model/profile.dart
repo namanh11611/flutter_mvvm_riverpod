@@ -5,7 +5,7 @@ part 'profile.freezed.dart';
 part 'profile.g.dart';
 
 @freezed
-class Profile with _$Profile {
+abstract class Profile with _$Profile {
   const factory Profile({
     @Default(null) String? id,
     @Default(null) String? email,

@@ -6,7 +6,7 @@ part 'authentication_state.freezed.dart';
 part 'authentication_state.g.dart';
 
 @freezed
-class AuthenticationState with _$AuthenticationState {
+abstract class AuthenticationState with _$AuthenticationState {
   const factory AuthenticationState({
     @JsonKey(toJson: _authResponseToJson, fromJson: _authResponseFromJson) AuthResponse? authResponse,
     @Default(false) bool isRegisterSuccessfully,

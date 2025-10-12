@@ -125,11 +125,13 @@ class PremiumViewModel extends _$PremiumViewModel {
         return;
       }
 
-      final customerInfo = await Purchases.purchasePackage(revenueCatPackage);
+      final purchaseResult =
+          await Purchases.purchase(PurchaseParams.package(revenueCatPackage));
       await ref.read(profileViewModelProvider.notifier).refreshProfile();
 
       state = AsyncData(currentState.copyWith(
-        isPurchaseSuccessfully: customerInfo.entitlements.active.isNotEmpty,
+        isPurchaseSuccessfully:
+            purchaseResult.customerInfo.entitlements.active.isNotEmpty,
       ));
     } catch (error) {
       state = AsyncError(Languages.purchaseError, StackTrace.current);

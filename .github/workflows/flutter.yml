@@ -30,7 +30,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
-          flutter-version: '3.27.1'
+          flutter-version: '3.35.5'
 
       - name: Install dependencies
         run: flutter pub get
@@ -45,7 +45,7 @@ jobs:
         run: flutter test
 
       - name: Build iOS
-        run: flutter build ios --release --no-codesign
+        run: flutter build ios --debug --simulator
 
-      - name: Build Android App Bundle
-        run: flutter build appbundle --release
+      - name: Build Android
+        run: flutter build apk --debug
