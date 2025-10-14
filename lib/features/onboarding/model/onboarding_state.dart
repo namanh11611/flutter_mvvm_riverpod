@@ -2,7 +2,7 @@ enum OnboardingStep {
   intro,
   inviteCode,
   username,
-  accountType,
+  googleAuth,
   completed,
 }
 

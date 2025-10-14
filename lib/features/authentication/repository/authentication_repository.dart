@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -73,38 +74,22 @@ class AuthenticationRepository {
   }
 
   Future<AuthResponse> signInWithGoogle() async {
-    // TODO: fake data
-    return AuthResponse(
-      user: User(
-        id: '',
-        appMetadata: {},
-        userMetadata: {},
-        aud: '',
-        createdAt: '',
-        email: 'henry@google.com',
-      ),
-    );
-
-    // TODO: Uncomment when ready to use real Google Sign-In
-    /*
     try {
-      const List<String> scopes = <String>[
-        Constants.googleEmailScope,
-        Constants.googleUserInfoScope,
-      ];
-
-      final GoogleSignIn googleSignIn = GoogleSignIn(scopes: scopes);
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      final googleSignIn = GoogleSignIn.instance;
+      
+      // Initialize with server client ID (required for Android)
+      await googleSignIn.initialize(
+        serverClientId: Env.googleServerClientId,
+      );
+      
+      // Authenticate the user
+      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
       if (googleUser == null) {
         throw Exception('Google sign in was cancelled');
       }
+      
       final googleAuth = await googleUser.authentication;
-      final accessToken = googleAuth.accessToken;
       final idToken = googleAuth.idToken;
-
-      if (accessToken == null) {
-        throw Exception('access_token_not_found'.tr());
-      }
 
       if (idToken == null) {
         throw Exception('id_token_not_found'.tr());
@@ -113,15 +98,16 @@ class AuthenticationRepository {
       final result = await supabase.auth.signInWithIdToken(
         provider: OAuthProvider.google,
         idToken: idToken,
-        accessToken: accessToken,
       );
       return result;
     } on AuthException catch (error) {
+      debugPrint('${Constants.tag} [AuthenticationRepository.signInWithGoogle] AuthException: ${error.message}');
       throw Exception(error.message);
-    } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
+    } catch (error, stackTrace) {
+      debugPrint('${Constants.tag} [AuthenticationRepository.signInWithGoogle] Error: $error');
+      debugPrint('${Constants.tag} [AuthenticationRepository.signInWithGoogle] StackTrace: $stackTrace');
+      throw Exception('$error');
     }
-    */
   }
 
   Future<AuthResponse> signInWithApple() async {

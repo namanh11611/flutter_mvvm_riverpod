@@ -63,20 +63,11 @@ class OnboardingViewModel extends _$OnboardingViewModel {
       return;
     }
     
-    state = currentState.copyWith(currentStep: OnboardingStep.accountType);
-  }
-
-  void selectAccountType(AccountType type) {
-    state = state.copyWith(selectedAccountType: type);
+    state = currentState.copyWith(currentStep: OnboardingStep.googleAuth);
   }
 
   void completeOnboarding() {
     final currentState = state;
-    if (currentState.selectedAccountType == null) {
-      state = currentState.copyWith(error: 'Please select an account type');
-      return;
-    }
-    
     state = currentState.copyWith(currentStep: OnboardingStep.completed);
   }
 
@@ -89,7 +80,7 @@ class OnboardingViewModel extends _$OnboardingViewModel {
       case OnboardingStep.username:
         state = currentState.copyWith(currentStep: OnboardingStep.inviteCode);
         break;
-      case OnboardingStep.accountType:
+      case OnboardingStep.googleAuth:
         state = currentState.copyWith(currentStep: OnboardingStep.username);
         break;
       default:
