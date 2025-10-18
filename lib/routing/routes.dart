@@ -1,8 +1,8 @@
 class Routes {
   Routes._();
 
-  static const splash = '/';
-  static const register = '/register';
+  static const register = '/';
+  static const splash = '/splash';
   static const login = '/login';
   static const otp = '/otp';
   static const onboarding = '/onboarding';

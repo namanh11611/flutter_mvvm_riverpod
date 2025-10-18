@@ -52,24 +52,17 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       '${Constants.tag} [SplashScreen._checkLoginStatus] isLoggedIn = $isLoggedIn, hasCompletedOnboarding = $hasCompletedOnboarding',
     );
 
-    await authRepo.setHasCompletedOnboarding(false);
-
     await Future.delayed(const Duration(seconds: 1));
     if (!mounted) return;
 
-    if (!hasCompletedOnboarding) {
-      debugPrint(
-        '${Constants.tag} [SplashScreen] Navigating to onboarding flow (onboarding not completed)',
-      );
-      context.pushReplacement(Routes.onboardingFlow);
-    } else if (isLoggedIn) {
+    if (isLoggedIn) {
       debugPrint(
         '${Constants.tag} [SplashScreen] Navigating to main (user is logged in)',
       );
       context.pushReplacement(Routes.main);
     } else {
       debugPrint(
-        '${Constants.tag} [SplashScreen] Navigating to register (onboarding completed, not logged in)',
+        '${Constants.tag} [SplashScreen] Navigating to register (user not logged in)',
       );
       context.pushReplacement(Routes.register);
     }

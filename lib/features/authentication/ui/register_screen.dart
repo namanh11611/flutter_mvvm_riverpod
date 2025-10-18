@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,17 +5,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../constants/assets.dart';
 import '../../../constants/constants.dart';
-import '../../../extensions/build_context_extension.dart';
+import '../../../features/authentication/repository/authentication_repository.dart';
 import '../../../routing/routes.dart';
+import '../../../theme/app_colors.dart';
 import '../../../theme/app_theme.dart';
-import '../../../utils/global_loading.dart';
-import '../../../utils/validator.dart';
-import '../../common/ui/widgets/common_text_form_field.dart';
-import '../../common/ui/widgets/primary_button.dart';
 import 'view_model/authentication_view_model.dart';
-import 'widgets/horizontal_divider.dart';
-import 'widgets/sign_in_agreement.dart';
-import 'widgets/social_sign_in.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -25,118 +18,198 @@ class RegisterScreen extends ConsumerStatefulWidget {
   ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends ConsumerState<RegisterScreen> {
-  late final TextEditingController _emailController;
-  // late final StreamSubscription<AuthState> _authSubscription;
-  bool _isEmailValid = false;
+class _RegisterScreenState extends ConsumerState<RegisterScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
-    _emailController.addListener(_validateEmail);
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    );
 
-    // TODO: Implement auth state listener with your own backend
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+      ),
+    );
+
+    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.2, 0.8, curve: Curves.elasticOut),
+      ),
+    );
+
+    _animationController.forward();
   }
 
   @override
   void dispose() {
-    _emailController.removeListener(_validateEmail);
-    _emailController.dispose();
-    // _authSubscription.cancel();
+    _animationController.dispose();
     super.dispose();
-  }
-
-  void _validateEmail() {
-    setState(() {
-      _isEmailValid = isValidEmail(_emailController.text);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(authenticationViewModelProvider, (previous, next) {
-      if (next.isLoading != previous?.isLoading) {
-        if (next.isLoading) {
-          Global.showLoading(context);
-        } else {
-          Global.hideLoading();
-        }
-      }
+    final authState = ref.watch(authenticationViewModelProvider);
 
-      if (next is AsyncError) {
-        context.showErrorSnackBar(next.error.toString());
-      }
+    // Listen to authentication state for navigation
+    ref.listen(authenticationViewModelProvider, (previous, next) {
+      debugPrint('${Constants.tag} [RegisterScreen] Auth state changed: $next');
 
       if (next is AsyncData) {
+        final value = next.value;
         debugPrint(
-          '${Constants.tag} [RegisterScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isSignInSuccessfully = ${next.value?.isSignInSuccessfully}',
+          '${Constants.tag} [RegisterScreen] isSignInSuccessfully: ${value?.isSignInSuccessfully}',
         );
-        if (next.value?.isRegisterSuccessfully == true) {
-          context.pushReplacement(Routes.onboarding);
-        } else if (next.value?.isSignInSuccessfully == true) {
+
+        if (value?.isSignInSuccessfully == true) {
+          // User signed in successfully, mark onboarding complete and go to main app
+          debugPrint(
+            '${Constants.tag} [RegisterScreen] Navigating to main app',
+          );
+          ref
+              .read(authenticationRepositoryProvider)
+              .setHasCompletedOnboarding(true);
           context.pushReplacement(Routes.main);
         }
+      } else if (next is AsyncError) {
+        debugPrint(
+          '${Constants.tag} [RegisterScreen] Auth error: ${next.error}',
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Sign in failed: ${next.error}'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     });
 
+    final isLoading = authState.isLoading;
+
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: SvgPicture.asset(
-                  Assets.welcome,
-                  fit: BoxFit.fitWidth,
-                  alignment: Alignment.bottomCenter,
-                  semanticsLabel: 'Welcome',
-                ),
-              ),
-              Text('register'.tr(), style: AppTheme.title32),
-              const SizedBox(height: 24),
-              CommonTextFormField(
-                label: 'Email',
-                controller: _emailController,
-                validator: notEmptyEmailValidator,
-              ),
-              const SizedBox(height: 32),
-              PrimaryButton(
-                isEnable: _isEmailValid,
-                text: 'continue'.tr(),
-                onPressed: () {
-                  ref
-                      .read(authenticationViewModelProvider.notifier)
-                      .signInWithMagicLink(_emailController.text);
-                  context.push(
-                    Routes.otp,
-                    extra: {'email': _emailController.text, 'isRegister': true},
-                  );
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('already_have_account'.tr(), style: AppTheme.body14),
-                  const SizedBox(width: 4),
-                  TextButton(
-                    onPressed: () {
-                      context.push(Routes.login);
-                    },
-                    child: Text('sign_in'.tr(), style: AppTheme.title14),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              const HorizontalDivider(),
-              const SizedBox(height: 16),
-              const SocialSignIn(),
-              const SizedBox(height: 16),
-              const SignInAgreement(),
-              const SizedBox(height: 32),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFFFFFFF), // White
+              Color(0xFFF8F7FF), // Light purple
+              Color(0xFFFFFFFF), // White
             ],
+            stops: [0.0, 0.5, 1.0],
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo with animation
+                AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (context, child) {
+                    return FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: ScaleTransition(
+                        scale: _scaleAnimation,
+                        child: SvgPicture.asset(
+                          'assets/images/authentick_logo.svg',
+                          width: 200,
+                          height: 60,
+                          fit: BoxFit.contain,
+                          placeholderBuilder: (context) => const SizedBox(
+                            width: 200,
+                            height: 60,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Color(0xFF6A4FFB),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                const SizedBox(height: 32),
+
+                // Tagline
+                Text(
+                  'A social network where every moment is\nreal, every location is verified and every\nthought is authentic',
+                  textAlign: TextAlign.center,
+                  style: AppTheme.body16.copyWith(
+                    color: AppColors.mono100,
+                    height: 1.5,
+                  ),
+                ),
+
+                const SizedBox(height: 48),
+
+                // Login/Signup Button
+                SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6A4FFB), // Purple
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            ref
+                                .read(authenticationViewModelProvider.notifier)
+                                .signInWithGoogle();
+                          },
+                    icon: isLoading
+                        ? const SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
+                              ),
+                            ),
+                          )
+                        : SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: SvgPicture.asset(
+                              Assets.googleLogo,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                    label: Text(
+                      'Login/Signup',
+                      style: AppTheme.title16.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
