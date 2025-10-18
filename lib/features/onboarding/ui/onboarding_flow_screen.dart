@@ -23,21 +23,33 @@ class OnboardingFlowScreen extends ConsumerWidget {
 
     // Listen to authentication state for Google sign-in
     ref.listen(authenticationViewModelProvider, (previous, next) {
-      debugPrint('${Constants.tag} [OnboardingFlowScreen] Auth state changed: $next');
-      
+      debugPrint(
+        '${Constants.tag} [OnboardingFlowScreen] Auth state changed: $next',
+      );
+
       if (next is AsyncData) {
         final value = next.value;
-        debugPrint('${Constants.tag} [OnboardingFlowScreen] isSignInSuccessfully: ${value?.isSignInSuccessfully}');
-        debugPrint('${Constants.tag} [OnboardingFlowScreen] authResponse: ${value?.authResponse?.user?.email}');
-        
+        debugPrint(
+          '${Constants.tag} [OnboardingFlowScreen] isSignInSuccessfully: ${value?.isSignInSuccessfully}',
+        );
+        debugPrint(
+          '${Constants.tag} [OnboardingFlowScreen] authResponse: ${value?.authResponse}',
+        );
+
         if (value?.isSignInSuccessfully == true) {
           // User signed in with Google, mark onboarding complete and go to main app
-          debugPrint('${Constants.tag} [OnboardingFlowScreen] Navigating to main app');
-          ref.read(authenticationRepositoryProvider).setHasCompletedOnboarding(true);
+          debugPrint(
+            '${Constants.tag} [OnboardingFlowScreen] Navigating to main app',
+          );
+          ref
+              .read(authenticationRepositoryProvider)
+              .setHasCompletedOnboarding(true);
           context.pushReplacement(Routes.main);
         }
       } else if (next is AsyncError) {
-        debugPrint('${Constants.tag} [OnboardingFlowScreen] Auth error: ${next.error}');
+        debugPrint(
+          '${Constants.tag} [OnboardingFlowScreen] Auth error: ${next.error}',
+        );
       }
     });
 
@@ -46,13 +58,16 @@ class OnboardingFlowScreen extends ConsumerWidget {
       if (next.currentStep == OnboardingStep.completed) {
         // Check if user is already authenticated
         final authState = ref.read(authenticationViewModelProvider);
-        if (authState is AsyncData && authState.value?.isSignInSuccessfully == true) {
+        if (authState is AsyncData &&
+            authState.value?.isSignInSuccessfully == true) {
           // Already handled by auth listener above
           return;
         }
-        
+
         // Mark completed and go to register screen for email/password auth
-        ref.read(authenticationRepositoryProvider).setHasCompletedOnboarding(true);
+        ref
+            .read(authenticationRepositoryProvider)
+            .setHasCompletedOnboarding(true);
         context.pushReplacement(Routes.register);
       }
     });

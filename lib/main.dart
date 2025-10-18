@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 // import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'constants/constants.dart';
 import 'environment/env.dart';
@@ -46,12 +45,6 @@ void main() async {
   //   return true;
   // };
 
-  /// Supabase
-  await Supabase.initialize(
-    url: Env.supabaseUrl,
-    anonKey: Env.supabaseAnonKey,
-  );
-
   /// Mobile ads
   // MobileAds.instance.initialize();
 
@@ -80,8 +73,6 @@ void main() async {
     ),
   );
 }
-
-final supabase = Supabase.instance.client;
 
 class MainApp extends ConsumerWidget {
   const MainApp({super.key});

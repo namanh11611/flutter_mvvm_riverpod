@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthenticationState {
 
-@AuthResponseConverter() AuthResponse? get authResponse; bool get isRegisterSuccessfully; bool get isSignInSuccessfully;
+ Map<String, dynamic>? get authResponse; bool get isRegisterSuccessfully; bool get isSignInSuccessfully;
 /// Create a copy of AuthenticationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,12 +28,12 @@ $AuthenticationStateCopyWith<AuthenticationState> get copyWith => _$Authenticati
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthenticationState&&(identical(other.authResponse, authResponse) || other.authResponse == authResponse)&&(identical(other.isRegisterSuccessfully, isRegisterSuccessfully) || other.isRegisterSuccessfully == isRegisterSuccessfully)&&(identical(other.isSignInSuccessfully, isSignInSuccessfully) || other.isSignInSuccessfully == isSignInSuccessfully));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthenticationState&&const DeepCollectionEquality().equals(other.authResponse, authResponse)&&(identical(other.isRegisterSuccessfully, isRegisterSuccessfully) || other.isRegisterSuccessfully == isRegisterSuccessfully)&&(identical(other.isSignInSuccessfully, isSignInSuccessfully) || other.isSignInSuccessfully == isSignInSuccessfully));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,authResponse,isRegisterSuccessfully,isSignInSuccessfully);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(authResponse),isRegisterSuccessfully,isSignInSuccessfully);
 
 @override
 String toString() {
@@ -48,7 +48,7 @@ abstract mixin class $AuthenticationStateCopyWith<$Res>  {
   factory $AuthenticationStateCopyWith(AuthenticationState value, $Res Function(AuthenticationState) _then) = _$AuthenticationStateCopyWithImpl;
 @useResult
 $Res call({
-@AuthResponseConverter() AuthResponse? authResponse, bool isRegisterSuccessfully, bool isSignInSuccessfully
+ Map<String, dynamic>? authResponse, bool isRegisterSuccessfully, bool isSignInSuccessfully
 });
 
 
@@ -68,7 +68,7 @@ class _$AuthenticationStateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? authResponse = freezed,Object? isRegisterSuccessfully = null,Object? isSignInSuccessfully = null,}) {
   return _then(_self.copyWith(
 authResponse: freezed == authResponse ? _self.authResponse : authResponse // ignore: cast_nullable_to_non_nullable
-as AuthResponse?,isRegisterSuccessfully: null == isRegisterSuccessfully ? _self.isRegisterSuccessfully : isRegisterSuccessfully // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,isRegisterSuccessfully: null == isRegisterSuccessfully ? _self.isRegisterSuccessfully : isRegisterSuccessfully // ignore: cast_nullable_to_non_nullable
 as bool,isSignInSuccessfully: null == isSignInSuccessfully ? _self.isSignInSuccessfully : isSignInSuccessfully // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -155,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@AuthResponseConverter()  AuthResponse? authResponse,  bool isRegisterSuccessfully,  bool isSignInSuccessfully)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Map<String, dynamic>? authResponse,  bool isRegisterSuccessfully,  bool isSignInSuccessfully)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthenticationState() when $default != null:
 return $default(_that.authResponse,_that.isRegisterSuccessfully,_that.isSignInSuccessfully);case _:
@@ -176,7 +176,7 @@ return $default(_that.authResponse,_that.isRegisterSuccessfully,_that.isSignInSu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@AuthResponseConverter()  AuthResponse? authResponse,  bool isRegisterSuccessfully,  bool isSignInSuccessfully)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Map<String, dynamic>? authResponse,  bool isRegisterSuccessfully,  bool isSignInSuccessfully)  $default,) {final _that = this;
 switch (_that) {
 case _AuthenticationState():
 return $default(_that.authResponse,_that.isRegisterSuccessfully,_that.isSignInSuccessfully);case _:
@@ -196,7 +196,7 @@ return $default(_that.authResponse,_that.isRegisterSuccessfully,_that.isSignInSu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@AuthResponseConverter()  AuthResponse? authResponse,  bool isRegisterSuccessfully,  bool isSignInSuccessfully)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Map<String, dynamic>? authResponse,  bool isRegisterSuccessfully,  bool isSignInSuccessfully)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthenticationState() when $default != null:
 return $default(_that.authResponse,_that.isRegisterSuccessfully,_that.isSignInSuccessfully);case _:
@@ -211,10 +211,18 @@ return $default(_that.authResponse,_that.isRegisterSuccessfully,_that.isSignInSu
 @JsonSerializable()
 
 class _AuthenticationState implements AuthenticationState {
-  const _AuthenticationState({@AuthResponseConverter() this.authResponse, this.isRegisterSuccessfully = false, this.isSignInSuccessfully = false});
+  const _AuthenticationState({final  Map<String, dynamic>? authResponse, this.isRegisterSuccessfully = false, this.isSignInSuccessfully = false}): _authResponse = authResponse;
   factory _AuthenticationState.fromJson(Map<String, dynamic> json) => _$AuthenticationStateFromJson(json);
 
-@override@AuthResponseConverter() final  AuthResponse? authResponse;
+ final  Map<String, dynamic>? _authResponse;
+@override Map<String, dynamic>? get authResponse {
+  final value = _authResponse;
+  if (value == null) return null;
+  if (_authResponse is EqualUnmodifiableMapView) return _authResponse;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
+}
+
 @override@JsonKey() final  bool isRegisterSuccessfully;
 @override@JsonKey() final  bool isSignInSuccessfully;
 
@@ -231,12 +239,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthenticationState&&(identical(other.authResponse, authResponse) || other.authResponse == authResponse)&&(identical(other.isRegisterSuccessfully, isRegisterSuccessfully) || other.isRegisterSuccessfully == isRegisterSuccessfully)&&(identical(other.isSignInSuccessfully, isSignInSuccessfully) || other.isSignInSuccessfully == isSignInSuccessfully));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthenticationState&&const DeepCollectionEquality().equals(other._authResponse, _authResponse)&&(identical(other.isRegisterSuccessfully, isRegisterSuccessfully) || other.isRegisterSuccessfully == isRegisterSuccessfully)&&(identical(other.isSignInSuccessfully, isSignInSuccessfully) || other.isSignInSuccessfully == isSignInSuccessfully));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,authResponse,isRegisterSuccessfully,isSignInSuccessfully);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_authResponse),isRegisterSuccessfully,isSignInSuccessfully);
 
 @override
 String toString() {
@@ -251,7 +259,7 @@ abstract mixin class _$AuthenticationStateCopyWith<$Res> implements $Authenticat
   factory _$AuthenticationStateCopyWith(_AuthenticationState value, $Res Function(_AuthenticationState) _then) = __$AuthenticationStateCopyWithImpl;
 @override @useResult
 $Res call({
-@AuthResponseConverter() AuthResponse? authResponse, bool isRegisterSuccessfully, bool isSignInSuccessfully
+ Map<String, dynamic>? authResponse, bool isRegisterSuccessfully, bool isSignInSuccessfully
 });
 
 
@@ -270,8 +278,8 @@ class __$AuthenticationStateCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? authResponse = freezed,Object? isRegisterSuccessfully = null,Object? isSignInSuccessfully = null,}) {
   return _then(_AuthenticationState(
-authResponse: freezed == authResponse ? _self.authResponse : authResponse // ignore: cast_nullable_to_non_nullable
-as AuthResponse?,isRegisterSuccessfully: null == isRegisterSuccessfully ? _self.isRegisterSuccessfully : isRegisterSuccessfully // ignore: cast_nullable_to_non_nullable
+authResponse: freezed == authResponse ? _self._authResponse : authResponse // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,isRegisterSuccessfully: null == isRegisterSuccessfully ? _self.isRegisterSuccessfully : isRegisterSuccessfully // ignore: cast_nullable_to_non_nullable
 as bool,isSignInSuccessfully: null == isSignInSuccessfully ? _self.isSignInSuccessfully : isSignInSuccessfully // ignore: cast_nullable_to_non_nullable
 as bool,
   ));

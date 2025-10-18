@@ -68,7 +68,6 @@ dependencies:
   shimmer: ^3.0.0
   sign_in_with_apple: ^7.0.1
   sqflite: ^2.4.1
-  supabase_flutter: ^2.5.4
   url_launcher: ^6.3.0
   uuid: ^4.4.0
 

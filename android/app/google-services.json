@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "234604531809",
-    "project_id": "authentick-b3cf5",
-    "storage_bucket": "authentick-b3cf5.firebasestorage.app"
+    "project_number": "795799101051",
+    "project_id": "authentick-71357",
+    "storage_bucket": "authentick-71357.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:234604531809:android:a5dc1b3c0146af28b75a20",
+        "mobilesdk_app_id": "1:795799101051:android:f7ed7267ca33e160f04cde",
         "android_client_info": {
-          "package_name": "com.intern.auth"
+          "package_name": "club.authentick"
         }
       },
       "oauth_client": [
         {
-          "client_id": "234604531809-1vmkuskqcdl5hgk177m5fs2bkfj6kd0d.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.intern.auth",
-            "certificate_hash": "a6b3b94faaa6c0320c9e9513824ab6bd726b4c0a"
-          }
-        },
-        {
-          "client_id": "234604531809-fj7lnrv10evplc2p0ik3ghaqqmi8v83b.apps.googleusercontent.com",
+          "client_id": "795799101051-on8cr5ga6b2oiuacm1kpffqupmfphdsf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCcNgT14Izs9LRtktL6dblMWv1WwM7dcE"
+          "current_key": "AIzaSyCjEqxoLXS1KN5wfsqnSbGaXozCdzCkwTY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "234604531809-8jgq1eiv5fouiik1dn1sd5hoio5297ct.apps.googleusercontent.com",
+              "client_id": "795799101051-on8cr5ga6b2oiuacm1kpffqupmfphdsf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

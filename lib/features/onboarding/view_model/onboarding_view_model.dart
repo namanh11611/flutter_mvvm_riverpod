@@ -13,7 +13,9 @@ class OnboardingViewModel extends _$OnboardingViewModel {
   void nextIntroPage() {
     final currentState = state;
     if (currentState.introPageIndex < 1) {
-      state = currentState.copyWith(introPageIndex: currentState.introPageIndex + 1);
+      state = currentState.copyWith(
+        introPageIndex: currentState.introPageIndex + 1,
+      );
     } else {
       state = currentState.copyWith(currentStep: OnboardingStep.inviteCode);
     }
@@ -22,7 +24,9 @@ class OnboardingViewModel extends _$OnboardingViewModel {
   void previousIntroPage() {
     final currentState = state;
     if (currentState.introPageIndex > 0) {
-      state = currentState.copyWith(introPageIndex: currentState.introPageIndex - 1);
+      state = currentState.copyWith(
+        introPageIndex: currentState.introPageIndex - 1,
+      );
     }
   }
 
@@ -44,7 +48,7 @@ class OnboardingViewModel extends _$OnboardingViewModel {
       state = currentState.copyWith(error: 'Please enter an invite code');
       return;
     }
-    
+
     state = currentState.copyWith(currentStep: OnboardingStep.username);
   }
 
@@ -62,7 +66,7 @@ class OnboardingViewModel extends _$OnboardingViewModel {
       state = currentState.copyWith(error: 'Please enter a username');
       return;
     }
-    
+
     state = currentState.copyWith(currentStep: OnboardingStep.googleAuth);
   }
 
@@ -90,5 +94,9 @@ class OnboardingViewModel extends _$OnboardingViewModel {
 
   void clearError() {
     state = state.copyWith(error: null);
+  }
+
+  void selectAccountType(AccountType accountType) {
+    state = state.copyWith(selectedAccountType: accountType);
   }
 }

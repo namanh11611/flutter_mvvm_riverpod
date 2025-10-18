@@ -1,23 +1,18 @@
-import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../constants/assets.dart';
 import '../../../constants/constants.dart';
 import '../../../extensions/build_context_extension.dart';
-import '../../../main.dart';
 import '../../../routing/routes.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/global_loading.dart';
 import '../../../utils/validator.dart';
 import '../../common/ui/widgets/common_text_form_field.dart';
 import '../../common/ui/widgets/primary_button.dart';
-import '../../profile/ui/view_model/profile_view_model.dart';
 import 'view_model/authentication_view_model.dart';
 import 'widgets/horizontal_divider.dart';
 import 'widgets/sign_in_agreement.dart';
@@ -32,7 +27,7 @@ class RegisterScreen extends ConsumerStatefulWidget {
 
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   late final TextEditingController _emailController;
-  late final StreamSubscription<AuthState> _authSubscription;
+  // late final StreamSubscription<AuthState> _authSubscription;
   bool _isEmailValid = false;
 
   @override
@@ -41,26 +36,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     _emailController = TextEditingController();
     _emailController.addListener(_validateEmail);
 
-    _authSubscription = supabase.auth.onAuthStateChange.listen((data) {
-      final AuthChangeEvent event = data.event;
-      final Session? session = data.session;
-      debugPrint(
-          '${Constants.tag} [RegisterScreen.initState] Auth change: $event, session: $session');
-
-      if (event == AuthChangeEvent.signedIn && session != null) {
-        ref
-            .read(profileViewModelProvider.notifier)
-            .updateProfile(email: session.user.email ?? '');
-        context.go(Routes.main);
-      }
-    });
+    // TODO: Implement auth state listener with your own backend
   }
 
   @override
   void dispose() {
     _emailController.removeListener(_validateEmail);
     _emailController.dispose();
-    _authSubscription.cancel();
+    // _authSubscription.cancel();
     super.dispose();
   }
 
@@ -87,7 +70,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
       if (next is AsyncData) {
         debugPrint(
-            '${Constants.tag} [RegisterScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isSignInSuccessfully = ${next.value?.isSignInSuccessfully}');
+          '${Constants.tag} [RegisterScreen.build] isRegisterSuccessfully = ${next.value?.isRegisterSuccessfully}, isSignInSuccessfully = ${next.value?.isSignInSuccessfully}',
+        );
         if (next.value?.isRegisterSuccessfully == true) {
           context.pushReplacement(Routes.onboarding);
         } else if (next.value?.isSignInSuccessfully == true) {
@@ -111,10 +95,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   semanticsLabel: 'Welcome',
                 ),
               ),
-              Text(
-                'register'.tr(),
-                style: AppTheme.title32,
-              ),
+              Text('register'.tr(), style: AppTheme.title32),
               const SizedBox(height: 24),
               CommonTextFormField(
                 label: 'Email',
@@ -131,29 +112,20 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       .signInWithMagicLink(_emailController.text);
                   context.push(
                     Routes.otp,
-                    extra: {
-                      'email': _emailController.text,
-                      'isRegister': true,
-                    },
+                    extra: {'email': _emailController.text, 'isRegister': true},
                   );
                 },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'already_have_account'.tr(),
-                    style: AppTheme.body14,
-                  ),
+                  Text('already_have_account'.tr(), style: AppTheme.body14),
                   const SizedBox(width: 4),
                   TextButton(
                     onPressed: () {
                       context.push(Routes.login);
                     },
-                    child: Text(
-                      'sign_in'.tr(),
-                      style: AppTheme.title14,
-                    ),
+                    child: Text('sign_in'.tr(), style: AppTheme.title14),
                   ),
                 ],
               ),

@@ -8,9 +8,7 @@ part of 'authentication_state.dart';
 
 _AuthenticationState _$AuthenticationStateFromJson(Map<String, dynamic> json) =>
     _AuthenticationState(
-      authResponse: const AuthResponseConverter().fromJson(
-        json['authResponse'] as Map<String, dynamic>?,
-      ),
+      authResponse: json['authResponse'] as Map<String, dynamic>?,
       isRegisterSuccessfully: json['isRegisterSuccessfully'] as bool? ?? false,
       isSignInSuccessfully: json['isSignInSuccessfully'] as bool? ?? false,
     );
@@ -18,7 +16,7 @@ _AuthenticationState _$AuthenticationStateFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$AuthenticationStateToJson(
   _AuthenticationState instance,
 ) => <String, dynamic>{
-  'authResponse': const AuthResponseConverter().toJson(instance.authResponse),
+  'authResponse': instance.authResponse,
   'isRegisterSuccessfully': instance.isRegisterSuccessfully,
   'isSignInSuccessfully': instance.isSignInSuccessfully,
 };
