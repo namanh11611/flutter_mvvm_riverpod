@@ -70,14 +70,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen>
         );
 
         if (value?.isSignInSuccessfully == true) {
-          // User signed in successfully, mark onboarding complete and go to main app
+          // User signed in successfully, navigate to onboarding flow
           debugPrint(
-            '${Constants.tag} [RegisterScreen] Navigating to main app',
+            '${Constants.tag} [RegisterScreen] Navigating to onboarding flow',
           );
-          ref
-              .read(authenticationRepositoryProvider)
-              .setHasCompletedOnboarding(true);
-          context.pushReplacement(Routes.main);
+          context.pushReplacement(Routes.onboardingFlow);
         }
       } else if (next is AsyncError) {
         debugPrint(
