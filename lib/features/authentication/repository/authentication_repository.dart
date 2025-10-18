@@ -47,7 +47,7 @@ class AuthenticationRepository {
       final googleSignIn = GoogleSignIn.instance;
 
       // Initialize with server client ID (required for Android)
-      await googleSignIn.initialize(serverClientId: Env.googleServerClientId);
+      await googleSignIn.initialize();
 
       // Authenticate the user
       final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
