@@ -6,7 +6,7 @@ import '../../model/product.dart';
 part 'premium_state.freezed.dart';
 
 @freezed
-class PremiumState with _$PremiumState {
+abstract class PremiumState with _$PremiumState {
   const factory PremiumState({
     required List<Product> products,
     required int selectedIndex,

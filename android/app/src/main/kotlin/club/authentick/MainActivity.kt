@@ -1,4 +1,4 @@
-package com.henry.flutter_mvvm_riverpod
+package club.authentick
 
 import io.flutter.embedding.android.FlutterActivity
 

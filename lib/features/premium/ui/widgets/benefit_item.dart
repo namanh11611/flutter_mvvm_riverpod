@@ -4,7 +4,7 @@ import '/theme/app_colors.dart';
 import '/theme/app_theme.dart';
 
 class BenefitItem extends StatelessWidget {
-  final Icon icon;
+  final Widget icon;
   final String title;
   final String description;
 

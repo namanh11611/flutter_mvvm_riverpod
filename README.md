@@ -1,6 +1,6 @@
 # Flutter MVVM Riverpod Starter
 
-A lightweight Flutter starter template implementing **MVVM architecture** with **Riverpod state management** and **Supabase backend**. Perfect for indie hackers and solo developers looking to quickly bootstrap their projects.
+A lightweight Flutter starter template implementing **MVVM architecture** with **Riverpod state management**. Perfect for indie hackers and solo developers looking to quickly bootstrap their projects.
 
 This project was inspired by the [Flutter App Architecture Guide](https://docs.flutter.dev/app-architecture/guide) and the [Starter Architecture for Flutter & Firebase](https://github.com/bizz84/starter_architecture_flutter_firebase).
 
@@ -8,7 +8,7 @@ This project was inspired by the [Flutter App Architecture Guide](https://docs.f
 
 - **MVVM Architecture**: Clean separation of concerns
 - **Riverpod State Management**: Efficient and type-safe state management solution
-- **Supabase Backend**: Ready-to-use backend infrastructure
+- **Custom Backend Ready**: Prepared for your own backend integration
 - **Dark/Light Theme**: Built-in theme support
 - **Localization**: Multi-language support
 - **Authentication**: Email & Social login ready
@@ -18,12 +18,12 @@ This project was inspired by the [Flutter App Architecture Guide](https://docs.f
 ## 📚 Libraries & Tools
 
 | Category             | Library                | Purpose                      |
-|----------------------|------------------------|------------------------------|
+| -------------------- | ---------------------- | ---------------------------- |
 | **State Management** |
 |                      | `flutter_riverpod`     | Reactive state management    |
 |                      | `riverpod_annotation`  | Code generation for Riverpod |
 | **Backend & Auth**   |
-|                      | `supabase_flutter`     | Backend as a service         |
+|                      | `dio`                  | HTTP client for API calls    |
 |                      | `google_sign_in`       | Google authentication        |
 |                      | `sign_in_with_apple`   | Apple authentication         |
 | **Navigation**       |
@@ -72,30 +72,37 @@ lib/
 ## 🚀 Getting Started
 
 1. Clone this repository
+
    ```bash
    git clone https://github.com/namanh11611/flutter_mvvm_riverpod.git
    ```
 
 2. Install dependencies
+
    ```bash
    flutter pub get
    ```
 
 3. Generate localization files
+
    ```bash
    dart run easy_localization:generate -f keys -o locale_keys.g.dart --source-dir assets/translations
    ```
 
 4. Generate code
+
    ```bash
    dart run build_runner build --delete-conflicting-outputs
    ```
 
 5. Change the app information
+
    - To change the app package name, run the following command:
+
    ```bash
    dart run change_app_package_name:main com.new.package.name
    ```
+
    - To change the Android app name, open the `android/app/src/main/AndroidManifest.xml` file, change the `android:label="New App Name"`
    - To change the iOS app name, open the `ios/Runner/Info.plist` file, change the `CFBundleDisplayName` to `New App Name`
    - To change the iOS bundle name, open the `ios/Runner/Info.plist` file, change the `CFBundleName` to `new_bundle_name`
@@ -108,7 +115,7 @@ lib/
 ## 📱 Screenshots
 
 | Light Hero                                | Light Profile                                   | Dark Hero                               | Dark Profile                                  |
-|-------------------------------------------|-------------------------------------------------|-----------------------------------------|-----------------------------------------------|
+| ----------------------------------------- | ----------------------------------------------- | --------------------------------------- | --------------------------------------------- |
 | ![Hero Light](/screenshots/HeroLight.png) | ![Profile Light](/screenshots/ProfileLight.png) | ![Hero Dark](/screenshots/HeroDark.png) | ![Profile Dark](/screenshots/ProfileDark.png) |
 
 ## 🤝 Contributing

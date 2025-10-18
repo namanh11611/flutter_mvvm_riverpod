@@ -6,13 +6,13 @@ part 'hero_list_state.freezed.dart';
 part 'hero_list_state.g.dart';
 
 @freezed
-class HeroListState with _$HeroListState {
+abstract class HeroListState with _$HeroListState {
   const factory HeroListState({
     @Default([]) List<Hero> heroes,
     @Default(false) bool isLoading,
     String? errorMessage,
   }) = _HeroListState;
 
-  factory HeroListState.fromJson(Map<String, Object?> json) =>
+  factory HeroListState.fromJson(Map<String, dynamic> json) =>
       _$HeroListStateFromJson(json);
 }

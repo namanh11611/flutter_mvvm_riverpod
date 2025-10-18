@@ -7,7 +7,7 @@ import '../../../common/ui/widgets/material_ink_well.dart';
 import 'common_rounded_item.dart';
 
 class ProfileItem extends StatelessWidget {
-  final IconData icon;
+  final Widget icon;
   final String text;
   final Function() onTap;
   final Color? textColor;
@@ -45,11 +45,7 @@ class ProfileItem extends StatelessWidget {
           ),
           child: Row(
             children: [
-              HugeIcon(
-                icon: icon,
-                color: textColor ?? context.primaryTextColor,
-                size: 20,
-              ),
+              icon,
               const SizedBox(width: 16),
               Expanded(
                 child: Text(

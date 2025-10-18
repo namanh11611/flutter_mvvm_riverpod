@@ -5,7 +5,7 @@ part 'language.freezed.dart';
 part 'language.g.dart';
 
 @freezed
-class Language with _$Language {
+abstract class Language with _$Language {
   const factory Language({
     required String id,
     required String name,
@@ -13,7 +13,7 @@ class Language with _$Language {
     required String flag,
   }) = _Language;
 
-  factory Language.fromJson(Map<String, Object?> json) =>
+  factory Language.fromJson(Map<String, dynamic> json) =>
       _$LanguageFromJson(json);
 
   static Language empty() =>

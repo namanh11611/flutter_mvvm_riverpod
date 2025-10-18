@@ -1,19 +1,15 @@
-import 'dart:convert';
-
-import 'package:crypto/crypto.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '/constants/constants.dart';
 import '/constants/languages.dart';
 import '/environment/env.dart';
-import '/main.dart';
 
 part 'authentication_repository.g.dart';
 
@@ -26,125 +22,75 @@ class AuthenticationRepository {
   const AuthenticationRepository();
 
   Future<void> signInWithMagicLink(String email) async {
-    // TODO: fake data
-    return;
-
-    try {
-      await supabase.auth.signInWithOtp(
-        email: email,
-        emailRedirectTo: Constants.supabaseLoginCallback,
-      );
-    } on AuthException catch (error) {
-      throw Exception(error.message);
-    } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
-    }
+    // TODO: Implement with your own backend
+    throw Exception('Magic link authentication not implemented yet');
   }
 
-  Future<AuthResponse> verifyOtp({
+  Future<Map<String, dynamic>> verifyOtp({
     required String email,
     required String token,
     required bool isRegister,
   }) async {
-    try {
-      // TODO: fake data
-      return AuthResponse(
-        user: User(
-          id: '',
-          appMetadata: {},
-          userMetadata: {},
-          aud: '',
-          createdAt: '',
-          email: email,
-        ),
-      );
-
-      final result = await supabase.auth.verifyOTP(
-        email: email,
-        token: token,
-        type: isRegister ? OtpType.signup : OtpType.magiclink,
-      );
-      return result;
-    } on AuthException catch (error) {
-      throw Exception(error.message);
-    } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
-    }
+    // TODO: Implement with your own backend
+    // Return a mock user object for now
+    return {
+      'user': {
+        'id': 'mock_user_id',
+        'email': email,
+        'created_at': DateTime.now().toIso8601String(),
+      },
+    };
   }
 
-  Future<AuthResponse> signInWithGoogle() async {
-    // TODO: fake data
-    return AuthResponse(
-      user: User(
-        id: '',
-        appMetadata: {},
-        userMetadata: {},
-        aud: '',
-        createdAt: '',
-        email: 'henry@google.com',
-      ),
-    );
-
+  Future<Map<String, dynamic>> signInWithGoogle() async {
     try {
-      const List<String> scopes = <String>[
-        Constants.googleEmailScope,
-        Constants.googleUserInfoScope,
-      ];
+      final googleSignIn = GoogleSignIn.instance;
 
-      final GoogleSignIn googleSignIn = GoogleSignIn(
-        clientId: Env.googleClientId,
-        serverClientId: Env.googleServerClientId,
-        scopes: scopes,
-      );
-      final googleUser = await googleSignIn.signIn();
-      final googleAuth = await googleUser!.authentication;
-      final accessToken = googleAuth.accessToken;
-      final idToken = googleAuth.idToken;
+      // Initialize with server client ID (required for Android)
+      await googleSignIn.initialize();
 
-      if (accessToken == null) {
-        throw Exception('access_token_not_found'.tr());
+      // Authenticate the user
+      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
+      if (googleUser == null) {
+        throw Exception('Google sign in was cancelled');
       }
+
+      final googleAuth = googleUser.authentication;
+      final idToken = googleAuth.idToken;
 
       if (idToken == null) {
         throw Exception('id_token_not_found'.tr());
       }
 
-      final result = await supabase.auth.signInWithIdToken(
-        provider: OAuthProvider.google,
-        idToken: idToken,
-        accessToken: accessToken,
+      // TODO: Send the ID token to your own backend for verification
+      // For now, return a mock response
+      return {
+        'user': {
+          'id': googleUser.id,
+          'email': googleUser.email,
+          'name': googleUser.displayName,
+          'avatar_url': googleUser.photoUrl,
+          'created_at': DateTime.now().toIso8601String(),
+        },
+      };
+    } catch (error, stackTrace) {
+      debugPrint(
+        '${Constants.tag} [AuthenticationRepository.signInWithGoogle] Error: $error',
       );
-      return result;
-    } on AuthException catch (error) {
-      throw Exception(error.message);
-    } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
+      debugPrint(
+        '${Constants.tag} [AuthenticationRepository.signInWithGoogle] StackTrace: $stackTrace',
+      );
+      throw Exception('$error');
     }
   }
 
-  Future<AuthResponse> signInWithApple() async {
-    // TODO: fake data
-    return AuthResponse(
-      user: User(
-        id: '',
-        appMetadata: {},
-        userMetadata: {},
-        aud: '',
-        createdAt: '',
-        email: 'henry@apple.com',
-      ),
-    );
-
+  Future<Map<String, dynamic>> signInWithApple() async {
     try {
-      final rawNonce = supabase.auth.generateRawNonce();
-      final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
-
       final credential = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
-        nonce: hashedNonce,
       );
 
       final idToken = credential.identityToken;
@@ -152,29 +98,27 @@ class AuthenticationRepository {
         throw Exception('id_token_not_found'.tr());
       }
 
-      final result = await supabase.auth.signInWithIdToken(
-        provider: OAuthProvider.apple,
-        idToken: idToken,
-        nonce: rawNonce,
-      );
-      return result;
-    } on AuthException catch (error) {
-      throw Exception(error.message);
+      // TODO: Send the ID token to your own backend for verification
+      // For now, return a mock response
+      return {
+        'user': {
+          'id': credential.userIdentifier ?? 'apple_user_id',
+          'email': credential.email ?? 'user@apple.com',
+          'name': '${credential.givenName ?? ''} ${credential.familyName ?? ''}'
+              .trim(),
+          'created_at': DateTime.now().toIso8601String(),
+        },
+      };
     } catch (error) {
       throw Exception(Languages.unexpectedErrorOccurred);
     }
   }
 
   Future<void> signOut() async {
-    // TODO: fake data
-    return;
-
     try {
-      await supabase.auth.signOut();
+      // TODO: Implement with your own backend
       setIsLogin(false);
       Purchases.logOut();
-    } on AuthException catch (error) {
-      throw Exception(error.message);
     } catch (error) {
       throw Exception(Languages.unexpectedErrorOccurred);
     }
@@ -198,5 +142,15 @@ class AuthenticationRepository {
   Future<void> setIsExistAccount(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(Constants.isExistAccountKey, value);
+  }
+
+  Future<bool> hasCompletedOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(Constants.hasCompletedOnboardingKey) ?? false;
+  }
+
+  Future<void> setHasCompletedOnboarding(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(Constants.hasCompletedOnboardingKey, value);
   }
 }

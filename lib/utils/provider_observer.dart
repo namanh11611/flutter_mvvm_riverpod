@@ -3,44 +3,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants/constants.dart';
 
-class AppObserver extends ProviderObserver {
+base class AppObserver extends ProviderObserver {
   @override
   void didAddProvider(
-    ProviderBase<Object?> provider,
+    ProviderObserverContext context,
     Object? value,
-    ProviderContainer container,
   ) {
     debugPrint(
-        '${Constants.tag} Provider ${provider.name} was initialized with $value');
+        '${Constants.tag} Provider ${context.provider.name} was initialized with $value');
   }
 
   @override
   void didDisposeProvider(
-    ProviderBase<Object?> provider,
-    ProviderContainer container,
+    ProviderObserverContext context,
   ) {
-    debugPrint('${Constants.tag} Provider ${provider.name} was disposed');
+    debugPrint(
+        '${Constants.tag} Provider ${context.provider.name} was disposed');
   }
 
   @override
   void didUpdateProvider(
-    ProviderBase<Object?> provider,
+    ProviderObserverContext context,
     Object? previousValue,
     Object? newValue,
-    ProviderContainer container,
   ) {
     debugPrint(
-        '${Constants.tag} Provider ${provider.name} updated from $previousValue to $newValue');
+        '${Constants.tag} Provider ${context.provider.name} updated from $previousValue to $newValue');
   }
 
   @override
   void providerDidFail(
-    ProviderBase<Object?> provider,
+    ProviderObserverContext context,
     Object error,
     StackTrace stackTrace,
-    ProviderContainer container,
   ) {
     debugPrint(
-        '${Constants.tag} Provider ${provider.name} threw $error at $stackTrace');
+        '${Constants.tag} Provider ${context.provider.name} threw $error at $stackTrace');
   }
 }

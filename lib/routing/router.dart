@@ -6,6 +6,7 @@ import '../features/authentication/ui/sign_in_screen.dart';
 import '../features/authentication/ui/register_screen.dart';
 import '../features/main/ui/main_screen.dart';
 import '../features/onboarding/ui/onboarding_screen.dart';
+import '../features/onboarding/ui/onboarding_flow_screen.dart';
 import '../features/onboarding/ui/splash_screen.dart';
 import '../features/premium/ui/premium_screen.dart';
 import '../features/profile/model/profile.dart';
@@ -102,6 +103,11 @@ final GoRouter router = GoRouter(
       path: Routes.onboarding,
       pageBuilder: (context, state) =>
           state.slidePage(const OnboardingScreen()),
+    ),
+    GoRoute(
+      path: Routes.onboardingFlow,
+      pageBuilder: (context, state) =>
+          state.slidePage(const OnboardingFlowScreen()),
     ),
     GoRoute(
       path: Routes.main,

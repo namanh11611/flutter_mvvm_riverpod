@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '/constants/constants.dart';
 import '/extensions/string_extension.dart';
@@ -21,8 +20,9 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
   Future<void> signInWithMagicLink(String email) async {
     state = const AsyncValue.loading();
     final authRepo = ref.read(authenticationRepositoryProvider);
-    final result =
-        await AsyncValue.guard(() => authRepo.signInWithMagicLink(email));
+    final result = await AsyncValue.guard(
+      () => authRepo.signInWithMagicLink(email),
+    );
 
     if (result is AsyncError) {
       state = AsyncError(result.error.toString(), StackTrace.current);
@@ -78,36 +78,39 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
 
   void handleResult(AsyncValue result) async {
     debugPrint(
-        '${Constants.tag} [AuthenticationViewModel.handleResult] result: $result');
+      '${Constants.tag} [AuthenticationViewModel.handleResult] result: $result',
+    );
     if (result is AsyncError) {
       state = AsyncError(result.error.toString(), StackTrace.current);
       return;
     }
 
-    final AuthResponse? authResponse = result.value;
+    final Map<String, dynamic>? authResponse = result.value;
     debugPrint(
-        '${Constants.tag} [AuthenticationViewModel.handleResult] authResponse: ${authResponse?.user?.toJson()}');
+      '${Constants.tag} [AuthenticationViewModel.handleResult] authResponse: $authResponse',
+    );
     if (authResponse == null) {
       state = AsyncError('unexpected_error_occurred'.tr(), StackTrace.current);
       return;
     }
 
-    final isExistAccount =
-        await ref.read(authenticationRepositoryProvider).isExistAccount();
+    final isExistAccount = await ref
+        .read(authenticationRepositoryProvider)
+        .isExistAccount();
     if (!isExistAccount) {
       ref.read(authenticationRepositoryProvider).setIsExistAccount(true);
     }
 
-    String? name;
-    String? avatar;
-    final metaData = authResponse.user?.userMetadata;
-    if (metaData != null) {
-      name = metaData['full_name'];
-      avatar = metaData['avatar_url'];
-    }
+    final userData = authResponse['user'] as Map<String, dynamic>?;
+    String? name = userData?['name'];
+    String? avatar = userData?['avatar_url'];
+    String? email = userData?['email'];
+
     ref.read(authenticationRepositoryProvider).setIsLogin(true);
-    ref.read(profileViewModelProvider.notifier).updateProfile(
-          email: authResponse.user?.email.orEmpty(),
+    ref
+        .read(profileViewModelProvider.notifier)
+        .updateProfile(
+          email: email?.orEmpty() ?? '',
           name: name,
           avatar: avatar,
         );

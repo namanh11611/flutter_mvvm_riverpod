@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../constants/languages.dart';
 import '../../../extensions/build_context_extension.dart';
@@ -19,10 +18,7 @@ import 'widgets/avatar.dart';
 class AccountInfoScreen extends ConsumerStatefulWidget {
   final Profile originalProfile;
 
-  const AccountInfoScreen({
-    super.key,
-    required this.originalProfile,
-  });
+  const AccountInfoScreen({super.key, required this.originalProfile});
 
   @override
   ConsumerState createState() => _AccountInfoScreenState();
@@ -44,8 +40,9 @@ class _AccountInfoScreenState extends ConsumerState<AccountInfoScreen> {
   }
 
   Future<void> _selectImage() async {
-    final result =
-        await ref.read(profileViewModelProvider.notifier).selectImage(context);
+    final result = await ref
+        .read(profileViewModelProvider.notifier)
+        .selectImage(context);
     setState(() => avatar = result);
   }
 
@@ -100,35 +97,24 @@ class _AccountInfoScreenState extends ConsumerState<AccountInfoScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 24,
-              right: 24,
-              bottom: 32,
-            ),
+            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 32),
             child: PrimaryButton(
               text: Languages.confirm,
-              isEnable: avatar != widget.originalProfile.avatar ||
+              isEnable:
+                  avatar != widget.originalProfile.avatar ||
                   name != widget.originalProfile.name,
               onPressed: () async {
                 try {
                   Global.showLoading(context);
                   await ref
                       .read(profileViewModelProvider.notifier)
-                      .updateProfile(
-                        avatar: avatar,
-                        name: name,
-                      );
+                      .updateProfile(avatar: avatar, name: name);
                   if (context.mounted) {
                     context.pop();
                   }
-                } on PostgrestException catch (error) {
-                  if (context.mounted) {
-                    context.showErrorSnackBar(error.message);
-                  }
                 } catch (error) {
                   if (context.mounted) {
-                    context
-                        .showErrorSnackBar(Languages.unexpectedErrorOccurred);
+                    context.showErrorSnackBar(error.toString());
                   }
                 } finally {
                   Global.hideLoading();

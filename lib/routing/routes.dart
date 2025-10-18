@@ -6,6 +6,7 @@ class Routes {
   static const login = '/login';
   static const otp = '/otp';
   static const onboarding = '/onboarding';
+  static const onboardingFlow = '/onboarding-flow';
   static const main = '/main';
   static const accountInformation = '/accountInformation';
   static const appearances = '/appearances';

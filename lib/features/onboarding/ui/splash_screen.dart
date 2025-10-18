@@ -33,13 +33,25 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> _checkLoginStatus() async {
-    final isLoggedIn = await ref.read(authenticationRepositoryProvider).isLogin();
-    debugPrint('${Constants.tag} [SplashScreen._checkLoginStatus] isLoggedIn = $isLoggedIn');
+    final authRepo = ref.read(authenticationRepositoryProvider);
+    final isLoggedIn = await authRepo.isLogin();
+    final hasCompletedOnboarding = await authRepo.hasCompletedOnboarding();
+    
+    debugPrint('${Constants.tag} [SplashScreen._checkLoginStatus] isLoggedIn = $isLoggedIn, hasCompletedOnboarding = $hasCompletedOnboarding');
+    
+    await authRepo.setHasCompletedOnboarding(false);
+    
     await Future.delayed(const Duration(seconds: 1));
     if (!mounted) return;
-    if (isLoggedIn) {
+    
+    if (!hasCompletedOnboarding) {
+      debugPrint('${Constants.tag} [SplashScreen] Navigating to onboarding flow (onboarding not completed)');
+      context.pushReplacement(Routes.onboardingFlow);
+    } else if (isLoggedIn) {
+      debugPrint('${Constants.tag} [SplashScreen] Navigating to main (user is logged in)');
       context.pushReplacement(Routes.main);
     } else {
+      debugPrint('${Constants.tag} [SplashScreen] Navigating to register (onboarding completed, not logged in)');
       context.pushReplacement(Routes.register);
     }
   }
