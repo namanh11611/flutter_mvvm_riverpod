@@ -71,6 +71,7 @@ dependencies:
   url_launcher: ^6.3.0
   uuid: ^4.4.0
   flutter_staggered_grid_view: ^0.7.0
+  google_mobile_ads: ^6.0.0
 
 dev_dependencies:
   build_runner: ^2.4.13
