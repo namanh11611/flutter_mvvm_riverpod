@@ -4,17 +4,17 @@ import '../generated/locale_keys.g.dart';
 
 String? notEmptyNameValidator(String? value) {
   return value == null || value.trim().isEmpty
-      ? LocaleKeys.validator_required_field.tr()
+      ? LocaleKeys.validatorRequiredField.tr()
       : null;
 }
 
 String? notEmptyEmailOrPhoneValidator(String? value) {
   if (value == null || value.trim().isEmpty) {
-    return LocaleKeys.validator_required_field.tr();
+    return LocaleKeys.validatorRequiredField.tr();
   }
 
   if (!isValidEmailOrPhone(value.trim())) {
-    return LocaleKeys.validator_invalid_email_or_phone_format.tr();
+    return LocaleKeys.validatorInvalidEmailOrPhoneFormat.tr();
   }
 
   // Return null if the value is valid
@@ -27,11 +27,11 @@ bool isValidEmailOrPhone(String value) {
 
 String? notEmptyEmailValidator(String? value) {
   if (value == null || value.trim().isEmpty) {
-    return LocaleKeys.validator_required_field.tr();
+    return LocaleKeys.validatorRequiredField.tr();
   }
 
   if (!isValidEmail(value.trim())) {
-    return LocaleKeys.validator_invalid_email_format.tr();
+    return LocaleKeys.validatorInvalidEmailFormat.tr();
   }
 
   // Return null if the value is valid
@@ -47,11 +47,11 @@ bool isValidEmail(String email) {
 
 String? notEmptyPhoneValidator(String? value) {
   if (value == null || value.trim().isEmpty) {
-    return LocaleKeys.validator_required_field.tr();
+    return LocaleKeys.validatorRequiredField.tr();
   }
 
   if (!isValidPhone(value.trim())) {
-    return LocaleKeys.validator_invalid_phone_format.tr();
+    return LocaleKeys.validatorInvalidPhoneFormat.tr();
   }
 
   // Return null if the value is valid
@@ -68,11 +68,11 @@ String? confirmPasswordValidator(String? password, String? confirmPassword) {
       password.isEmpty ||
       confirmPassword == null ||
       confirmPassword.isEmpty) {
-    return LocaleKeys.validator_required_field.tr();
+    return LocaleKeys.validatorRequiredField.tr();
   }
 
   if (password != confirmPassword) {
-    return LocaleKeys.validator_password_not_match.tr();
+    return LocaleKeys.validatorPasswordNotMatch.tr();
   }
 
   return null;

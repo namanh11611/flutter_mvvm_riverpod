@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../generated/locale_keys.g.dart';
 import '/constants/constants.dart';
 import '/extensions/string_extension.dart';
 import '/features/profile/ui/view_model/profile_view_model.dart';
@@ -88,7 +89,7 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
     debugPrint(
         '${Constants.tag} [AuthenticationViewModel.handleResult] authResponse: ${authResponse?.user?.toJson()}');
     if (authResponse == null) {
-      state = AsyncError('unexpected_error_occurred'.tr(), StackTrace.current);
+      state = AsyncError(LocaleKeys.unexpectedErrorOccurred.tr(), StackTrace.current);
       return;
     }
 

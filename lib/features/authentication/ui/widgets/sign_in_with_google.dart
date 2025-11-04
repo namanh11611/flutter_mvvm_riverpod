@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../generated/locale_keys.g.dart';
 import '/constants/assets.dart';
 import '/features/authentication/ui/view_model/authentication_view_model.dart';
 import '/features/common/ui/widgets/secondary_button.dart';
@@ -23,7 +24,9 @@ class SignInWithGoogle extends ConsumerWidget {
           fit: BoxFit.contain,
         ),
       ),
-      text: Platform.isIOS ? 'google'.tr() : 'sign_in_with_google'.tr(),
+      text: Platform.isIOS
+          ? LocaleKeys.google.tr()
+          : LocaleKeys.signInWithGoogle.tr(),
       onPressed: () =>
           ref.read(authenticationViewModelProvider.notifier).signInWithGoogle(),
     );

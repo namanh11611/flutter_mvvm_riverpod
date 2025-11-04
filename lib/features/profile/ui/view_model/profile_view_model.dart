@@ -1,15 +1,16 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '/constants/languages.dart';
 import '/extensions/build_context_extension.dart';
 import '/extensions/profile_extension.dart';
 import '/extensions/string_extension.dart';
+import '/generated/locale_keys.g.dart';
 import '../../../../constants/constants.dart';
 import '../../../../features/authentication/ui/view_model/authentication_view_model.dart';
 import '../../../../features/profile/model/profile.dart';
@@ -91,7 +92,7 @@ class ProfileViewModel extends _$ProfileViewModel {
       final havePermission = await Utils.havePhotoPermission();
       if (!havePermission) {
         if (context.mounted) {
-          context.showErrorSnackBar(Languages.noPhotoPermissionError);
+          context.showErrorSnackBar(LocaleKeys.noPhotoPermissionError.tr());
         }
         return null;
       }

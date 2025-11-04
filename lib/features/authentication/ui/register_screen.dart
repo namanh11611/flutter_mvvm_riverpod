@@ -10,6 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/constants.dart';
 import '../../../extensions/build_context_extension.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../main.dart';
 import '../../../routing/routes.dart';
 import '../../../theme/app_theme.dart';
@@ -124,7 +125,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               const SizedBox(height: 32),
               PrimaryButton(
                 isEnable: _isEmailValid,
-                text: 'continue'.tr(),
+                text: LocaleKeys.continueText.tr(),
                 onPressed: () {
                   ref
                       .read(authenticationViewModelProvider.notifier)
@@ -142,7 +143,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'already_have_account'.tr(),
+                    LocaleKeys.alreadyHaveAccount.tr(),
                     style: AppTheme.body14,
                   ),
                   const SizedBox(width: 4),
@@ -151,7 +152,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       context.push(Routes.login);
                     },
                     child: Text(
-                      'sign_in'.tr(),
+                      LocaleKeys.signIn.tr(),
                       style: AppTheme.title14,
                     ),
                   ),

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../constants/languages.dart';
 import '../../../extensions/build_context_extension.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../theme/app_theme.dart';
 import '../../common/ui/widgets/common_empty_data.dart';
 import '../../common/ui/widgets/common_error.dart';
@@ -85,9 +85,9 @@ class HeroListScreen extends ConsumerWidget {
 
   String _getGreeting() {
     final currentHour = DateTime.now().hour;
-    if (currentHour >= 5 && currentHour < 12) return Languages.goodMorning;
-    if (currentHour >= 12 && currentHour < 18) return Languages.goodAfternoon;
-    return Languages.goodEvening;
+    if (currentHour >= 5 && currentHour < 12) return LocaleKeys.goodMorning;
+    if (currentHour >= 12 && currentHour < 18) return LocaleKeys.goodAfternoon;
+    return LocaleKeys.goodEvening;
   }
 
   @override

@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../constants/languages.dart';
 import '../../../extensions/build_context_extension.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../extensions/string_extension.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/global_loading.dart';
@@ -65,7 +66,7 @@ class _AccountInfoScreenState extends ConsumerState<AccountInfoScreen> {
     return Scaffold(
       body: Column(
         children: [
-          CommonHeader(header: Languages.accountInformation),
+          CommonHeader(header: LocaleKeys.accountInformation.tr()),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
@@ -78,14 +79,14 @@ class _AccountInfoScreenState extends ConsumerState<AccountInfoScreen> {
                     SizedBox(
                       width: 120,
                       child: SecondaryButton(
-                        text: Languages.selectAvatar,
+                        text: LocaleKeys.selectAvatar.tr(),
                         onPressed: _selectImage,
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 32),
-                Text(Languages.email, style: AppTheme.body12),
+                Text(LocaleKeys.email.tr(), style: AppTheme.body12),
                 const SizedBox(height: 6),
                 Text(
                   widget.originalProfile.email.orEmpty(),
@@ -93,7 +94,7 @@ class _AccountInfoScreenState extends ConsumerState<AccountInfoScreen> {
                 ),
                 const SizedBox(height: 32),
                 CommonTextFormField(
-                  label: Languages.name,
+                  label: LocaleKeys.name.tr(),
                   controller: nameController,
                 ),
               ],
@@ -106,7 +107,7 @@ class _AccountInfoScreenState extends ConsumerState<AccountInfoScreen> {
               bottom: 32,
             ),
             child: PrimaryButton(
-              text: Languages.confirm,
+              text: LocaleKeys.confirm.tr(),
               isEnable: avatar != widget.originalProfile.avatar ||
                   name != widget.originalProfile.name,
               onPressed: () async {
@@ -128,7 +129,7 @@ class _AccountInfoScreenState extends ConsumerState<AccountInfoScreen> {
                 } catch (error) {
                   if (context.mounted) {
                     context
-                        .showErrorSnackBar(Languages.unexpectedErrorOccurred);
+                        .showErrorSnackBar(LocaleKeys.unexpectedErrorOccurred.tr());
                   }
                 } finally {
                   Global.hideLoading();

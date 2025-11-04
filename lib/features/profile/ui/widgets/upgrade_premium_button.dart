@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '../../../../constants/languages.dart';
 import '../../../../features/common/ui/widgets/material_ink_well.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../routing/routes.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_theme.dart';
@@ -46,7 +47,7 @@ class UpgradePremiumButton extends StatelessWidget {
               ),
               const SizedBox(width: 4),
               Text(
-                Languages.premium,
+                LocaleKeys.premium.tr(),
                 style:
                     AppTheme.title14.copyWith(color: AppColors.mono0),
               ),

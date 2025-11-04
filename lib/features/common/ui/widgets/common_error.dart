@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '/constants/assets.dart';
-import '/constants/languages.dart';
 import '/extensions/build_context_extension.dart';
+import '/generated/locale_keys.g.dart';
 import '/theme/app_theme.dart';
 
 class CommonError extends StatelessWidget {
@@ -26,7 +27,7 @@ class CommonError extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            Languages.unexpectedErrorOccurred,
+            LocaleKeys.unexpectedErrorOccurred.tr(),
             style: AppTheme.body14.copyWith(
               color: context.secondaryTextColor,
             ),

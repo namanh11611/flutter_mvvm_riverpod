@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,9 +9,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '/constants/constants.dart';
-import '/constants/languages.dart';
 import '/extensions/build_context_extension.dart';
 import '/extensions/profile_extension.dart';
+import '/generated/locale_keys.g.dart';
 import '/routing/routes.dart';
 import '/theme/app_colors.dart';
 import '/theme/app_theme.dart';
@@ -99,14 +100,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              Languages.general,
+              LocaleKeys.general.tr(),
               style: AppTheme.title20,
             ),
           ),
           const SizedBox(height: 8),
           ProfileItem(
             icon: HugeIcons.strokeRoundedUser,
-            text: Languages.accountInformation,
+            text: LocaleKeys.accountInformation.tr(),
             isFirst: true,
             onTap: () {
               context.push(
@@ -117,14 +118,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedIdea,
-            text: Languages.appearances,
+            text: LocaleKeys.appearances.tr(),
             onTap: () {
               context.push(Routes.appearances);
             },
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedCoinsSwap,
-            text: Languages.language,
+            text: LocaleKeys.language.tr(),
             isLast: true,
             onTap: () {
               context.push(Routes.languages);
@@ -134,36 +135,36 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              Languages.preferences,
+              LocaleKeys.preferences.tr(),
               style: AppTheme.title20,
             ),
           ),
           const SizedBox(height: 8),
           ProfileItem(
             icon: HugeIcons.strokeRoundedNews,
-            text: Languages.termOfService,
+            text: LocaleKeys.termOfService.tr(),
             isFirst: true,
             onTap: () => context.tryLaunchUrl(Constants.termOfService),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedShield01,
-            text: Languages.privacyPolicy,
+            text: LocaleKeys.privacyPolicy.tr(),
             onTap: () => context.tryLaunchUrl(Constants.privacyPolicy),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedUserMultiple,
-            text: Languages.aboutUs,
+            text: LocaleKeys.aboutUs.tr(),
             onTap: () => context.tryLaunchUrl(Constants.aboutUs),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedStar,
-            text: Languages.rateUs,
+            text: LocaleKeys.rateUs.tr(),
             onTap: () => context.tryLaunchUrl(
                 Platform.isIOS ? Constants.appStore : Constants.playStore),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedSettingError04,
-            text: Languages.reportAProblem,
+            text: LocaleKeys.reportAProblem.tr(),
             isLast: true,
             onTap: () => context.tryLaunchUrl(Constants.facebookPage),
           ),
@@ -171,21 +172,21 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              Languages.dangerousZone,
+              LocaleKeys.dangerousZone.tr(),
               style: AppTheme.title20,
             ),
           ),
           const SizedBox(height: 8),
           ProfileItem(
             icon: HugeIcons.strokeRoundedLogout01,
-            text: Languages.logOut,
+            text: LocaleKeys.logOut.tr(),
             textColor: dangerousColor,
             isFirst: true,
             onTap: () => _signOut(context),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedDelete01,
-            text: Languages.deleteAccount,
+            text: LocaleKeys.deleteAccount.tr(),
             textColor: dangerousColor,
             isLast: true,
             onTap: () => _deleteAccount(context),
@@ -217,11 +218,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => CommonDialog(
-        title: Languages.logOutTitle,
-        content: Languages.logOutMessage,
-        primaryButtonLabel: Languages.logOut,
+        title: LocaleKeys.logOutTitle.tr(),
+        content: LocaleKeys.logOutMessage.tr(),
+        primaryButtonLabel: LocaleKeys.logOut.tr(),
         primaryButtonBackground: AppColors.rambutan100,
-        secondaryButtonLabel: Languages.cancel,
+        secondaryButtonLabel: LocaleKeys.cancel.tr(),
         primaryButtonAction: () async {
           try {
             Global.showLoading(context);
@@ -232,7 +233,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             }
           } catch (error) {
             if (context.mounted) {
-              context.showErrorSnackBar(Languages.unexpectedErrorOccurred);
+              context.showErrorSnackBar(LocaleKeys.unexpectedErrorOccurred.tr());
             }
           } finally {
             if (context.mounted) {
@@ -249,11 +250,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     showDialog(
       context: context,
       builder: (dialogContext) => CommonDialog(
-        title: Languages.deleteAccountTitle,
-        content: Languages.deleteAccountMessage,
-        primaryButtonLabel: Languages.deleteAccount,
+        title: LocaleKeys.deleteAccountTitle.tr(),
+        content: LocaleKeys.deleteAccountMessage.tr(),
+        primaryButtonLabel: LocaleKeys.deleteAccount.tr(),
         primaryButtonBackground: AppColors.rambutan100,
-        secondaryButtonLabel: Languages.cancel,
+        secondaryButtonLabel: LocaleKeys.cancel.tr(),
         primaryButtonAction: () async {
           try {
             Global.showLoading(context);
@@ -264,7 +265,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             }
           } catch (error) {
             if (context.mounted) {
-              context.showErrorSnackBar(Languages.unexpectedErrorOccurred);
+              context.showErrorSnackBar(LocaleKeys.unexpectedErrorOccurred.tr());
             }
           } finally {
             if (context.mounted) {

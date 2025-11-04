@@ -11,6 +11,7 @@ import '../../../extensions/build_context_extension.dart';
 import '../../../features/authentication/ui/view_model/authentication_view_model.dart';
 import '../../../features/common/ui/widgets/common_back_button.dart';
 import '../../../features/common/ui/widgets/primary_button.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../theme/app_theme.dart';
 
 class OtpScreen extends ConsumerStatefulWidget {
@@ -82,11 +83,11 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                     ),
                   ),
                   Text(
-                    'otp_enter_title'.tr(),
+                    LocaleKeys.otpEnterTitle.tr(),
                     style: AppTheme.title20,
                   ),
                   Text(
-                    'otp_enter_description'.tr(),
+                    LocaleKeys.otpEnterDescription.tr(),
                     style: AppTheme.body16,
                   ),
                   const SizedBox(height: 16),
@@ -110,7 +111,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'did_not_receive_otp'.tr(),
+                        LocaleKeys.didNotReceiveOtp.tr(),
                         style: AppTheme.body14.copyWith(
                           color: context.secondaryTextColor,
                         ),
@@ -127,7 +128,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                               }
                             : null,
                         child: Text(
-                          'resend_otp'.tr(),
+                          LocaleKeys.resendOtp.tr(),
                           style: AppTheme.title12,
                         ),
                       ),
@@ -137,7 +138,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                       ? Padding(
                           padding: const EdgeInsets.only(top: 16, bottom: 32),
                           child: Text(
-                            'try_again_after',
+                            LocaleKeys.tryAgainAfter,
                             style: AppTheme.body14.copyWith(
                               color: context.secondaryTextColor,
                             ),
@@ -145,7 +146,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                         )
                       : const SizedBox(height: 68),
                   PrimaryButton(
-                    text: 'confirm'.tr(),
+                    text: LocaleKeys.confirm.tr(),
                     isEnable: otpController.text.length == 6,
                     onPressed: () => ref
                         .read(authenticationViewModelProvider.notifier)

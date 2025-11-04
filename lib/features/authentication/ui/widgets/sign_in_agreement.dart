@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '/constants/constants.dart';
 
-import '/constants/languages.dart';
 import '/extensions/build_context_extension.dart';
+import '/generated/locale_keys.g.dart';
 import '/theme/app_theme.dart';
 
 class SignInAgreement extends StatelessWidget {
@@ -21,25 +22,25 @@ class SignInAgreement extends StatelessWidget {
               color: context.secondaryTextColor,
             ),
             children: [
-              TextSpan(text: '${Languages.signInAgreementPrefix} '),
+              TextSpan(text: '${LocaleKeys.signInAgreementPrefix.tr()} '),
               TextSpan(
-                text: Languages.termOfService,
+                text: LocaleKeys.termOfService.tr(),
                 style: AppTheme.title12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     context.tryLaunchUrl(Constants.termOfService);
                   },
               ),
-              TextSpan(text: ' ${Languages.signInAgreementMiddle} '),
+              TextSpan(text: ' ${LocaleKeys.signInAgreementMiddle.tr()} '),
               TextSpan(
-                text: Languages.privacyPolicy,
+                text: LocaleKeys.privacyPolicy.tr(),
                 style: AppTheme.title12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     context.tryLaunchUrl(Constants.privacyPolicy);
                   },
               ),
-              TextSpan(text: ' ${Languages.signInAgreementSuffix}'),
+              TextSpan(text: ' ${LocaleKeys.signInAgreementSuffix.tr()}'),
             ],
           ),
         ),

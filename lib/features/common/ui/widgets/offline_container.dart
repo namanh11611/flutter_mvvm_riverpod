@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/constants/constants.dart';
-import '/constants/languages.dart';
+import '/generated/locale_keys.g.dart';
 import '/theme/app_colors.dart';
 import '/theme/app_theme.dart';
 
@@ -76,7 +77,7 @@ class _OfflineContainerState extends ConsumerState<OfflineContainer> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      Languages.offline,
+                      LocaleKeys.offline.tr(),
                       style: AppTheme.body14.copyWith(
                         color: AppColors.mono0,
                       ),

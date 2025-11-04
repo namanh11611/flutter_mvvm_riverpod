@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '/constants/languages.dart';
+import '/generated/locale_keys.g.dart';
 import '../../../../extensions/date_time_extension.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_theme.dart';
@@ -27,7 +28,7 @@ class PremiumInfo extends StatelessWidget {
       ),
       child: expiryDate == null
           ? Text(
-              Languages.premiumLifetime,
+              LocaleKeys.premiumLifetime.tr(),
               style: AppTheme.title14.copyWith(
                 color: AppColors.mono0,
               ),
@@ -36,14 +37,14 @@ class PremiumInfo extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  Languages.premium,
+                  LocaleKeys.premium.tr(),
                   style: AppTheme.title14.copyWith(
                     color: AppColors.mono0,
                   ),
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  Languages.until,
+                  LocaleKeys.until.tr(),
                   style: AppTheme.body14.copyWith(
                     color: AppColors.mono0,
                   ),

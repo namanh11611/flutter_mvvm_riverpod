@@ -11,8 +11,8 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '/constants/constants.dart';
-import '/constants/languages.dart';
 import '/environment/env.dart';
+import '/generated/locale_keys.g.dart';
 import '/main.dart';
 
 part 'authentication_repository.g.dart';
@@ -37,7 +37,7 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
+      throw Exception(LocaleKeys.unexpectedErrorOccurred.tr());
     }
   }
 
@@ -68,7 +68,7 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
+      throw Exception(LocaleKeys.unexpectedErrorOccurred.tr());
     }
   }
 
@@ -102,11 +102,11 @@ class AuthenticationRepository {
       final idToken = googleAuth.idToken;
 
       if (accessToken == null) {
-        throw Exception('access_token_not_found'.tr());
+        throw Exception(LocaleKeys.accessTokenNotFound.tr());
       }
 
       if (idToken == null) {
-        throw Exception('id_token_not_found'.tr());
+        throw Exception(LocaleKeys.idTokenNotFound.tr());
       }
 
       final result = await supabase.auth.signInWithIdToken(
@@ -118,7 +118,7 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
+      throw Exception(LocaleKeys.unexpectedErrorOccurred.tr());
     }
   }
 
@@ -149,7 +149,7 @@ class AuthenticationRepository {
 
       final idToken = credential.identityToken;
       if (idToken == null) {
-        throw Exception('id_token_not_found'.tr());
+        throw Exception(LocaleKeys.idTokenNotFound.tr());
       }
 
       final result = await supabase.auth.signInWithIdToken(
@@ -161,7 +161,7 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
+      throw Exception(LocaleKeys.unexpectedErrorOccurred.tr());
     }
   }
 
@@ -176,7 +176,7 @@ class AuthenticationRepository {
     } on AuthException catch (error) {
       throw Exception(error.message);
     } catch (error) {
-      throw Exception(Languages.unexpectedErrorOccurred);
+      throw Exception(LocaleKeys.unexpectedErrorOccurred.tr());
     }
   }
 

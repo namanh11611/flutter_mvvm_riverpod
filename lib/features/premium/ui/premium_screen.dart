@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:collection/collection.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../constants/assets.dart';
-import '../../../constants/languages.dart';
 import '../../../extensions/build_context_extension.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/global_loading.dart';
@@ -36,14 +39,14 @@ class PremiumScreen extends ConsumerWidget {
 
       if (next is AsyncData) {
         if (next.value?.isPurchaseSuccessfully == true) {
-          context.showSuccessSnackBar(Languages.purchaseSuccess);
+          context.showSuccessSnackBar(LocaleKeys.purchaseSuccess);
           context.pop();
         }
         if (next.value?.isRestoreSuccessfully == true) {
-          context.showSuccessSnackBar(Languages.restorePurchasesSuccess);
+          context.showSuccessSnackBar(LocaleKeys.restorePurchasesSuccess);
           context.pop();
         } else if (next.value?.isRestoreSuccessfully == false) {
-          context.showWarningSnackBar(Languages.noActivePurchases);
+          context.showWarningSnackBar(LocaleKeys.noActivePurchases);
         }
       }
     });
@@ -80,7 +83,7 @@ class PremiumScreen extends ConsumerWidget {
                     children: [
                       SizedBox(width: 36),
                       Text(
-                        Languages.premium,
+                        LocaleKeys.premium,
                         style: AppTheme.title32.copyWith(
                           color: AppColors.mono0,
                         ),
@@ -94,7 +97,7 @@ class PremiumScreen extends ConsumerWidget {
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 256),
                     children: [
                       Text(
-                        Languages.premiumBenefits,
+                        LocaleKeys.premiumBenefits,
                         style: AppTheme.title24.copyWith(
                           color: AppColors.mono0,
                         ),
@@ -119,7 +122,7 @@ class PremiumScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        Languages.selectPlan,
+                        LocaleKeys.selectPlan,
                         style: AppTheme.title24.copyWith(
                           color: AppColors.mono0,
                         ),
@@ -148,7 +151,9 @@ class PremiumScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        Languages.subscriptionInfo,
+                        Platform.isIOS
+                            ? LocaleKeys.subscriptionInfoIos.tr()
+                            : LocaleKeys.subscriptionInfoAndroid.tr(),
                         style: AppTheme.body14.copyWith(
                           color: AppColors.mono0,
                         ),
@@ -189,7 +194,7 @@ class PremiumScreen extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   PrimaryButton(
-                    text: Languages.continueText,
+                    text: LocaleKeys.continueText,
                     onPressed: () =>
                         ref.read(premiumViewModelProvider.notifier).purchase(),
                   ),
@@ -199,7 +204,7 @@ class PremiumScreen extends ConsumerWidget {
                         .read(premiumViewModelProvider.notifier)
                         .restorePurchases(),
                     child: Text(
-                      Languages.restorePurchases,
+                      LocaleKeys.restorePurchases,
                       style: AppTheme.title14.copyWith(
                         color: AppColors.mono0,
                       ),

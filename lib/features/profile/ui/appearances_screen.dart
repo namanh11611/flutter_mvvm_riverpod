@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
+import '../../../generated/locale_keys.g.dart';
 import '/extensions/build_context_extension.dart';
 import '/features/common/ui/widgets/common_header.dart';
 import 'widgets/appearance_item.dart';
@@ -37,7 +38,7 @@ class AppearancesScreen extends ConsumerWidget {
                     color: context.primaryTextColor,
                     size: 20,
                   ),
-                  text: 'light_mode'.tr(),
+                  text: LocaleKeys.lightMode.tr(),
                   value: ThemeMode.light,
                 ),
                 AppearanceItem(
@@ -46,7 +47,7 @@ class AppearancesScreen extends ConsumerWidget {
                     color: context.primaryTextColor,
                     size: 20,
                   ),
-                  text: 'dark_mode'.tr(),
+                  text: LocaleKeys.darkMode.tr(),
                   value: ThemeMode.dark,
                   isLast: true,
                 ),

@@ -1,8 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../constants/languages.dart';
 import '../features/common/remote/api_client.dart';
+import '../generated/locale_keys.g.dart';
 
 class Utils {
   Utils._();
@@ -33,7 +34,7 @@ class Utils {
     if (error is NotFoundException) return error.message;
     if (error is ServerException) return error.message;
     if (error is UnknownException) return error.message;
-    return Languages.unexpectedErrorOccurred;
+    return LocaleKeys.unexpectedErrorOccurred.tr();
   }
 
   static DateTime today() {
