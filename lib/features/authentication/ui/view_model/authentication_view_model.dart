@@ -93,25 +93,17 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
       return;
     }
 
+    // TODO: fake data, remove this when connect to real auth
     final isExistAccount =
         await ref.read(authenticationRepositoryProvider).isExistAccount();
     if (!isExistAccount) {
       ref.read(authenticationRepositoryProvider).setIsExistAccount(true);
     }
-
-    String? name;
-    String? avatar;
-    final metaData = authResponse.user?.userMetadata;
-    if (metaData != null) {
-      name = metaData['full_name'];
-      avatar = metaData['avatar_url'];
+    if (authResponse.user != null) {
+      updateProfile(authResponse.user!);
     }
     ref.read(authenticationRepositoryProvider).setIsLogin(true);
-    ref.read(profileViewModelProvider.notifier).updateProfile(
-          email: authResponse.user?.email.orEmpty(),
-          name: name,
-          avatar: avatar,
-        );
+    // END TODO
 
     state = AsyncData(
       AuthenticationState(
@@ -119,6 +111,21 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
         isRegisterSuccessfully: !isExistAccount,
         isSignInSuccessfully: true,
       ),
+    );
+  }
+
+  Future<void> updateProfile(User user) async {
+    String? name;
+    String? avatar;
+    final metaData = user.userMetadata;
+    if (metaData != null) {
+      name = metaData['full_name'];
+      avatar = metaData['avatar_url'];
+    }
+    ref.read(profileViewModelProvider.notifier).updateProfile(
+      email: user.email,
+      name: name,
+      avatar: avatar,
     );
   }
 }

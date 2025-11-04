@@ -42,19 +42,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     _emailController = TextEditingController();
     _emailController.addListener(_validateEmail);
 
-    _authSubscription = supabase.auth.onAuthStateChange.listen((data) {
-      final AuthChangeEvent event = data.event;
-      final Session? session = data.session;
-      debugPrint(
-          '${Constants.tag} [RegisterScreen.initState] Auth change: $event, session: $session');
-
-      if (event == AuthChangeEvent.signedIn && session != null) {
-        ref
-            .read(profileViewModelProvider.notifier)
-            .updateProfile(email: session.user.email ?? '');
-        context.go(Routes.main);
-      }
-    });
+    _authSubscription =
+        supabase.auth.onAuthStateChange.listen(_onAuthStateChange);
   }
 
   @override
@@ -63,6 +52,20 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     _emailController.dispose();
     _authSubscription.cancel();
     super.dispose();
+  }
+
+  void _onAuthStateChange(AuthState data) async {
+    final AuthChangeEvent event = data.event;
+    final Session? session = data.session;
+    debugPrint(
+        '${Constants.tag} [RegisterScreen._onAuthStateChange] Auth change: $event, session: $session');
+
+    if (event == AuthChangeEvent.signedIn && session != null) {
+      ref
+          .read(authenticationViewModelProvider.notifier)
+          .updateProfile(session.user);
+      if (mounted) context.go(Routes.main);
+    }
   }
 
   void _validateEmail() {
