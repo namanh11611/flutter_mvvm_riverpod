@@ -44,6 +44,11 @@ jobs:
       - name: Run tests
         run: flutter test
 
+      - name: Install iOS pods
+        run: |
+          cd ios
+          pod install --repo-update
+
       - name: Build iOS
         run: flutter build ios --debug --simulator
 
