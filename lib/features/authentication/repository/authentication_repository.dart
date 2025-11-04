@@ -171,7 +171,6 @@ class AuthenticationRepository {
 
     try {
       await supabase.auth.signOut();
-      setIsLogin(false);
       Purchases.logOut();
     } on AuthException catch (error) {
       throw Exception(error.message);
@@ -181,10 +180,15 @@ class AuthenticationRepository {
   }
 
   Future<bool> isLogin() async {
+    // TODO: fake data, remove this when integrating real auth
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(Constants.isLoginKey) ?? false;
+    // END TODO
+
+    return supabase.auth.currentUser != null;
   }
 
+  // TODO: remove this when integrating real auth
   Future<void> setIsLogin(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(Constants.isLoginKey, value);
@@ -199,4 +203,5 @@ class AuthenticationRepository {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(Constants.isExistAccountKey, value);
   }
+  // END TODO
 }
