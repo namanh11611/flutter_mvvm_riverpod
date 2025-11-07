@@ -6,7 +6,13 @@ import '../../../utils/database_helper.dart';
 
 part 'database_provider.g.dart';
 
-@Riverpod(keepAlive: true)
-Future<Database> database(Ref ref) {
-  return DatabaseHelper.instance.database;
+@riverpod
+Future<Database> database(Ref ref) async {
+  final db = await DatabaseHelper.instance.database;
+  
+  ref.onDispose(() async {
+    await DatabaseHelper.instance.close();
+  });
+  
+  return db;
 }
