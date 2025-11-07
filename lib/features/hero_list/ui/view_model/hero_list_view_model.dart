@@ -9,10 +9,12 @@ part 'hero_list_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class HeroListViewModel extends _$HeroListViewModel {
+  late HeroListRepository _repository;
+
   @override
   FutureOr<HeroListState> build() async {
-    final repository = await ref.watch(heroListRepositoryProvider.future);
-    final heroes = await repository.getHeroes();
+    _repository = await ref.watch(heroListRepositoryProvider.future);
+    final heroes = await _repository.getHeroes();
     return HeroListState(heroes: heroes);
   }
 
@@ -24,7 +26,6 @@ class HeroListViewModel extends _$HeroListViewModel {
   }) async {
     state = const AsyncValue.loading();
     try {
-      final repository = await ref.read(heroListRepositoryProvider.future);
       final hero = Hero(
         id: const Uuid().v4(),
         name: name,
@@ -34,7 +35,7 @@ class HeroListViewModel extends _$HeroListViewModel {
         lastUpdated: DateTime.now(),
       );
 
-      await repository.insertHero(hero);
+      await _repository.insertHero(hero);
       await refreshHeroes();
     } catch (error) {
       state = AsyncError(error, StackTrace.current);
@@ -44,8 +45,7 @@ class HeroListViewModel extends _$HeroListViewModel {
   Future<void> updateHero(Hero hero) async {
     state = const AsyncValue.loading();
     try {
-      final repository = await ref.read(heroListRepositoryProvider.future);
-      await repository.updateHero(hero);
+      await _repository.updateHero(hero);
       await refreshHeroes();
     } catch (error) {
       state = AsyncError(error, StackTrace.current);
@@ -55,8 +55,7 @@ class HeroListViewModel extends _$HeroListViewModel {
   Future<void> deleteHero(String id) async {
     state = const AsyncValue.loading();
     try {
-      final repository = await ref.read(heroListRepositoryProvider.future);
-      await repository.deleteHero(id);
+      await _repository.deleteHero(id);
       await refreshHeroes();
     } catch (error) {
       state = AsyncError(error, StackTrace.current);
@@ -66,8 +65,7 @@ class HeroListViewModel extends _$HeroListViewModel {
   Future<void> toggleFavorite(String id) async {
     state = const AsyncValue.loading();
     try {
-      final repository = await ref.read(heroListRepositoryProvider.future);
-      await repository.toggleFavorite(id);
+      await _repository.toggleFavorite(id);
       await refreshHeroes();
     } catch (error) {
       state = AsyncError(error, StackTrace.current);
@@ -76,8 +74,7 @@ class HeroListViewModel extends _$HeroListViewModel {
 
   Future<void> refreshHeroes() async {
     try {
-      final repository = await ref.read(heroListRepositoryProvider.future);
-      final heroes = await repository.getHeroes();
+      final heroes = await _repository.getHeroes();
       state = AsyncData(HeroListState(heroes: heroes));
     } catch (error) {
       state = AsyncError(error, StackTrace.current);

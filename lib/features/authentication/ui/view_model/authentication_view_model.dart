@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../constants/constants.dart';
+import '../../../../features/profile/ui/view_model/profile_view_model.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '/constants/constants.dart';
-import '/extensions/string_extension.dart';
-import '/features/profile/ui/view_model/profile_view_model.dart';
 import '../../repository/authentication_repository.dart';
 import '../../ui/state/authentication_state.dart';
 
@@ -14,16 +13,18 @@ part 'authentication_view_model.g.dart';
 
 @riverpod
 class AuthenticationViewModel extends _$AuthenticationViewModel {
+  late AuthenticationRepository _repository;
+
   @override
   FutureOr<AuthenticationState> build() async {
+    _repository = ref.read(authenticationRepositoryProvider);
     return const AuthenticationState();
   }
 
   Future<void> signInWithMagicLink(String email) async {
     state = const AsyncValue.loading();
-    final authRepo = ref.read(authenticationRepositoryProvider);
     final result =
-        await AsyncValue.guard(() => authRepo.signInWithMagicLink(email));
+        await AsyncValue.guard(() => _repository.signInWithMagicLink(email));
 
     if (result is AsyncError) {
       state = AsyncError(result.error.toString(), StackTrace.current);
@@ -39,9 +40,8 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
     required bool isRegister,
   }) async {
     state = const AsyncValue.loading();
-    final authRepo = ref.read(authenticationRepositoryProvider);
     final result = await AsyncValue.guard(
-      () => authRepo.verifyOtp(
+      () => _repository.verifyOtp(
         email: email,
         token: token,
         isRegister: isRegister,
@@ -52,22 +52,19 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
 
   Future<void> signInWithGoogle() async {
     state = const AsyncValue.loading();
-    final authRepo = ref.read(authenticationRepositoryProvider);
-    final result = await AsyncValue.guard(authRepo.signInWithGoogle);
+    final result = await AsyncValue.guard(_repository.signInWithGoogle);
     handleResult(result);
   }
 
   Future<void> signInWithApple() async {
     state = const AsyncValue.loading();
-    final authRepo = ref.read(authenticationRepositoryProvider);
-    final result = await AsyncValue.guard(authRepo.signInWithApple);
+    final result = await AsyncValue.guard(_repository.signInWithApple);
     handleResult(result);
   }
 
   Future<void> signOut() async {
     state = const AsyncValue.loading();
-    final authRepo = ref.read(authenticationRepositoryProvider);
-    final result = await AsyncValue.guard(authRepo.signOut);
+    final result = await AsyncValue.guard(_repository.signOut);
 
     if (result is AsyncError) {
       state = AsyncError(result.error.toString(), StackTrace.current);
@@ -94,15 +91,14 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
     }
 
     // TODO: fake data, remove this when connect to real auth
-    final isExistAccount =
-        await ref.read(authenticationRepositoryProvider).isExistAccount();
+    final isExistAccount = await _repository.isExistAccount();
     if (!isExistAccount) {
-      ref.read(authenticationRepositoryProvider).setIsExistAccount(true);
+      _repository.setIsExistAccount(true);
     }
     if (authResponse.user != null) {
       updateProfile(authResponse.user!);
     }
-    ref.read(authenticationRepositoryProvider).setIsLogin(true);
+    _repository.setIsLogin(true);
     // END TODO
 
     state = AsyncData(
