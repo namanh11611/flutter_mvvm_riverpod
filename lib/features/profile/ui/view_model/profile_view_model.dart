@@ -7,24 +7,27 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '/extensions/build_context_extension.dart';
-import '/extensions/profile_extension.dart';
-import '/extensions/string_extension.dart';
-import '/generated/locale_keys.g.dart';
 import '../../../../constants/constants.dart';
-import '../../../../features/authentication/ui/view_model/authentication_view_model.dart';
-import '../../../../features/profile/model/profile.dart';
-import '../../../../features/profile/repository/profile_repository.dart';
-import '../../../../features/profile/ui/state/profile_state.dart';
+import '../../../../extensions/build_context_extension.dart';
+import '../../../../extensions/profile_extension.dart';
+import '../../../../extensions/string_extension.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../utils/utils.dart';
+import '../../../authentication/ui/view_model/authentication_view_model.dart';
+import '../../model/profile.dart';
+import '../../repository/profile_repository.dart';
+import '../../ui/state/profile_state.dart';
 
 part 'profile_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class ProfileViewModel extends _$ProfileViewModel {
+  late ProfileRepository _repository;
+
   @override
   FutureOr<ProfileState> build() async {
-    final profile = await ref.read(profileRepositoryProvider).get();
+    _repository = ref.read(profileRepositoryProvider);
+    final profile = await _repository.get();
     return ProfileState(profile: profile);
   }
 
@@ -39,10 +42,10 @@ class ProfileViewModel extends _$ProfileViewModel {
       final currentProfile = state.value?.profile;
 
       final updatedProfile = currentProfile?.copyWith(
-        email: email ?? currentProfile.email,
-        name: name ?? currentProfile.name,
-        avatar: newAvatarPath ?? currentProfile.avatar,
-      ) ??
+            email: email ?? currentProfile.email,
+            name: name ?? currentProfile.name,
+            avatar: newAvatarPath ?? currentProfile.avatar,
+          ) ??
           Profile(
             email: email,
             name: name,
@@ -51,7 +54,7 @@ class ProfileViewModel extends _$ProfileViewModel {
       debugPrint(
           '${Constants.tag} [ProfileViewModel.updateProfile] $updatedProfile');
 
-      await ref.read(profileRepositoryProvider).update(updatedProfile);
+      await _repository.update(updatedProfile);
       state = AsyncData(ProfileState(profile: updatedProfile));
     } catch (error) {
       state = AsyncError(error, StackTrace.current);
@@ -61,7 +64,7 @@ class ProfileViewModel extends _$ProfileViewModel {
   Future<void> refreshProfile() async {
     state = const AsyncValue.loading();
     try {
-      final profile = await ref.read(profileRepositoryProvider).get();
+      final profile = await _repository.get();
       state = AsyncData(ProfileState(profile: profile));
     } catch (error) {
       state = AsyncError(error, StackTrace.current);
@@ -80,11 +83,11 @@ class ProfileViewModel extends _$ProfileViewModel {
 
   Future<bool> isShowPremium() async {
     if (state.value?.profile?.isPremium == true) return false;
-    return ref.read(profileRepositoryProvider).isShowPremium();
+    return _repository.isShowPremium();
   }
 
   Future<void> setIsShowPremium() async {
-    await ref.read(profileRepositoryProvider).setIsShowPremium();
+    await _repository.setIsShowPremium();
   }
 
   Future<String?> selectImage(BuildContext context) async {
