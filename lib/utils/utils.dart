@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../features/common/remote/api_client.dart';
 import '../generated/locale_keys.g.dart';
@@ -11,17 +10,6 @@ class Utils {
   static Future<bool> haveConnection() async {
     final connectivityResults = await Connectivity().checkConnectivity();
     return !connectivityResults.contains(ConnectivityResult.none);
-  }
-
-  static Future<bool> havePhotoPermission() async {
-    PermissionStatus status = await Permission.photos.status;
-    if (status == PermissionStatus.granted) return true;
-
-    final result = await Permission.photos.request();
-    if (result == PermissionStatus.permanentlyDenied) {
-      openAppSettings();
-    }
-    return result == PermissionStatus.granted;
   }
 
   static String getErrorMessage(Object? error) {

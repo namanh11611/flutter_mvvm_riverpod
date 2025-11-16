@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
@@ -11,8 +10,6 @@ import '../../../../constants/constants.dart';
 import '../../../../extensions/build_context_extension.dart';
 import '../../../../extensions/profile_extension.dart';
 import '../../../../extensions/string_extension.dart';
-import '../../../../generated/locale_keys.g.dart';
-import '../../../../utils/utils.dart';
 import '../../../authentication/ui/view_model/authentication_view_model.dart';
 import '../../model/profile.dart';
 import '../../repository/profile_repository.dart';
@@ -92,14 +89,6 @@ class ProfileViewModel extends _$ProfileViewModel {
 
   Future<String?> selectImage(BuildContext context) async {
     try {
-      final havePermission = await Utils.havePhotoPermission();
-      if (!havePermission) {
-        if (context.mounted) {
-          context.showErrorSnackBar(LocaleKeys.noPhotoPermissionError.tr());
-        }
-        return null;
-      }
-
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       return image?.path;
