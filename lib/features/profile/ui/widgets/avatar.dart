@@ -21,11 +21,21 @@ class Avatar extends StatelessWidget {
       radius: 48,
       backgroundColor: AppColors.cempedak50,
       backgroundImage: AssetImage(Assets.avatar),
-      foregroundImage: url != null
-          ? (url.isUrl
-              ? CachedNetworkImageProvider(url.orEmpty())
-              : FileImage(File(url!)))
-          : null,
+      foregroundImage: _foregroundImage(),
     );
+  }
+
+  ImageProvider<Object>? _foregroundImage() {
+    if (url == null) return null;
+
+    if (url.isUrl) {
+      return CachedNetworkImageProvider(url.orEmpty());
+    }
+
+    if (File(url!).existsSync()) {
+      return FileImage(File(url!));
+    }
+
+    return null;
   }
 }

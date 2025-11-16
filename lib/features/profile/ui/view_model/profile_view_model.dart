@@ -124,7 +124,7 @@ class ProfileViewModel extends _$ProfileViewModel {
 
       return newFile.path;
     } catch (error) {
-      rethrow;
+      return null;
     }
   }
 }
