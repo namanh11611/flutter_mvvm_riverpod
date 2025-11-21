@@ -118,3 +118,7 @@ Contributions, issues, and feature requests are welcome!
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=namanh11611/flutter_mvvm_riverpod&type=date&legend=top-left)](https://www.star-history.com/#namanh11611/flutter_mvvm_riverpod&type=date&legend=top-left)
