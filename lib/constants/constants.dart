@@ -7,8 +7,7 @@ class Constants {
   static const String supabaseProfileTable = 'profile';
   static const String googleEmailScope = 'email';
   static const String googleUserInfoScope = 'https://www.googleapis.com/auth/userinfo.profile';
-  static const String defaultName = 'Henry Nguyen';
-  static const String defaultEmail = 'namanh11611@gmail.com';
+  static const String defaultName = 'Guest';
   static const String termOfService = 'https://github.com/namanh11611/flutter_mvvm_riverpod';
   static const String privacyPolicy = 'https://github.com/namanh11611/flutter_mvvm_riverpod';
   static const String aboutUs = 'https://github.com/namanh11611';
@@ -20,10 +19,15 @@ class Constants {
   static const String premiumYearly = '\$rc_annual';
   static const String premiumLifeTime = '\$rc_lifetime';
 
+  // Route
+  static const String isGoToMain = 'isGoToMain';
+
   // SharedPreferences key
   static const String themeModeKey = 'theme_mode_key';
   static const String profileKey = 'profile_key';
   static const String isLoginKey = 'is_login_key';
   static const String isExistAccountKey = 'is_exist_account_key';
+  static const String isGuestMode = 'is_guest_mode';
+  static const String wasShowOnboarding = 'was_show_onboarding';
   static const String lastDayShowPremiumKey = 'last_day_show_premium_key';
 }

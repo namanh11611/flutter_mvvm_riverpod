@@ -13,6 +13,7 @@
   "validatorPasswordNotMatch": "Mật khẩu không trùng khớp!",
 
   "welcome": "Xin chào đến với Flutter MVVM Riverpod!",
+  "welcomeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
   "alreadyHaveAccount": "Đã có tài khoản?",
   "or": "hoặc",
   "signIn": "Đăng nhập",
@@ -26,6 +27,7 @@
   "signInAgreementPrefix": "Bằng việc đăng nhập, bạn đồng ý với ",
   "signInAgreementMiddle": "\nvà ",
   "signInAgreementSuffix": " của chúng tôi",
+  "continueAsGuest": "Tiếp tục với tư cách khách",
 
   "otpVerification": "Xác thực OTP",
   "otpEnterTitle": "Chúng tôi đã gửi mã OTP gồm 6 chữ số tới email của bạn",

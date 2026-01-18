@@ -124,4 +124,16 @@ class AuthenticationViewModel extends _$AuthenticationViewModel {
       avatar: avatar,
     );
   }
+
+  Future<bool> isLogin() async {
+    return _repository.isLogin();
+  }
+
+  Future<bool> isGuestMode() async {
+    return _repository.isGuestMode();
+  }
+
+  Future<void> setIsGuestMode() async {
+    await _repository.setIsGuestMode();
+  }
 }

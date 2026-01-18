@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../constants/constants.dart';
 import '../features/authentication/ui/otp_screen.dart';
-import '../features/authentication/ui/sign_in_screen.dart';
 import '../features/authentication/ui/register_screen.dart';
+import '../features/authentication/ui/sign_in_screen.dart';
+import '../features/authentication/ui/welcome_screen.dart';
 import '../features/main/ui/main_screen.dart';
 import '../features/onboarding/ui/onboarding_screen.dart';
 import '../features/onboarding/ui/splash_screen.dart';
@@ -80,6 +82,10 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) => state.slidePage(const SplashScreen()),
     ),
     GoRoute(
+      path: Routes.welcome,
+      pageBuilder: (context, state) => state.slidePage(const WelcomeScreen()),
+    ),
+    GoRoute(
       path: Routes.register,
       pageBuilder: (context, state) => state.slidePage(const RegisterScreen()),
     ),
@@ -125,10 +131,15 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: Routes.premium,
-      pageBuilder: (context, state) => state.slidePage(
-        const PremiumScreen(),
-        direction: SlideDirection.up,
-      ),
+      pageBuilder: (context, state) {
+        final map = state.extra as Map?;
+        return state.slidePage(
+          PremiumScreen(
+            isGoToHome: map?[Constants.isGoToMain] as bool?,
+          ),
+          direction: SlideDirection.up,
+        );
+      },
     ),
   ],
 );

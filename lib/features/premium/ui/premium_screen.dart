@@ -9,21 +9,39 @@ import 'package:go_router/go_router.dart';
 import '../../../constants/assets.dart';
 import '../../../extensions/build_context_extension.dart';
 import '../../../generated/locale_keys.g.dart';
+import '../../../routing/routes.dart';
 import '../../../theme/app_colors.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/global_loading.dart';
 import '../../common/ui/widgets/common_close_button.dart';
 import '../../common/ui/widgets/primary_button.dart';
+import '../../profile/ui/view_model/profile_view_model.dart';
 import 'view_model/premium_view_model.dart';
 import 'widgets/benefit_item.dart';
 import 'widgets/premium_agreement.dart';
 import 'widgets/product_item.dart';
 
-class PremiumScreen extends ConsumerWidget {
-  const PremiumScreen({super.key});
+class PremiumScreen extends ConsumerStatefulWidget {
+  final bool? isGoToHome;
+
+  const PremiumScreen({
+    super.key,
+    this.isGoToHome,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState createState() => _PremiumScreenState();
+}
+
+class _PremiumScreenState extends ConsumerState<PremiumScreen> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(profileViewModelProvider.notifier).setIsShowPremium();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ref.listen(premiumViewModelProvider, (previous, next) {
       if (previous != next) {
         if (next.isLoading) {
@@ -39,14 +57,14 @@ class PremiumScreen extends ConsumerWidget {
 
       if (next is AsyncData) {
         if (next.value?.isPurchaseSuccessfully == true) {
-          context.showSuccessSnackBar(LocaleKeys.purchaseSuccess);
+          context.showSuccessSnackBar(LocaleKeys.purchaseSuccess.tr());
           context.pop();
         }
         if (next.value?.isRestoreSuccessfully == true) {
-          context.showSuccessSnackBar(LocaleKeys.restorePurchasesSuccess);
+          context.showSuccessSnackBar(LocaleKeys.restorePurchasesSuccess.tr());
           context.pop();
         } else if (next.value?.isRestoreSuccessfully == false) {
-          context.showWarningSnackBar(LocaleKeys.noActivePurchases);
+          context.showWarningSnackBar(LocaleKeys.noActivePurchases.tr());
         }
       }
     });
@@ -83,12 +101,15 @@ class PremiumScreen extends ConsumerWidget {
                     children: [
                       SizedBox(width: 36),
                       Text(
-                        LocaleKeys.premium,
+                        LocaleKeys.premium.tr(),
                         style: AppTheme.title32.copyWith(
                           color: AppColors.mono0,
                         ),
                       ),
-                      CommonCloseButton(color: AppColors.mono0),
+                      CommonCloseButton(
+                        onClose: _mayBackOrGoHome,
+                        color: AppColors.mono0,
+                      ),
                     ],
                   ),
                 ),
@@ -97,7 +118,7 @@ class PremiumScreen extends ConsumerWidget {
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 256),
                     children: [
                       Text(
-                        LocaleKeys.premiumBenefits,
+                        LocaleKeys.premiumBenefits.tr(),
                         style: AppTheme.title24.copyWith(
                           color: AppColors.mono0,
                         ),
@@ -122,7 +143,7 @@ class PremiumScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        LocaleKeys.selectPlan,
+                        LocaleKeys.selectPlan.tr(),
                         style: AppTheme.title24.copyWith(
                           color: AppColors.mono0,
                         ),
@@ -194,7 +215,7 @@ class PremiumScreen extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   PrimaryButton(
-                    text: LocaleKeys.continueText,
+                    text: LocaleKeys.continueText.tr(),
                     onPressed: () =>
                         ref.read(premiumViewModelProvider.notifier).purchase(),
                   ),
@@ -204,7 +225,7 @@ class PremiumScreen extends ConsumerWidget {
                         .read(premiumViewModelProvider.notifier)
                         .restorePurchases(),
                     child: Text(
-                      LocaleKeys.restorePurchases,
+                      LocaleKeys.restorePurchases.tr(),
                       style: AppTheme.title14.copyWith(
                         color: AppColors.mono0,
                       ),
@@ -217,5 +238,13 @@ class PremiumScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  void _mayBackOrGoHome() {
+    if (widget.isGoToHome == true) {
+      context.pushReplacement(Routes.main);
+    } else {
+      context.pop();
+    }
   }
 }

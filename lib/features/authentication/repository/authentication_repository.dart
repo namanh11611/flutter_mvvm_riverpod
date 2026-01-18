@@ -167,6 +167,7 @@ class AuthenticationRepository {
 
   Future<void> signOut() async {
     // TODO: fake data
+    setIsLogin(false);
     return;
 
     try {
@@ -204,4 +205,14 @@ class AuthenticationRepository {
     await prefs.setBool(Constants.isExistAccountKey, value);
   }
   // END TODO
+
+  Future<bool> isGuestMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(Constants.isGuestMode) ?? false;
+  }
+
+  Future<void> setIsGuestMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(Constants.isGuestMode, true);
+  }
 }

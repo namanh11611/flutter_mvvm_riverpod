@@ -92,6 +92,16 @@ class ProfileRepository {
     }
   }
 
+  Future<bool> wasShowOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(Constants.wasShowOnboarding) ?? false;
+  }
+
+  Future<void> setWasShowOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(Constants.wasShowOnboarding, true);
+  }
+
   Future<bool> isShowPremium() async {
     final prefs = await SharedPreferences.getInstance();
     final day = prefs.getString(Constants.lastDayShowPremiumKey);

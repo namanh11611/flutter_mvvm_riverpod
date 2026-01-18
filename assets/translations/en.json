@@ -13,6 +13,7 @@
   "validatorPasswordNotMatch": "Passwords do not match!",
 
   "welcome": "Welcome to Flutter MVVM Riverpod!",
+  "welcomeDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
   "alreadyHaveAccount": "Already have an account?",
   "or": "or",
   "signIn": "Sign in",
@@ -26,6 +27,7 @@
   "signInAgreementPrefix": "By signing in, you agree to our ",
   "signInAgreementMiddle": "\nand ",
   "signInAgreementSuffix": "",
+  "continueAsGuest": "Continue as guest",
 
   "otpVerification": "OTP Verification",
   "otpEnterTitle": "We've sent a 6-digit OTP to your email",

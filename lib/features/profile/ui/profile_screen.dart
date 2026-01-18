@@ -8,15 +8,16 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '/constants/constants.dart';
-import '/extensions/build_context_extension.dart';
-import '/extensions/profile_extension.dart';
-import '/generated/locale_keys.g.dart';
-import '/routing/routes.dart';
-import '/theme/app_colors.dart';
-import '/theme/app_theme.dart';
-import '/utils/global_loading.dart';
-import '../../../../features/common/ui/widgets/common_dialog.dart';
+import '../../../constants/constants.dart';
+import '../../../extensions/build_context_extension.dart';
+import '../../../extensions/profile_extension.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../routing/routes.dart';
+import '../../../theme/app_colors.dart';
+import '../../../theme/app_theme.dart';
+import '../../../utils/global_loading.dart';
+import '../../authentication/ui/view_model/authentication_view_model.dart';
+import '../../common/ui/widgets/common_dialog.dart';
 import '../model/profile.dart';
 import 'view_model/profile_view_model.dart';
 import 'widgets/avatar.dart';
@@ -32,11 +33,13 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  var _isLogin = false;
   var _version = '';
 
   @override
   void initState() {
     super.initState();
+    _checkIsLogin();
     _getPackageInfo();
   }
 
@@ -76,14 +79,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           style: AppTheme.title24,
                         ),
                       ),
-                      Center(
-                        child: Text(
-                          profile?.email ?? '',
-                          style: AppTheme.body14.copyWith(
-                            color: context.secondaryTextColor,
+                      if (_isLogin)
+                        Center(
+                          child: Text(
+                            profile?.email ?? '',
+                            style: AppTheme.body14.copyWith(
+                              color: context.secondaryTextColor,
+                            ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),
@@ -105,31 +109,33 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ),
           ),
           const SizedBox(height: 8),
-          ProfileItem(
-            icon: HugeIcons.strokeRoundedUser,
-            text: LocaleKeys.accountInformation.tr(),
-            isFirst: true,
-            onTap: () {
-              context.push(
+          if (_isLogin)
+            ProfileItem(
+              icon: HugeIcons.strokeRoundedUser,
+              text: LocaleKeys.accountInformation.tr(),
+              isFirst: true,
+              onTap: () => context.push(
                 Routes.accountInformation,
                 extra: profile ?? Profile(),
-              );
-            },
-          ),
+              ),
+            )
+          else
+            ProfileItem(
+              icon: HugeIcons.strokeRoundedLogin01,
+              text: LocaleKeys.signIn.tr(),
+              isFirst: true,
+              onTap: () => context.go(Routes.welcome),
+            ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedIdea,
             text: LocaleKeys.appearances.tr(),
-            onTap: () {
-              context.push(Routes.appearances);
-            },
+            onTap: () => context.push(Routes.appearances),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedCoinsSwap,
             text: LocaleKeys.language.tr(),
             isLast: true,
-            onTap: () {
-              context.push(Routes.languages);
-            },
+            onTap: () => context.push(Routes.languages),
           ),
           const SizedBox(height: 24),
           Padding(
@@ -169,29 +175,35 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             onTap: () => context.tryLaunchUrl(Constants.facebookPage),
           ),
           const SizedBox(height: 24),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              LocaleKeys.dangerousZone.tr(),
-              style: AppTheme.title20,
+          if (_isLogin)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
+                    LocaleKeys.dangerousZone.tr(),
+                    style: AppTheme.title20,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ProfileItem(
+                  icon: HugeIcons.strokeRoundedLogout01,
+                  text: LocaleKeys.logOut.tr(),
+                  textColor: dangerousColor,
+                  isFirst: true,
+                  onTap: () => _signOut(context),
+                ),
+                ProfileItem(
+                  icon: HugeIcons.strokeRoundedDelete01,
+                  text: LocaleKeys.deleteAccount.tr(),
+                  textColor: dangerousColor,
+                  isLast: true,
+                  onTap: () => _deleteAccount(context),
+                ),
+                const SizedBox(height: 24),
+              ],
             ),
-          ),
-          const SizedBox(height: 8),
-          ProfileItem(
-            icon: HugeIcons.strokeRoundedLogout01,
-            text: LocaleKeys.logOut.tr(),
-            textColor: dangerousColor,
-            isFirst: true,
-            onTap: () => _signOut(context),
-          ),
-          ProfileItem(
-            icon: HugeIcons.strokeRoundedDelete01,
-            text: LocaleKeys.deleteAccount.tr(),
-            textColor: dangerousColor,
-            isLast: true,
-            onTap: () => _deleteAccount(context),
-          ),
-          const SizedBox(height: 24),
           Center(
             child: Text(
               'Version $_version',
@@ -201,6 +213,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         ],
       ),
     );
+  }
+
+  void _checkIsLogin() async {
+    _isLogin =
+        await ref.read(authenticationViewModelProvider.notifier).isLogin();
+    setState(() {});
   }
 
   void _getPackageInfo() {
@@ -233,12 +251,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             }
           } catch (error) {
             if (context.mounted) {
-              context.showErrorSnackBar(LocaleKeys.unexpectedErrorOccurred.tr());
+              context
+                  .showErrorSnackBar(LocaleKeys.unexpectedErrorOccurred.tr());
             }
           } finally {
             if (context.mounted) {
               Global.hideLoading();
-              context.pushReplacement(Routes.register);
+              context.pushReplacement(Routes.welcome);
             }
           }
         },
@@ -265,12 +284,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             }
           } catch (error) {
             if (context.mounted) {
-              context.showErrorSnackBar(LocaleKeys.unexpectedErrorOccurred.tr());
+              context
+                  .showErrorSnackBar(LocaleKeys.unexpectedErrorOccurred.tr());
             }
           } finally {
             if (context.mounted) {
               Global.hideLoading();
-              context.pushReplacement(Routes.register);
+              context.pushReplacement(Routes.welcome);
             }
           }
         },
