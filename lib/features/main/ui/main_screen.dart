@@ -1,18 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:ming_cute_icons/ming_cute_icons.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../extensions/build_context_extension.dart';
-import '../../../features/hero_list/ui/hero_list_screen.dart';
-import '../../../features/profile/ui/profile_screen.dart';
 import '../../../theme/app_colors.dart';
+import '../../../theme/app_theme.dart';
+import '../../common/ui/widgets/material_ink_well.dart';
+import '../../hero_list/ui/hero_list_screen.dart';
 import '../../hero_list/ui/view_model/hero_count_provider.dart';
 import '../../hero_list/ui/view_model/hero_list_view_model.dart';
+import '../../profile/ui/profile_screen.dart';
+import '../model/main_tab.dart';
 
 const List<Widget> _screens = [
-  HeroListScreen(),
   HeroListScreen(),
   ProfileScreen(),
 ];
@@ -25,111 +26,108 @@ class MainScreen extends ConsumerStatefulWidget {
 }
 
 class _MainScreenState extends ConsumerState<MainScreen> {
-  late PersistentTabController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = PersistentTabController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  List<PersistentBottomNavBarItem> _navBarsItems(
-    BuildContext context,
-    Color selectedColor,
-    Color unselectedColor,
-    int count,
-  ) {
-    return [
-      PersistentBottomNavBarItem(
-        icon: Icon(MingCuteIcons.mgc_lightning_fill, color: selectedColor),
-        inactiveIcon:
-            Icon(MingCuteIcons.mgc_lightning_line, color: unselectedColor),
-      ),
-      PersistentBottomNavBarItem(
-        icon: HugeIcon(
-          icon: HugeIcons.strokeRoundedAdd01,
-          color: AppColors.mono0,
-          size: 20,
-        ),
-        inactiveIcon: HugeIcon(
-          icon: HugeIcons.strokeRoundedAdd01,
-          color: AppColors.mono0,
-          size: 20,
-        ),
-        activeColorPrimary: selectedColor,
-        inactiveColorPrimary: unselectedColor,
-        onPressed: (_) async {
-          final randomHero = sampleHeroes[count % sampleHeroes.length];
-          await ref.read(heroListViewModelProvider.notifier).addHero(
-                name: randomHero.name,
-                description: randomHero.description,
-                imageUrl: randomHero.imageUrl,
-                power: randomHero.power,
-              );
-          ref.read(heroCountProvider.notifier).increment();
-        },
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(MingCuteIcons.mgc_user_3_fill, color: selectedColor),
-        inactiveIcon:
-            Icon(MingCuteIcons.mgc_user_3_line, color: unselectedColor),
-      ),
-    ];
-  }
+  int _currentTabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    final selectedColor =
-        context.isDarkMode ? AppColors.blueberry100 : AppColors.blueberry100;
-    final unselectedColor =
-        context.isDarkMode ? AppColors.mono40 : AppColors.mono60;
     final count = ref.watch(heroCountProvider);
     return Scaffold(
-      body: PersistentTabView(
-        context,
-        controller: _controller,
-        screens: _screens,
-        items: _navBarsItems(
-          context,
-          selectedColor,
-          unselectedColor,
-          count,
-        ),
-        confineToSafeArea: true,
-        backgroundColor: context.secondaryWidgetColor,
-        handleAndroidBackButtonPress: true,
-        resizeToAvoidBottomInset: true,
-        stateManagement: true,
-        hideNavigationBarWhenKeyboardAppears: true,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
-          colorBehindNavBar: context.secondaryBackgroundColor,
-        ),
-        popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
-        animationSettings: const NavBarAnimationSettings(
-          navBarItemAnimation: ItemAnimationSettings(
-            // Navigation Bar's items animation properties.
-            duration: Duration(milliseconds: 400),
-            curve: Curves.ease,
+      body: Stack(
+        children: [
+          IndexedStack(
+            index: _currentTabIndex,
+            children: _screens,
           ),
-          screenTransitionAnimation: ScreenTransitionAnimationSettings(
-            // Screen transition animation on change of selected tab.
-            animateTabTransition: true,
-            duration: Duration(milliseconds: 300),
-            screenTransitionAnimationType: ScreenTransitionAnimationType.fadeIn,
+          Positioned(
+            left: 24,
+            right: 24,
+            bottom: MediaQuery.paddingOf(context).bottom + 16,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      color: context.secondaryWidgetColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(48)),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: MainTab.values
+                          .map((tab) => _buildNavItem(tab))
+                          .toList(),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  decoration: BoxDecoration(
+                    color: context.secondaryWidgetColor,
+                    borderRadius: const BorderRadius.all(Radius.circular(48)),
+                  ),
+                  child: MaterialInkWell(
+                    radius: 48,
+                    onTap: () async {
+                      final randomHero =
+                          sampleHeroes[count % sampleHeroes.length];
+                      await ref
+                          .read(heroListViewModelProvider.notifier)
+                          .addHero(
+                            name: randomHero.name,
+                            description: randomHero.description,
+                            imageUrl: randomHero.imageUrl,
+                            power: randomHero.power,
+                          );
+                      ref.read(heroCountProvider.notifier).increment();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(18),
+                      child: HugeIcon(
+                        icon: HugeIcons.strokeRoundedAdd01,
+                        color: AppColors.mono100,
+                        size: 32,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          onNavBarHideAnimation: OnHideAnimationSettings(
-            duration: Duration(milliseconds: 100),
-            curve: Curves.bounceInOut,
-          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem(MainTab tab) {
+    final isSelected = _currentTabIndex == tab.index;
+    return MaterialInkWell(
+      radius: 24,
+      onTap: () {
+        setState(() {
+          _currentTabIndex = tab.index;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        decoration: BoxDecoration(
+          color: isSelected ? context.secondaryBackgroundColor : null,
+          borderRadius: const BorderRadius.all(Radius.circular(24)),
         ),
-        navBarStyle: NavBarStyle.style17,
+        child: Column(
+          children: [
+            Icon(
+              tab.iconData,
+              color: isSelected ? AppColors.blueberry100 : null,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              context.tr(tab.labelKey),
+              style: AppTheme.body12.copyWith(
+                color: isSelected ? AppColors.blueberry100 : null,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

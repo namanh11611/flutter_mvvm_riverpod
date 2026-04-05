@@ -95,13 +95,14 @@ class HeroListScreen extends ConsumerWidget {
     final heroListState = ref.watch(heroListViewModelProvider);
 
     return Scaffold(
+      backgroundColor: context.secondaryBackgroundColor,
       appBar: AppBar(
         title: Text(
           context.tr(_getGreeting()),
           style: AppTheme.title32,
         ),
         automaticallyImplyLeading: false,
-        backgroundColor: context.primaryBackgroundColor,
+        backgroundColor: context.secondaryBackgroundColor,
         foregroundColor: context.primaryTextColor,
       ),
       body: heroListState.when(
@@ -119,7 +120,7 @@ class HeroListScreen extends ConsumerWidget {
           }
 
           return GridView.builder(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 128),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 8.0,

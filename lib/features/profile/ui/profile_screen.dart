@@ -56,7 +56,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           16,
           MediaQuery.paddingOf(context).top + 48,
           16,
-          48,
+          128,
         ),
         children: [
           Container(
