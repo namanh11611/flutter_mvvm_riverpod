@@ -38,6 +38,7 @@ final List<Product> defaultProducts = [
     description: LocaleKeys.monthlyDescription.tr(),
     currentPrice: '\$0.99',
     savePercent: 34,
+    label: LocaleKeys.starter.tr(),
     identifier: Constants.premiumMonthly,
   ),
   Product(

@@ -4,10 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../extensions/build_context_extension.dart';
+import '../../../extensions/profile_extension.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../theme/app_theme.dart';
 import '../../common/ui/widgets/common_empty_data.dart';
 import '../../common/ui/widgets/common_error.dart';
+import '../../profile/ui/view_model/profile_view_model.dart';
 import '../../profile/ui/widgets/upgrade_premium_button.dart';
 import '../model/hero.dart' as hero;
 import '../ui/view_model/hero_list_view_model.dart';
@@ -94,6 +96,8 @@ class HeroListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final heroListState = ref.watch(heroListViewModelProvider);
+    final profile =
+        ref.watch(profileViewModelProvider.select((it) => it.value?.profile));
 
     return Scaffold(
       backgroundColor: context.secondaryBackgroundColor,
@@ -102,12 +106,14 @@ class HeroListScreen extends ConsumerWidget {
           context.tr(_getGreeting()),
           style: AppTheme.title32,
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: UpgradePremiumButton(isShowText: false),
-          ),
-        ],
+        actions: profile.isPremium
+            ? null
+            : [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: UpgradePremiumButton(isShowText: false),
+                ),
+              ],
         automaticallyImplyLeading: false,
         backgroundColor: context.secondaryBackgroundColor,
         foregroundColor: context.primaryTextColor,

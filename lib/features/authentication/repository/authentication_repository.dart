@@ -208,11 +208,11 @@ class AuthenticationRepository {
 
   Future<bool> isGuestMode() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(Constants.isGuestMode) ?? false;
+    return prefs.getBool(Constants.isGuestModeKey) ?? false;
   }
 
   Future<void> setIsGuestMode() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(Constants.isGuestMode, true);
+    await prefs.setBool(Constants.isGuestModeKey, true);
   }
 }

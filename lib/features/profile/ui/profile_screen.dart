@@ -21,7 +21,7 @@ import '../../common/ui/widgets/common_dialog.dart';
 import '../model/profile.dart';
 import 'view_model/profile_view_model.dart';
 import 'widgets/avatar.dart';
-import 'widgets/premium_info.dart';
+import 'widgets/premium_info_button.dart';
 import 'widgets/profile_item.dart';
 import 'widgets/upgrade_premium_button.dart';
 
@@ -94,7 +94,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 Transform.translate(
                   offset: Offset(0, -32),
                   child: profile.isPremium
-                      ? PremiumInfo(expiryDate: profile?.expiryDatePremium)
+                      ? PremiumInfoButton(
+                          expiryDate: profile?.expiryDatePremium,
+                        )
                       : UpgradePremiumButton(),
                 ),
               ],

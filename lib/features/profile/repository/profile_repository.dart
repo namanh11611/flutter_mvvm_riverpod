@@ -9,6 +9,7 @@ import '../../../constants/constants.dart';
 import '../../../features/profile/model/profile.dart';
 import '../../../main.dart';
 import '../../../utils/utils.dart';
+import '../../premium/model/premium_info.dart';
 
 part 'profile_repository.g.dart';
 
@@ -26,39 +27,58 @@ class ProfileRepository {
     final profileStr = prefs.getString(Constants.profileKey);
     if (profileStr == null) return null;
 
-    final profile = Profile.fromJson(jsonDecode(profileStr));
-    return profile;
+    final fakeProfile = Profile.fromJson(jsonDecode(profileStr));
+    return fakeProfile;
+    // END TODO
 
     final userId = supabase.auth.currentUser?.id;
-    if (userId == null) return null;
+    Profile profile = Profile();
+    CustomerInfo? customerInfo;
 
-    final data = await supabase
-        .from(Constants.supabaseProfileTable)
-        .select()
-        .eq('id', userId)
-        .single();
-    final result = Profile.fromJson(data);
+    if (userId == null) {
+      // Guest user
+      customerInfo = await Purchases.getCustomerInfo();
+    } else {
+      // Verified user
+      final data = await supabase
+          .from(Constants.supabaseProfileTable)
+          .select()
+          .eq('id', userId)
+          .single();
+      profile = Profile.fromJson(data);
 
-    DateTime? expiryDatePremium;
-    bool? isLifetimePremium;
-
-    // Get purchase information
-    final logInResult = await Purchases.logIn(userId);
-    final activeEntitlements = logInResult.customerInfo.entitlements.active;
-    if (activeEntitlements.containsKey(Constants.premium)) {
-      final premiumEntitlement = activeEntitlements[Constants.premium];
-      final date = premiumEntitlement?.expirationDate;
-      if (date != null) {
-        expiryDatePremium = DateTime.parse(date);
-      } else {
-        isLifetimePremium = true;
-      }
+      final logInResult = await Purchases.logIn(userId);
+      customerInfo = logInResult.customerInfo;
     }
 
-    return result.copyWith(
-      expiryDatePremium: expiryDatePremium,
-      isLifetimePremium: isLifetimePremium,
+    final premiumInfo = _extractPremiumInfo(customerInfo.entitlements.active);
+    await setIsPremiumUser(premiumInfo.isPremium);
+
+    return profile.copyWith(
+      expiryDatePremium: premiumInfo.expiryDate,
+      isLifetimePremium: premiumInfo.isLifetime,
     );
+  }
+
+  PremiumInfo _extractPremiumInfo(Map<String, EntitlementInfo> entitlements) {
+    final isPremium = entitlements.containsKey(Constants.premium);
+    if (!isPremium) {
+      return const PremiumInfo(isPremium: false);
+    }
+
+    final premiumEntitlement = entitlements[Constants.premium];
+    final date = premiumEntitlement?.expirationDate;
+    if (date != null) {
+      return PremiumInfo(
+        isPremium: true,
+        expiryDate: DateTime.parse(date),
+      );
+    } else {
+      return const PremiumInfo(
+        isPremium: true,
+        isLifetime: true,
+      );
+    }
   }
 
   Future<void> update(Profile profile) async {
@@ -94,16 +114,24 @@ class ProfileRepository {
 
   Future<bool> wasShowOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(Constants.wasShowOnboarding) ?? false;
+    return prefs.getBool(Constants.wasShowOnboardingKey) ?? false;
   }
 
   Future<void> setWasShowOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(Constants.wasShowOnboarding, true);
+    await prefs.setBool(Constants.wasShowOnboardingKey, true);
+  }
+
+  Future<void> setIsPremiumUser(bool isPremiumUser) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(Constants.isPremiumUserKey, isPremiumUser);
   }
 
   Future<bool> isShowPremium() async {
     final prefs = await SharedPreferences.getInstance();
+    final isPremiumUser = prefs.getBool(Constants.isPremiumUserKey) ?? false;
+    if (isPremiumUser) return false;
+
     final day = prefs.getString(Constants.lastDayShowPremiumKey);
     if (day == null) return true;
     return Utils.today().difference(DateTime.parse(day)).inDays >= 3;

@@ -27,7 +27,8 @@ class Constants {
   static const String profileKey = 'profile_key';
   static const String isLoginKey = 'is_login_key';
   static const String isExistAccountKey = 'is_exist_account_key';
-  static const String isGuestMode = 'is_guest_mode';
-  static const String wasShowOnboarding = 'was_show_onboarding';
+  static const String isGuestModeKey = 'is_guest_mode_key';
+  static const String wasShowOnboardingKey = 'was_show_onboarding_key';
+  static const String isPremiumUserKey = 'is_premium_user_key';
   static const String lastDayShowPremiumKey = 'last_day_show_premium_key';
 }

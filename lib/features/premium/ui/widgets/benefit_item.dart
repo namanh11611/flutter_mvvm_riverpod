@@ -21,19 +21,21 @@ class BenefitItem extends StatelessWidget {
       children: [
         icon,
         const SizedBox(width: 16),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: AppTheme.title16.copyWith(color: AppColors.mono0),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              description,
-              style: AppTheme.body14.copyWith(color: AppColors.mono0),
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: AppTheme.title16.copyWith(color: AppColors.mono0),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                description,
+                style: AppTheme.body14.copyWith(color: AppColors.mono0),
+              ),
+            ],
+          ),
         ),
       ],
     );

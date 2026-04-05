@@ -20,13 +20,14 @@ import 'view_model/premium_view_model.dart';
 import 'widgets/benefit_item.dart';
 import 'widgets/premium_agreement.dart';
 import 'widgets/product_item.dart';
+import 'widgets/trial_timeline.dart';
 
 class PremiumScreen extends ConsumerStatefulWidget {
-  final bool? isGoToHome;
+  final bool? isGoToMain;
 
   const PremiumScreen({
     super.key,
-    this.isGoToHome,
+    this.isGoToMain,
   });
 
   @override
@@ -58,11 +59,11 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
       if (next is AsyncData) {
         if (next.value?.isPurchaseSuccessfully == true) {
           context.showSuccessSnackBar(LocaleKeys.purchaseSuccess.tr());
-          context.pop();
+          context.go(Routes.splash);
         }
         if (next.value?.isRestoreSuccessfully == true) {
           context.showSuccessSnackBar(LocaleKeys.restorePurchasesSuccess.tr());
-          context.pop();
+          context.go(Routes.splash);
         } else if (next.value?.isRestoreSuccessfully == false) {
           context.showWarningSnackBar(LocaleKeys.noActivePurchases.tr());
         }
@@ -118,6 +119,45 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 256),
                     children: [
                       Text(
+                        LocaleKeys.start7dayFreeTrial.tr(),
+                        style: AppTheme.title18.copyWith(
+                          color: AppColors.mono0,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      const TrialTimeline(),
+                      const SizedBox(height: 24),
+                      Text(
+                        LocaleKeys.selectPlan.tr(),
+                        style: AppTheme.title24.copyWith(
+                          color: AppColors.mono0,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        spacing: 16,
+                        children: products
+                            .mapIndexed(
+                              (index, product) => ProductItem(
+                            product: product,
+                            isSelected: selectedIndex == index,
+                            onTap: () => ref
+                                .read(premiumViewModelProvider.notifier)
+                                .selectProduct(index),
+                          ),
+                        )
+                            .toList(),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '* ${products[selectedIndex].description}',
+                        style: AppTheme.body14.copyWith(
+                          color: AppColors.mono20,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
                         LocaleKeys.premiumBenefits.tr(),
                         style: AppTheme.title24.copyWith(
                           color: AppColors.mono0,
@@ -134,43 +174,14 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                           spacing: 16,
                           children: benefits
                               .map((benefit) => BenefitItem(
-                                    icon: benefit.icon,
-                                    title: benefit.title,
-                                    description: benefit.description,
-                                  ))
+                            icon: benefit.icon,
+                            title: benefit.title,
+                            description: benefit.description,
+                          ))
                               .toList(),
                         ),
                       ),
                       const SizedBox(height: 24),
-                      Text(
-                        LocaleKeys.selectPlan.tr(),
-                        style: AppTheme.title24.copyWith(
-                          color: AppColors.mono0,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        spacing: 16,
-                        children: products
-                            .mapIndexed(
-                              (index, product) => ProductItem(
-                                product: product,
-                                isSelected: selectedIndex == index,
-                                onTap: () => ref
-                                    .read(premiumViewModelProvider.notifier)
-                                    .selectProduct(index),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        '* ${products[selectedIndex].description}',
-                        style: AppTheme.body14.copyWith(
-                          color: AppColors.mono20,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
                       Text(
                         Platform.isIOS
                             ? LocaleKeys.subscriptionInfoIos.tr()
@@ -215,7 +226,9 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   PrimaryButton(
-                    text: LocaleKeys.continueText.tr(),
+                    text: selectedIndex == 2
+                        ? context.tr(LocaleKeys.continueText)
+                        : context.tr(LocaleKeys.startFreeTrial),
                     onPressed: () =>
                         ref.read(premiumViewModelProvider.notifier).purchase(),
                   ),
@@ -241,7 +254,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
   }
 
   void _mayBackOrGoHome() {
-    if (widget.isGoToHome == true) {
+    if (widget.isGoToMain == true) {
       context.pushReplacement(Routes.main);
     } else {
       context.pop();

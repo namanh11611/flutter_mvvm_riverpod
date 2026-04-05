@@ -135,7 +135,7 @@ final GoRouter router = GoRouter(
         final map = state.extra as Map?;
         return state.slidePage(
           PremiumScreen(
-            isGoToHome: map?[Constants.isGoToMain] as bool?,
+            isGoToMain: map?[Constants.isGoToMain] as bool?,
           ),
           direction: SlideDirection.up,
         );
