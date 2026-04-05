@@ -8,6 +8,7 @@ import '../../../generated/locale_keys.g.dart';
 import '../../../theme/app_theme.dart';
 import '../../common/ui/widgets/common_empty_data.dart';
 import '../../common/ui/widgets/common_error.dart';
+import '../../profile/ui/widgets/upgrade_premium_button.dart';
 import '../model/hero.dart' as hero;
 import '../ui/view_model/hero_list_view_model.dart';
 import 'widgets/hero_item.dart';
@@ -101,6 +102,12 @@ class HeroListScreen extends ConsumerWidget {
           context.tr(_getGreeting()),
           style: AppTheme.title32,
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: UpgradePremiumButton(isShowText: false),
+          ),
+        ],
         automaticallyImplyLeading: false,
         backgroundColor: context.secondaryBackgroundColor,
         foregroundColor: context.primaryTextColor,
