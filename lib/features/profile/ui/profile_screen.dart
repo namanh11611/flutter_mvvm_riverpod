@@ -174,7 +174,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             icon: HugeIcons.strokeRoundedSettingError04,
             text: LocaleKeys.reportAProblem.tr(),
             isLast: true,
-            onTap: () => context.tryLaunchUrl(Constants.facebookPage),
+            onTap: () => context.tryLaunchUrl(Constants.reportProblem),
           ),
           const SizedBox(height: 24),
           if (_isLogin)

@@ -8,12 +8,12 @@ class Constants {
   static const String googleEmailScope = 'email';
   static const String googleUserInfoScope = 'https://www.googleapis.com/auth/userinfo.profile';
   static const String defaultName = 'Guest';
-  static const String termOfService = 'https://github.com/namanh11611/flutter_mvvm_riverpod';
-  static const String privacyPolicy = 'https://github.com/namanh11611/flutter_mvvm_riverpod';
-  static const String aboutUs = 'https://github.com/namanh11611';
-  static const String appStore = 'https://apps.apple.com/us/developer/anh-nguyen/id1760383102';
+  static const String termOfService = 'https://areser.net';
+  static const String privacyPolicy = 'https://areser.net';
+  static const String aboutUs = 'https://areser.net';
+  static const String appStore = 'https://apps.apple.com/developer/id1760383102';
   static const String playStore = 'https://play.google.com/store/apps/developer?id=Areser+JSC';
-  static const String facebookPage = 'https://facebook.com/namanh11611';
+  static const String reportProblem = 'mailto:areserjsc@gmail.com?subject=Report a Problem';
   static const String premium = 'premium';
   static const String premiumMonthly = '\$rc_monthly';
   static const String premiumYearly = '\$rc_annual';
