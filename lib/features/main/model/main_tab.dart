@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_riverpod/generated/locale_keys.g.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
+
+import '../../../generated/locale_keys.g.dart';
 
 enum MainTab {
   hero(MingCuteIcons.mgc_lightning_fill, LocaleKeys.menuHero),

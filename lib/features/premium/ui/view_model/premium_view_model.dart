@@ -42,12 +42,12 @@ final List<Product> defaultProducts = [
     identifier: Constants.premiumMonthly,
   ),
   Product(
-    title: LocaleKeys.yearly.tr(),
-    description: LocaleKeys.yearlyDescription.tr(),
+    title: LocaleKeys.annual.tr(),
+    description: LocaleKeys.annualDescription.tr(),
     currentPrice: '\$9.99',
     savePercent: 38,
     label: LocaleKeys.mostPopular.tr(),
-    identifier: Constants.premiumYearly,
+    identifier: Constants.premiumAnnual,
   ),
   Product(
     title: LocaleKeys.lifetime.tr(),
@@ -83,7 +83,7 @@ class PremiumViewModel extends _$PremiumViewModel {
               currentPrice: p.storeProduct.priceString,
             );
             break;
-          case Constants.premiumYearly:
+          case Constants.premiumAnnual:
             products[1] = products[1].copyWith(
               currentPrice: p.storeProduct.priceString,
             );

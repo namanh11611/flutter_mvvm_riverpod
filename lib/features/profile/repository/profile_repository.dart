@@ -134,7 +134,7 @@ class ProfileRepository {
 
     final day = prefs.getString(Constants.lastDayShowPremiumKey);
     if (day == null) return true;
-    return Utils.today().difference(DateTime.parse(day)).inDays >= 3;
+    return Utils.today().difference(DateTime.parse(day)).inDays >= 1;
   }
 
   Future<void> setIsShowPremium() async {

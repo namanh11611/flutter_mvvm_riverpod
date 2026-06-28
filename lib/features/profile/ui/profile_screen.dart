@@ -150,9 +150,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           const SizedBox(height: 8),
           ProfileItem(
             icon: HugeIcons.strokeRoundedNews,
-            text: LocaleKeys.termOfService.tr(),
+            text: LocaleKeys.termsOfService.tr(),
             isFirst: true,
-            onTap: () => context.tryLaunchUrl(Constants.termOfService),
+            onTap: () => context.tryLaunchUrl(Constants.termsOfService),
           ),
           ProfileItem(
             icon: HugeIcons.strokeRoundedShield01,

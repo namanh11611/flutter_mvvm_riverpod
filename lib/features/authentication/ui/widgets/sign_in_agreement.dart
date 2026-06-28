@@ -24,11 +24,11 @@ class SignInAgreement extends StatelessWidget {
             children: [
               TextSpan(text: '${LocaleKeys.signInAgreementPrefix.tr()} '),
               TextSpan(
-                text: LocaleKeys.termOfService.tr(),
+                text: LocaleKeys.termsOfService.tr(),
                 style: AppTheme.title12,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    context.tryLaunchUrl(Constants.termOfService);
+                    context.tryLaunchUrl(Constants.termsOfService);
                   },
               ),
               TextSpan(text: ' ${LocaleKeys.signInAgreementMiddle.tr()} '),

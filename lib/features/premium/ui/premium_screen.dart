@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +14,10 @@ import '../../../utils/global_loading.dart';
 import '../../common/ui/widgets/common_close_button.dart';
 import '../../common/ui/widgets/primary_button.dart';
 import '../../profile/ui/view_model/profile_view_model.dart';
+import '../model/product.dart';
 import 'view_model/premium_view_model.dart';
 import 'widgets/benefit_item.dart';
-import 'widgets/premium_agreement.dart';
+import 'widgets/premium_footer.dart';
 import 'widgets/product_item.dart';
 import 'widgets/trial_timeline.dart';
 
@@ -78,7 +77,9 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
       backgroundColor: AppColors.premiumBackground,
       body: Stack(
         children: [
-          Image(image: AssetImage(Assets.premiumBackground)),
+          Positioned.fill(
+            child: Image.asset(Assets.premiumBackground, fit: BoxFit.cover),
+          ),
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -116,7 +117,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                 ),
                 Expanded(
                   child: ListView(
-                    padding: EdgeInsets.fromLTRB(16, 0, 16, 256),
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 128),
                     children: [
                       Text(
                         LocaleKeys.start7dayFreeTrial.tr(),
@@ -135,20 +136,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Row(
-                        spacing: 16,
-                        children: products
-                            .mapIndexed(
-                              (index, product) => ProductItem(
-                            product: product,
-                            isSelected: selectedIndex == index,
-                            onTap: () => ref
-                                .read(premiumViewModelProvider.notifier)
-                                .selectProduct(index),
-                          ),
-                        )
-                            .toList(),
-                      ),
+                      _buildPlans(products, selectedIndex),
                       const SizedBox(height: 8),
                       Text(
                         '* ${products[selectedIndex].description}',
@@ -164,35 +152,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: AppColors.mono100.withAlpha(220),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          spacing: 16,
-                          children: benefits
-                              .map((benefit) => BenefitItem(
-                            icon: benefit.icon,
-                            title: benefit.title,
-                            description: benefit.description,
-                          ))
-                              .toList(),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        Platform.isIOS
-                            ? LocaleKeys.subscriptionInfoIos.tr()
-                            : LocaleKeys.subscriptionInfoAndroid.tr(),
-                        style: AppTheme.body14.copyWith(
-                          color: AppColors.mono0,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      const SizedBox(height: 8),
-                      PremiumAgreement(),
+                      _buildBenefits(),
                     ],
                   ),
                 ),
@@ -208,7 +168,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                 16,
                 0,
                 16,
-                MediaQuery.paddingOf(context).bottom + 16,
+                MediaQuery.paddingOf(context).bottom,
               ),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -232,23 +192,50 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                     onPressed: () =>
                         ref.read(premiumViewModelProvider.notifier).purchase(),
                   ),
-                  const SizedBox(height: 8),
-                  TextButton(
-                    onPressed: () => ref
-                        .read(premiumViewModelProvider.notifier)
-                        .restorePurchases(),
-                    child: Text(
-                      LocaleKeys.restorePurchases.tr(),
-                      style: AppTheme.title14.copyWith(
-                        color: AppColors.mono0,
-                      ),
-                    ),
-                  ),
+                  const SizedBox(height: 2),
+                  PremiumFooter(),
                 ],
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPlans(List<Product> products, int selectedIndex) {
+    return Row(
+      spacing: 16,
+      children: products
+          .mapIndexed(
+            (index, product) => ProductItem(
+              product: product,
+              isSelected: selectedIndex == index,
+              onTap: () => ref
+                  .read(premiumViewModelProvider.notifier)
+                  .selectProduct(index),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _buildBenefits() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.mono100.withAlpha(220),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        spacing: 16,
+        children: benefits
+            .map((benefit) => BenefitItem(
+                  icon: benefit.icon,
+                  title: benefit.title,
+                  description: benefit.description,
+                ))
+            .toList(),
       ),
     );
   }

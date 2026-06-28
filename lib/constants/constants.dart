@@ -8,7 +8,7 @@ class Constants {
   static const String googleEmailScope = 'email';
   static const String googleUserInfoScope = 'https://www.googleapis.com/auth/userinfo.profile';
   static const String defaultName = 'Guest';
-  static const String termOfService = 'https://areser.net';
+  static const String termsOfService = 'https://areser.net';
   static const String privacyPolicy = 'https://areser.net';
   static const String aboutUs = 'https://areser.net';
   static const String appStore = 'https://apps.apple.com/developer/id1760383102';
@@ -16,7 +16,7 @@ class Constants {
   static const String reportProblem = 'mailto:areserjsc@gmail.com?subject=Report a Problem';
   static const String premium = 'premium';
   static const String premiumMonthly = '\$rc_monthly';
-  static const String premiumYearly = '\$rc_annual';
+  static const String premiumAnnual = '\$rc_annual';
   static const String premiumLifeTime = '\$rc_lifetime';
 
   // Route
