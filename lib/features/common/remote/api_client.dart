@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../constants/constants.dart';
+import 'package:flutter_mvvm_riverpod/core/constants/constants.dart';
 
 part 'api_client.g.dart';
 

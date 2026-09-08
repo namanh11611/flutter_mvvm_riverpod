@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sos_shortcut_short_label">Emergency SOS</string>
+    <string name="sos_shortcut_long_label">Open SOS confirmation</string>
+    <string name="sos_widget_name">GoBuddy Emergency SOS</string>
+    <string name="sos_widget_description">Quickly open the GoBuddy SOS confirmation screen</string>
+    <string name="sos_widget_title">SOS</string>
+    <string name="sos_widget_action">TAP FOR EMERGENCY HELP</string>
+</resources>

@@ -1,4 +1,7 @@
 # Miscellaneous
+.env
+.env.*
+!.env.example
 *.class
 *.log
 *.pyc
@@ -45,3 +48,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Locally generated assessment documents and diagrams
+/deliverables/

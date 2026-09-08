@@ -20,8 +20,6 @@
   "register": "Đăng ký",
   "google": "Google",
   "signInWithGoogle": "Đăng nhập với Google",
-  "apple": "Apple",
-  "signInWithApple": "Đăng nhập với Apple",
   "accessTokenNotFound": "Không có access token. Vui lòng thử lại.",
   "idTokenNotFound": "Không có ID token. Vui lòng thử lại.",
   "signInAgreementPrefix": "Bằng việc đăng nhập, bạn đồng ý với ",

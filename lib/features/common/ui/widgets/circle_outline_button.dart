@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 
-import '/extensions/build_context_extension.dart';
+import 'package:flutter_mvvm_riverpod/core/extensions/build_context_extension.dart';
 import 'material_ink_well.dart';
 
 class CircleOutlineButton extends ConsumerWidget {
-  final IconData icon;
+  final List<List<dynamic>> icon;
   final Function()? onPressed;
   final Color? color;
 

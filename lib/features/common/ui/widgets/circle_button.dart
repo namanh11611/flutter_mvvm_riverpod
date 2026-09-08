@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/theme/app_colors.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_colors.dart';
 
 class CircleButton extends StatelessWidget {
   final Widget icon;

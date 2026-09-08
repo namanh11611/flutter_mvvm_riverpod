@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '/extensions/build_context_extension.dart';
-import '/theme/app_colors.dart';
-import '/theme/app_theme.dart';
+import 'package:flutter_mvvm_riverpod/core/extensions/build_context_extension.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_colors.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_theme.dart';
 import 'primary_button.dart';
 import 'secondary_button.dart';
 

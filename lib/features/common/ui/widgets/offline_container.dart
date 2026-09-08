@@ -6,10 +6,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/constants/constants.dart';
-import '/generated/locale_keys.g.dart';
-import '/theme/app_colors.dart';
-import '/theme/app_theme.dart';
+import 'package:flutter_mvvm_riverpod/core/constants/constants.dart';
+import 'package:flutter_mvvm_riverpod/generated/locale_keys.g.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_colors.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_theme.dart';
 
 class OfflineContainer extends ConsumerStatefulWidget {
   final Widget? child;

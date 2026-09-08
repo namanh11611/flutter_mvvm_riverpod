@@ -1,107 +1,153 @@
-import 'dart:io';
+import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'constants/constants.dart';
-import 'environment/env.dart';
-import 'extensions/build_context_extension.dart';
-import 'features/common/ui/providers/app_theme_mode_provider.dart';
-import 'features/common/ui/widgets/offline_container.dart';
-import 'routing/router.dart';
-import 'utils/provider_observer.dart';
+import 'package:flutter_mvvm_riverpod/core/environment/env.dart';
+import 'package:flutter_mvvm_riverpod/core/notifications/push_notification_service.dart';
+import 'package:flutter_mvvm_riverpod/core/permissions/app_permission_service.dart';
+import 'package:flutter_mvvm_riverpod/core/routing/router.dart';
+import 'package:flutter_mvvm_riverpod/core/routing/routes.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_theme.dart';
+import 'package:flutter_mvvm_riverpod/features/common/ui/providers/app_theme_mode_provider.dart';
+import 'package:flutter_mvvm_riverpod/features/collaboration/ui/global_incoming_call_listener.dart';
 
-Future<void> initPlatformState() async {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  if (!Env.hasSupabase) {
+    runApp(const _ConfigurationErrorApp());
+    return;
+  }
+  await Supabase.initialize(
+    url: Env.supabaseUrl,
+    publishableKey: Env.supabaseAnonKey,
+  );
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('vi')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      child: const ProviderScope(child: GoBuddyApp()),
+    ),
+  );
+
+  unawaited(_initializeAppServices());
+}
+
+Future<void> _initializeAppServices() async {
   try {
-    await Purchases.setLogLevel(LogLevel.debug);
+    // Keep native permission dialogs sequential so one request cannot obscure
+    // another during startup.
+    await PushNotificationService.initialize();
+  } catch (error, stack) {
+    debugPrint('Notification setup failed: $error\n$stack');
+  }
 
-    final configuration = PurchasesConfiguration(
-      Platform.isIOS ? Env.revenueCatAppStore : Env.revenueCatPlayStore,
-    );
-    await Purchases.configure(configuration);
-  } on PlatformException catch (e) {
-    debugPrint('${Constants.tag} [initPlatformState] Error: ${e.message}');
+  try {
+    await const AppPermissionService().requestStartupPermissions();
+  } catch (error, stack) {
+    debugPrint('Startup permission setup failed: $error\n$stack');
   }
 }
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+class _ConfigurationErrorApp extends StatelessWidget {
+  const _ConfigurationErrorApp();
 
-  /// Firebase
-  // await Firebase.initializeApp(
-  //     // options: DefaultFirebaseOptions.currentPlatform,
-  //     );
-  // await FirebaseAnalytics.instance.logAppOpen();
-  // FlutterError.onError = (errorDetails) {
-  //   FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  // };
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-  //   return true;
-  // };
-
-  /// Supabase
-  await Supabase.initialize(
-    url: Env.supabaseUrl,
-    anonKey: Env.supabaseAnonKey,
-  );
-
-  /// Mobile ads
-  // MobileAds.instance.initialize();
-
-  /// RevenueCat
-  // await initPlatformState();
-
-  /// Localization
-  await EasyLocalization.ensureInitialized();
-
-  /// Google Font
-  LicenseRegistry.addLicense(() async* {
-    final license = await rootBundle.loadString('google_fonts/OFL.txt');
-    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
-  });
-
-  runApp(
-    ProviderScope(
-      observers: [AppObserver()],
-      child: EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('vi')],
-        path: 'assets/translations',
-        fallbackLocale: const Locale('en'),
-        useOnlyLangCode: true,
-        child: const MainApp(),
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 520),
+            child: const Padding(
+              padding: EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.settings_outlined, size: 48),
+                  SizedBox(height: 16),
+                  Text(
+                    'Supabase configuration is missing',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(height: 12),
+                  Text(
+                    'Set SUPABASE_URL and SUPABASE_ANON_KEY in the local '
+                    '.env file, regenerate the Envied configuration, and '
+                    'restart the app.',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     ),
   );
 }
 
-final supabase = Supabase.instance.client;
-
-class MainApp extends ConsumerWidget {
-  const MainApp({super.key});
+class GoBuddyApp extends ConsumerStatefulWidget {
+  const GoBuddyApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(appThemeModeProvider);
+  ConsumerState<GoBuddyApp> createState() => _GoBuddyAppState();
+}
 
+class _GoBuddyAppState extends ConsumerState<GoBuddyApp> {
+  late final StreamSubscription<AuthState> _authSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    _authSubscription = Supabase.instance.client.auth.onAuthStateChange.listen(
+      (state) {
+        if (state.event == AuthChangeEvent.passwordRecovery &&
+            state.session != null) {
+          router.go(Routes.resetPassword);
+        }
+      },
+      onError: (Object error, StackTrace stackTrace) {
+        if (error is AuthException) {
+          final message = error.message.toLowerCase();
+          if (message.contains('expired') ||
+              message.contains('invalid') ||
+              message.contains('otp')) {
+            router.go(Routes.resetPassword);
+          }
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _authSubscription.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final themeMode = ref.watch(appThemeModeProvider).value ?? ThemeMode.system;
     return MaterialApp.router(
-      theme: context.lightTheme,
-      darkTheme: context.darkTheme,
-      themeMode: themeMode.value,
+      title: 'GoBuddy',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.materialTheme,
+      darkTheme: AppTheme.darkMaterialTheme,
+      themeMode: themeMode,
+      routerConfig: router,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routerConfig: router,
-      debugShowCheckedModeBanner: false,
-      builder: (context, child) {
-        return OfflineContainer(child: child);
-      },
+      builder: (context, child) =>
+          GlobalIncomingCallListener(child: child ?? const SizedBox.shrink()),
     );
   }
 }

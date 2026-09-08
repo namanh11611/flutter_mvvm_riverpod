@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="emergency_sos"
+        android:enabled="true"
+        android:icon="@drawable/ic_sos_tile"
+        android:shortcutShortLabel="@string/sos_shortcut_short_label"
+        android:shortcutLongLabel="@string/sos_shortcut_long_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.henry.flutter_mvvm_riverpod"
+            android:targetClass="com.henry.flutter_mvvm_riverpod.MainActivity"
+            android:data="gobuddy://app/safety/sos/confirm" />
+    </shortcut>
+</shortcuts>

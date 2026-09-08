@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "686606983004",
+    "project_id": "gobuddy-2026",
+    "storage_bucket": "gobuddy-2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686606983004:android:eb3f9fa43a1e6a91b8ab99",
+        "android_client_info": {
+          "package_name": "com.henry.flutter_mvvm_riverpod"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA--gTovXt0viBEg8VY6S9EP4TZTp6v83g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
