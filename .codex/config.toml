@@ -1,0 +1,8 @@
+[mcp_servers.supabase-cd]
+url = "https://mcp.supabase.com/mcp?project_ref=xnkobjlnduowpwwxscvh&features=docs%2Caccount%2Cdatabase%2Cdebugging%2Cdevelopment%2Cfunctions%2Cbranching"
+
+[mcp_servers.supabase-cd.tools.execute_sql]
+approval_mode = "approve"
+
+[mcp_servers.supabase-cd.tools.apply_migration]
+approval_mode = "approve"

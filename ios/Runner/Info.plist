@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>GoBuddy uses your location while you share it with your trip group.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>GoBuddy shares your live location with your selected trip group while the app is in the background or your screen is locked.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>GoBuddy shares your live location with your selected trip group while the app is in the background or your screen is locked.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>GoBuddy uses your camera for profile photos, video calls, and sharing photos with your trip group.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>GoBuddy uses your microphone to record voice messages and for voice and video calls.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -14,6 +28,17 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>flutter_mvvm_riverpod</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gobuddy</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

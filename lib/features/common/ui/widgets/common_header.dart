@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../features/common/ui/widgets/common_back_button.dart';
-import '../../../../theme/app_theme.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_theme.dart';
 
 class CommonHeader extends ConsumerWidget {
   final String header;

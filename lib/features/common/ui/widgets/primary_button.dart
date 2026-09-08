@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/theme/app_colors.dart';
-import '/theme/app_theme.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_colors.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_theme.dart';
 import 'material_ink_well.dart';
 
 class PrimaryButton extends StatelessWidget {

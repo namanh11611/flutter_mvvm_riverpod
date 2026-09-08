@@ -1,0 +1,7 @@
+[functions.didit-webhook]
+# Didit authenticates using an HMAC signature, not a Supabase user JWT.
+verify_jwt = false
+
+[functions.cleanup-expired-trips]
+# pg_cron invokes this with the project's anon JWT stored in Supabase Vault.
+verify_jwt = true

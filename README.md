@@ -25,7 +25,6 @@ This project was inspired by the [Flutter App Architecture Guide](https://docs.f
 | **Backend & Auth**   |
 |                      | `supabase_flutter`     | Backend as a service         |
 |                      | `google_sign_in`       | Google authentication        |
-|                      | `sign_in_with_apple`   | Apple authentication         |
 | **Navigation**       |
 |                      | `go_router`            | Declarative routing          |
 | **Storage**          |
@@ -115,6 +114,8 @@ lib/
 
 Contributions, issues, and feature requests are welcome!
 
+For the required Flutter MVVM module structure and group workflow, read [Module Contribution Guide](MODULE_CONTRIBUTION_GUIDE.md).
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -122,3 +123,17 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=namanh11611/flutter_mvvm_riverpod&type=date&legend=top-left)](https://www.star-history.com/#namanh11611/flutter_mvvm_riverpod&type=date&legend=top-left)
+
+
+flutter pub get
+dart run easy_localization:generate -f keys -o locale_keys.g.dart --source-dir assets/translations
+dart run build_runner build --delete-conflicting-outputs
+# Group Expense exchange rates
+
+Admin role setup and moderation details: [Admin moderation](docs/admin-moderation.md).
+
+Multi-currency expenses use Frankfurter's public v2 pair API as a daily
+reference-rate source. These are reference rates, not live trading prices. The
+selected rate and rounded base amount are saved with the expense when it is
+created or explicitly edited; historical expenses are never continuously
+recalculated using newer rates.

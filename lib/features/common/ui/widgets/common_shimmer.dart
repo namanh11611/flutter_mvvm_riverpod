@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '/extensions/build_context_extension.dart';
-import '/theme/app_colors.dart';
+import 'package:flutter_mvvm_riverpod/core/extensions/build_context_extension.dart';
+import 'package:flutter_mvvm_riverpod/core/theme/app_colors.dart';
 
 class CommonShimmer extends StatelessWidget {
   final Widget child;

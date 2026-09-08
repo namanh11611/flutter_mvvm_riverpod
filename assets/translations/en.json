@@ -20,8 +20,6 @@
   "register": "Register",
   "google": "Google",
   "signInWithGoogle": "Sign in with Google",
-  "apple": "Apple",
-  "signInWithApple": "Sign in with Apple",
   "accessTokenNotFound": "Access token not found. Please try again.",
   "idTokenNotFound": "ID token not found. Please try again.",
   "signInAgreementPrefix": "By signing in, you agree to our ",
