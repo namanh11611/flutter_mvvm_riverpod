@@ -15,6 +15,7 @@ import '../../../main.dart';
 import '../../../routing/routes.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/global_loading.dart';
+import '../../premium/ui/premium_navigation.dart';
 import '../../profile/ui/view_model/profile_view_model.dart';
 import 'view_model/authentication_view_model.dart';
 import 'widgets/continue_as_guest.dart';
@@ -73,13 +74,16 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
       return;
     }
 
-    final isShowPremium =
-        await ref.read(profileViewModelProvider.notifier).isShowPremium();
-    if (isShowPremium) {
+    final shouldShowPremium =
+        await ref.read(profileViewModelProvider.notifier).shouldShowPremium();
+    if (shouldShowPremium) {
       if (mounted) {
-        context.go(
-          Routes.premium,
-          extra: { Constants.isGoToMain: true },
+        final offer = PremiumNavigation.pickSplashOffer();
+        await PremiumNavigation.open(
+          context,
+          screen: offer,
+          isGoToMain: true,
+          replace: true,
         );
       }
       return;

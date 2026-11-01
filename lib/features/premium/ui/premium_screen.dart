@@ -15,6 +15,7 @@ import '../../common/ui/widgets/common_close_button.dart';
 import '../../common/ui/widgets/primary_button.dart';
 import '../../profile/ui/view_model/profile_view_model.dart';
 import '../model/product.dart';
+import 'premium_navigation.dart';
 import 'view_model/premium_view_model.dart';
 import 'widgets/benefit_item.dart';
 import 'widgets/premium_footer.dart';
@@ -37,7 +38,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
   @override
   void initState() {
     super.initState();
-    ref.read(profileViewModelProvider.notifier).setIsShowPremium();
+    ref.read(profileViewModelProvider.notifier).setShouldShowPremium();
   }
 
   @override
@@ -242,7 +243,17 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
 
   void _mayBackOrGoHome() {
     if (widget.isGoToMain == true) {
-      context.pushReplacement(Routes.main);
+      final next = PremiumNavigation.pickAfterPremiumClose();
+      if (next != null) {
+        PremiumNavigation.open(
+          context,
+          screen: next,
+          isGoToMain: true,
+          replace: true,
+        );
+      } else {
+        context.pushReplacement(Routes.main);
+      }
     } else {
       context.pop();
     }

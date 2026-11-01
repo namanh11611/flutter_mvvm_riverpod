@@ -8,6 +8,7 @@ import '../../../../routing/routes.dart';
 import '../../../../theme/app_colors.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../common/ui/widgets/material_ink_well.dart';
+import '../../../premium/ui/premium_navigation.dart';
 
 class UpgradePremiumButton extends StatelessWidget {
   final String source;
@@ -36,8 +37,11 @@ class UpgradePremiumButton extends StatelessWidget {
       ),
       child: MaterialInkWell(
         onTap: () async {
-          if (context.mounted) {
-            context.push(Routes.premium);
+          await context.push(Routes.premium);
+          if (!context.mounted) return;
+          final next = PremiumNavigation.pickAfterPremiumClose();
+          if (next != null) {
+            await PremiumNavigation.open(context, screen: next);
           }
         },
         radius: 24,

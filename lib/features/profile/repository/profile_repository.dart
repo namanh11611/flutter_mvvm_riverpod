@@ -127,7 +127,7 @@ class ProfileRepository {
     await prefs.setBool(Constants.isPremiumUserKey, isPremiumUser);
   }
 
-  Future<bool> isShowPremium() async {
+  Future<bool> shouldShowPremium() async {
     final prefs = await SharedPreferences.getInstance();
     final isPremiumUser = prefs.getBool(Constants.isPremiumUserKey) ?? false;
     if (isPremiumUser) return false;
@@ -137,7 +137,7 @@ class ProfileRepository {
     return Utils.today().difference(DateTime.parse(day)).inDays >= 1;
   }
 
-  Future<void> setIsShowPremium() async {
+  Future<void> setShouldShowPremium() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(
         Constants.lastDayShowPremiumKey, Utils.today().toIso8601String());

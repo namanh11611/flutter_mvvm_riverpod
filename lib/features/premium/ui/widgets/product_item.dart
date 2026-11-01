@@ -34,28 +34,30 @@ class ProductItem extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Container(
-                alignment: Alignment.topRight,
-                margin: EdgeInsets.only(right: 16),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 2,
-                    horizontal: 8,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: AppColors.rambutan80,
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(8),
-                    ),
-                  ),
-                  child: Text(
-                    '- ${product.savePercent}%',
-                    style: AppTheme.body12.copyWith(
-                      color: AppColors.mono0,
-                    ),
-                  ),
-                ),
-              ),
+              product.savePercent > 0
+                  ? Container(
+                      alignment: Alignment.topRight,
+                      margin: EdgeInsets.only(right: 16),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 2,
+                          horizontal: 8,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: AppColors.rambutan80,
+                          borderRadius: BorderRadius.vertical(
+                            bottom: Radius.circular(8),
+                          ),
+                        ),
+                        child: Text(
+                          '- ${product.savePercent}%',
+                          style: AppTheme.body12.copyWith(
+                            color: AppColors.mono0,
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(height: 20),
               const SizedBox(height: 24),
               Text(
                 product.title,

@@ -12,4 +12,5 @@ class Assets {
   static const appleLogo = 'assets/images/apple_logo.svg';
   static const avatar = 'assets/images/avatar.webp';
   static const premiumBackground = 'assets/images/premium_background.webp';
+  static const specialOffer = 'assets/images/special_offer.webp';
 }

@@ -9,7 +9,9 @@ import '../features/authentication/ui/welcome_screen.dart';
 import '../features/main/ui/main_screen.dart';
 import '../features/onboarding/ui/onboarding_screen.dart';
 import '../features/onboarding/ui/splash_screen.dart';
+import '../features/premium/ui/discount_screen.dart';
 import '../features/premium/ui/premium_screen.dart';
+import '../features/premium/ui/short_period_screen.dart';
 import '../features/profile/model/profile.dart';
 import '../features/profile/ui/account_info_screen.dart';
 import '../features/profile/ui/appearances_screen.dart';
@@ -135,6 +137,30 @@ final GoRouter router = GoRouter(
         final map = state.extra as Map?;
         return state.slidePage(
           PremiumScreen(
+            isGoToMain: map?[Constants.isGoToMain] as bool?,
+          ),
+          direction: SlideDirection.up,
+        );
+      },
+    ),
+    GoRoute(
+      path: Routes.shortPeriodPremium,
+      pageBuilder: (context, state) {
+        final map = state.extra as Map?;
+        return state.slidePage(
+          ShortPeriodScreen(
+            isGoToMain: map?[Constants.isGoToMain] as bool?,
+          ),
+          direction: SlideDirection.up,
+        );
+      },
+    ),
+    GoRoute(
+      path: Routes.discountPremium,
+      pageBuilder: (context, state) {
+        final map = state.extra as Map?;
+        return state.slidePage(
+          DiscountScreen(
             isGoToMain: map?[Constants.isGoToMain] as bool?,
           ),
           direction: SlideDirection.up,

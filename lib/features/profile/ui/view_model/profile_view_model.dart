@@ -86,13 +86,14 @@ class ProfileViewModel extends _$ProfileViewModel {
     await _repository.setWasShowOnboarding();
   }
 
-  Future<bool> isShowPremium() async {
-    if (state.value?.profile?.isPremium == true) return false;
-    return _repository.isShowPremium();
+  Future<bool> shouldShowPremium() async {
+    final profile = state.value?.profile;
+    if (profile.isPremium) return false;
+    return _repository.shouldShowPremium();
   }
 
-  Future<void> setIsShowPremium() async {
-    await _repository.setIsShowPremium();
+  Future<void> setShouldShowPremium() async {
+    await _repository.setShouldShowPremium();
   }
 
   Future<String?> selectImage(BuildContext context) async {

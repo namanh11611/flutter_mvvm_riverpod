@@ -105,5 +105,17 @@
   "purchaseError": "Purchase failed",
   "restorePurchasesSuccess": "Your purchases have been restored successfully",
   "noActivePurchases": "No active purchases found",
-  "restorePurchasesError": "Failed to restore purchases"
+  "restorePurchasesError": "Failed to restore purchases",
+
+  "offerTitle": "Special Offer",
+  "shortPeriodSubtitle": "Try Premium for just a week!",
+  "weekly": "Weekly Subscription",
+  "weeklyDescription": "3-day free trial, then billed weekly.\nCancel anytime.",
+  "perWeek": "/week",
+  "discountSubtitle": "Get 50% off your first year of Premium!",
+  "discount": "Annual Subscription",
+  "discountDescription": "50% off first year, then original price annually.\nCancel anytime.",
+  "perYear": "/year",
+  "hurryUp": "Hurry up! Your offer ends in {}",
+  "getOfferNow": "Get Offer Now"
 }

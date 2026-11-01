@@ -15,9 +15,12 @@ class Constants {
   static const String playStore = 'https://play.google.com/store/apps/developer?id=Areser+JSC';
   static const String reportProblem = 'mailto:areserjsc@gmail.com?subject=Report a Problem';
   static const String premium = 'premium';
+  static const String premiumWeekly = '\$rc_weekly';
   static const String premiumMonthly = '\$rc_monthly';
   static const String premiumAnnual = '\$rc_annual';
+  static const String premiumAnnualDiscount50 = '\$rc_annual_discount_50';
   static const String premiumLifeTime = '\$rc_lifetime';
+  static const int countdownDefaultSecond = 5 * 60; // 5 minutes
 
   // Route
   static const String isGoToMain = 'isGoToMain';

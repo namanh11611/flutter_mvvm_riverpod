@@ -12,4 +12,6 @@ class Routes {
   static const appearances = '/appearances';
   static const languages = '/languages';
   static const premium = '/premium';
+  static const shortPeriodPremium = '/shortPeriodPremium';
+  static const discountPremium = '/discountPremium';
 }

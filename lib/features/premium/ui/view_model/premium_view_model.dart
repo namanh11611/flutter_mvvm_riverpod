@@ -4,9 +4,9 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '/constants/constants.dart';
-import '/generated/locale_keys.g.dart';
-import '/theme/app_colors.dart';
+import '../../../../constants/constants.dart';
+import '../../../../generated/locale_keys.g.dart';
+import '../../../../theme/app_colors.dart';
 import '../../../profile/ui/view_model/profile_view_model.dart';
 import '../../model/benefit.dart';
 import '../../model/product.dart';
@@ -36,24 +36,24 @@ final List<Product> defaultProducts = [
   Product(
     title: LocaleKeys.monthly.tr(),
     description: LocaleKeys.monthlyDescription.tr(),
-    currentPrice: '\$0.99',
-    savePercent: 34,
+    currentPrice: '\$1.99',
+    savePercent: 0,
     label: LocaleKeys.starter.tr(),
     identifier: Constants.premiumMonthly,
   ),
   Product(
     title: LocaleKeys.annual.tr(),
     description: LocaleKeys.annualDescription.tr(),
-    currentPrice: '\$9.99',
-    savePercent: 38,
+    currentPrice: '\$19.99',
+    savePercent: 50,
     label: LocaleKeys.mostPopular.tr(),
     identifier: Constants.premiumAnnual,
   ),
   Product(
     title: LocaleKeys.lifetime.tr(),
     description: LocaleKeys.lifetimeDescription.tr(),
-    currentPrice: '\$14.99',
-    savePercent: 42,
+    currentPrice: '\$39.99',
+    savePercent: 35,
     label: LocaleKeys.bestPrice.tr(),
     identifier: Constants.premiumLifeTime,
   ),

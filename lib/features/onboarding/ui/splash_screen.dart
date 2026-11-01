@@ -6,6 +6,8 @@ import '../../../constants/constants.dart';
 import '../../../routing/routes.dart';
 import '../../authentication/ui/view_model/authentication_view_model.dart';
 import '../../common/ui/widgets/loading.dart';
+import '../../premium/ui/premium_navigation.dart';
+import '../../profile/ui/view_model/profile_view_model.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -42,7 +44,21 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     await Future.delayed(const Duration(seconds: 1));
     if (!mounted) return;
     if (isLoggedIn || isGuestMode) {
-      context.pushReplacement(Routes.main);
+      final shouldShow = await ref
+          .read(profileViewModelProvider.notifier)
+          .shouldShowPremium();
+      if (!mounted) return;
+      if (shouldShow) {
+        final offer = PremiumNavigation.pickSplashOffer();
+        await PremiumNavigation.open(
+          context,
+          screen: offer,
+          isGoToMain: true,
+          replace: true,
+        );
+      } else {
+        context.pushReplacement(Routes.main);
+      }
     } else {
       context.pushReplacement(Routes.welcome);
     }

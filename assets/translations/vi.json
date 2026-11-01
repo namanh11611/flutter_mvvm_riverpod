@@ -105,5 +105,17 @@
   "purchaseError": "Mua hàng thất bại",
   "restorePurchasesSuccess": "Đã khôi phục thành công các gói đã mua",
   "noActivePurchases": "Không tìm thấy gói đã mua",
-  "restorePurchasesError": "Không thể khôi phục các gói đã mua"
+  "restorePurchasesError": "Không thể khôi phục các gói đã mua",
+
+  "offerTitle": "Ưu Đãi Đặc Biệt",
+  "shortPeriodSubtitle": "Thử Premium chỉ trong một tuần!",
+  "weekly": "Gói Đăng Ký Hàng Tuần",
+  "weeklyDescription": "Dùng thử miễn phí 3 ngày, sau đó tính phí hàng tuần.\nHủy bất kỳ lúc nào.",
+  "perWeek": "/tuần",
+  "discountSubtitle": "Giảm 50% cho năm đầu tiên sử dụng Premium!",
+  "discount": "Gói Đăng Ký Hàng Năm",
+  "discountDescription": "Giảm 50% năm đầu tiên, sau đó tính giá gốc hàng năm.\nHủy bất kỳ lúc nào.",
+  "perYear": "/năm",
+  "hurryUp": "Nhanh lên! Ưu đãi của bạn sẽ kết thúc sau {}",
+  "getOfferNow": "Nhận Ưu Đãi Ngay"
 }

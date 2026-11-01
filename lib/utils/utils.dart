@@ -29,4 +29,10 @@ class Utils {
     final today = DateTime.now();
     return DateTime(today.year, today.month, today.day);
   }
+
+  static String formatTime(int second) {
+    final minutes = (second ~/ 60).toString().padLeft(2, '0');
+    final seconds = (second % 60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
+  }
 }
